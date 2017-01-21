@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -37,6 +38,7 @@
 		CE624E48B09A402B98CC232C /* libRNI18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1113DCCA9C374875967A6C98 /* libRNI18n.a */; };
 		D1F5FCF4CBEA4C929591BD1E /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C65550665DCC4469929ADA00 /* EvilIcons.ttf */; };
 		E52964FCCE0D4FE5885E684D /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 93E5AC501BC74D69BFACAF95 /* SimpleLineIcons.ttf */; };
+		E81956661E31BF1900F25938 /* DeviceUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = E81956651E31BF1900F25938 /* DeviceUtil.m */; };
 		FF542F3A43A0437AA31BF1E7 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B4E2B5A067EB47189A153A47 /* MaterialIcons.ttf */; };
 /* End PBXBuildFile section */
 
@@ -276,6 +278,8 @@
 		C607D677097E4A24BA5109CC /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		C65550665DCC4469929ADA00 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
 		DA32076AE080432988AB42E9 /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		E81956641E31BF1900F25938 /* DeviceUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeviceUtil.h; path = MarketAuthority1/DeviceUtil.h; sourceTree = "<group>"; };
+		E81956651E31BF1900F25938 /* DeviceUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeviceUtil.m; path = MarketAuthority1/DeviceUtil.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -394,6 +398,8 @@
 		13B07FAE1A68108700A75B9A /* MarketAuthority1 */ = {
 			isa = PBXGroup;
 			children = (
+				E81956641E31BF1900F25938 /* DeviceUtil.h */,
+				E81956651E31BF1900F25938 /* DeviceUtil.m */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -941,6 +947,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E81956661E31BF1900F25938 /* DeviceUtil.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
@@ -1034,6 +1041,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.marketauthority.osr;
 				PRODUCT_NAME = MarketAuthority1;
+				TARGETED_DEVICE_FAMILY = 2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1053,6 +1061,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.marketauthority.osr;
 				PRODUCT_NAME = MarketAuthority1;
+				TARGETED_DEVICE_FAMILY = 2;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

@@ -8,7 +8,8 @@ import RoundedButton from '../Components/RoundedButton'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 
 import { Container, Content, List, ListItem, Button, Icon,  InputGroup, Input } from 'native-base';
-import { Col, Row, Grid } from 'react-native-easy-grid';
+import { Col, Row, Grid } from 'react-native-easy-grid'
+import DeviceInfo from 'react-native-device-info'
 
 import Svg,{
   Circle,
@@ -51,6 +52,33 @@ export default class PresentationScreen extends React.Component {
     ];
 
     var boxes1 = [];
+    var dimensionsString = '  ';
+
+    // dimensionsString.concat("Device Model" + DeviceInfo.getModel());
+    // dimensionsString.concat("App is running in emulator" + DeviceInfo.isEmulator());
+    // dimensionsString.concat("App is running on a tablet" + DeviceInfo.isTablet());
+if(DeviceInfo.isEmulator()){
+  console.log("Device Model inEmulator"  );
+  var mod1 = DeviceInfo.getModel();
+  console.log("Device Model", JSON.stringify(mod1));
+  console.log("Test Model", DeviceInfo.getModel());
+  console.log("Device ID", DeviceInfo.getDeviceId());
+  console.log("System Name", DeviceInfo.getSystemName());
+}
+
+if(DeviceInfo.isTablet()){
+  console.log("Device Model isTablet" );
+  var mod1 = DeviceInfo.getModel();
+  console.log("Device Model", JSON.stringify(mod1));
+  console.log("Test Model", DeviceInfo.getModel());
+  console.log("Device ID", DeviceInfo.getDeviceId());
+  console.log("System Name", DeviceInfo.getSystemName());
+}
+
+
+
+    // dimensionsString.concat("App is running in emulator" + DeviceInfo.isEmulator());
+    // dimensionsString.concat("App is running on a tablet" + DeviceInfo.isTablet());
 
     var ct = 0;
 
@@ -160,9 +188,9 @@ export default class PresentationScreen extends React.Component {
 
 
           <View style={styles.section} >
-            <Text style={styles.sectionText} >
-              Default screens for development, debugging, and alpha testing
-              are available below.
+
+            <Text style={{ color:'#FFFFFF'}} >
+              {dimensionsString}
             </Text>
           </View>
 

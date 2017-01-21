@@ -11,6 +11,7 @@ const ApplicationStyles = {
   screen: {
     mainContainer: {
       flex: 1,
+      flexDirection: 'row',
       marginTop: Metrics.navBarHeight,
       backgroundColor: Colors.fire
     },
