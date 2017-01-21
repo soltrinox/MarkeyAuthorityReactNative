@@ -52,28 +52,73 @@ export default class PresentationScreen extends React.Component {
     ];
 
     var boxes1 = [];
-    var dimensionsString = '  ';
+    let rr = 0;
 
-    // dimensionsString.concat("Device Model" + DeviceInfo.getModel());
-    // dimensionsString.concat("App is running in emulator" + DeviceInfo.isEmulator());
-    // dimensionsString.concat("App is running on a tablet" + DeviceInfo.isTablet());
-if(DeviceInfo.isEmulator()){
-  console.log("Device Model inEmulator"  );
-  var mod1 = DeviceInfo.getModel();
-  console.log("Device Model", JSON.stringify(mod1));
+    boxes1.push(
+      <View style={{ margin:2 }}  key={rr} >
+        <Grid key={rr}>
+          <Col style={{ backgroundColor: '#00000000', height: 25 }}>
+            <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'space-around',
+                        alignItems: 'center',
+                        }} >
+
+              <Text style={styles.sectionText}>KEYWORD</Text>
+
+            </View>
+          </Col>
+
+          <Col style={{ backgroundColor: '#00000000', height: 25  }}>
+            <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        }} >
+              <Text style={styles.sectionText}>targetdomain.com</Text>
+
+            </View>
+          </Col>
+
+          <Col style={{ backgroundColor: '#00000000', height: 25  }}>
+            <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        }} >
+              <Text style={styles.sectionText}>DEX ESS</Text>
+
+            </View>
+          </Col>
+
+          <Col style={{ backgroundColor: '#00000000', height: 25  }}>
+            <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        }} >
+              <Text style={styles.sectionText}>DEX PRO</Text>
+
+            </View>
+          </Col>
+
+        </Grid>
+      </View>
+    );
+  //  increment the counter
+  rr++;
+
+  console.log("Device  inEmulator"  );
+  console.log("Device  isTablet" );
+
   console.log("Test Model", DeviceInfo.getModel());
   console.log("Device ID", DeviceInfo.getDeviceId());
   console.log("System Name", DeviceInfo.getSystemName());
-}
 
-if(DeviceInfo.isTablet()){
-  console.log("Device Model isTablet" );
-  var mod1 = DeviceInfo.getModel();
-  console.log("Device Model", JSON.stringify(mod1));
-  console.log("Test Model", DeviceInfo.getModel());
-  console.log("Device ID", DeviceInfo.getDeviceId());
-  console.log("System Name", DeviceInfo.getSystemName());
-}
 
 
 
@@ -82,7 +127,7 @@ if(DeviceInfo.isTablet()){
 
     var ct = 0;
 
-    for(let i = 0; i < keywords.length ; i++){
+    for(let i = rr; i < keywords.length ; ++i ){
 
       ct = Math.floor(Math.random() * 10);
       ct = ct + 2;
@@ -120,8 +165,19 @@ if(DeviceInfo.isTablet()){
                         alignItems: 'center',
                         }} >
 
-                <Text style={styles.sectionText}>{valKeyName} {i}</Text>
+                <Text style={styles.sectionText}>{i}] {valKeyName} </Text>
 
+              </View>
+            </Col>
+
+            <Col style={{ backgroundColor: '#00000000', height: 25  }}>
+              <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        }} >
+                { boxr1 }
               </View>
             </Col>
 
@@ -173,6 +229,11 @@ if(DeviceInfo.isTablet()){
               <Input  borderType='rounded' placeholder="CATEGORY" style={{ color:'#FFFFFF',}}   />
             </InputGroup>
 
+            <InputGroup borderType='rounded'  style={{ flex:1,  marginRight:5, marginLeft:5, width: 50 }}  >
+              <Icon name='ios-map' style={{color:'#696969'}}/>
+              <Input  borderType='rounded' placeholder="STATE" style={{ color:'#FFFFFF',}}   />
+            </InputGroup>
+
             <InputGroup borderType='rounded'  style={{ flex:2,  marginRight:5, marginLeft:5 }}  >
               <Icon name='ios-map' style={{color:'#696969'}}/>
               <Input  borderType='rounded' placeholder="MARKET" style={{ color:'#FFFFFF',}}   />
@@ -190,7 +251,7 @@ if(DeviceInfo.isTablet()){
           <View style={styles.section} >
 
             <Text style={{ color:'#FFFFFF'}} >
-              {dimensionsString}
+
             </Text>
           </View>
 
