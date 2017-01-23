@@ -120,11 +120,6 @@ export default class PresentationScreen extends React.Component {
   console.log("System Name", DeviceInfo.getSystemName());
 
 
-
-
-    // dimensionsString.concat("App is running in emulator" + DeviceInfo.isEmulator());
-    // dimensionsString.concat("App is running on a tablet" + DeviceInfo.isTablet());
-
     var ct = 0;
 
     for(let i = rr; i < keywords.length ; ++i ){
