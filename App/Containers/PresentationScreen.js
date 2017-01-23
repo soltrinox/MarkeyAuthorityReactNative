@@ -109,7 +109,7 @@ export default class PresentationScreen extends React.Component {
         </Grid>
       </View>
     );
-  //  increment the counter
+
   rr++;
 
   console.log("Device  inEmulator"  );
@@ -127,6 +127,8 @@ export default class PresentationScreen extends React.Component {
       ct = Math.floor(Math.random() * 10);
       ct = ct + 2;
       var boxr1 = [];
+      var boxr2 = [];
+      var boxr3 = [];
       var valCol = parseInt(keywords[i][2]);
       var iii = parseInt(valCol);
 
@@ -146,6 +148,22 @@ export default class PresentationScreen extends React.Component {
             </Svg>
           )
         }
+
+      for(var x = 0;x < iii ; x++){
+        boxr2.push(
+          <Svg height="16" width="17"  key={x} >
+            <Rect
+              x="0"
+              y="0"
+              width="15"
+              height="15"
+              stroke="black"
+              strokeWidth="1"
+              fill="green"
+            />
+          </Svg>
+        )
+      }
 
       var valKeyName = keywords[i][0];
 
