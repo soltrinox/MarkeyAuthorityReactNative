@@ -56,7 +56,7 @@ class DrawerContent extends Component {
         <DrawerButton icon='window-maximize' text='Google PageOne' onPress={this.handlePressComponents} />
         <DrawerButton icon='print' text='Print' onPress={this.handlePressUsage} />
         <DrawerButton icon='tachometer' text='Site Gaps' onPress={this.handlePressAPI} />
-        <View style={{marginBottom: 100}} ></View>
+        <View style={{marginBottom: 90}} ></View>
         <DrawerButton icon='play-circle' text='Send' onPress={this.handlePressTheme} />
         <DrawerButton icon='cog' text='Settings' onPress={this.handlePressDevice} />
       </ScrollView>

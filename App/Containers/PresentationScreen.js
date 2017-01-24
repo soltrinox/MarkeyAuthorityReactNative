@@ -34,6 +34,23 @@ import styles from './Styles/PresentationScreenStyle'
 
 export default class PresentationScreen extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+       text: 'Useless Placeholder' ,
+       selectedDomain : 'targetdomain.com',
+       selectedCategory : 'plumbing',
+       selectedState : 'CA',
+       selectedCity : 'San Francisco',
+       selectedDomainTotal : 0,
+       columnTotal2 : 0,
+       columnTotal3 : 0,
+       columnTotal4 : 0,
+       columnTotal5 : 0,
+       columnTotal6 : 0,
+    };
+  }
+
 
   render () {
 
@@ -49,10 +66,26 @@ export default class PresentationScreen extends React.Component {
       ['plumbing', '0', '6','2', '2'],
       ['water heater', '1', '5','2', '2'],
       ['broken pipes', '0', '6','2', '2'],
+      ['plumbing', '0', '6','2', '2'],
+      ['water heater', '1', '5','2', '2'],
+      ['broken pipes', '0', '6','2', '2'],
     ];
 
     var boxes1 = [];
     let rr = 0;
+
+    var selectedDomain = 'targetdomain.com';
+    var selectedCategory = 'plumbing';
+    var selectedState = 'CA';
+    var selectedCity = 'San Francisco';
+
+
+    var selectedDomainTotal = 0;
+    var columnTotal2 = 0;
+    var columnTotal3 = 0;
+    var columnTotal4 = 0;
+    var columnTotal5 = 0;
+    var columnTotal6 = 0;
 
     boxes1.push(
       <View style={{ margin:2 }}  key={rr} >
@@ -77,7 +110,7 @@ export default class PresentationScreen extends React.Component {
                         justifyContent: 'flex-start',
                         alignItems: 'center',
                         }} >
-              <Text style={styles.sectionText}>targetdomain.com</Text>
+              <Text style={styles.sectionText}>{selectedDomain}</Text>
 
             </View>
           </Col>
@@ -132,8 +165,9 @@ export default class PresentationScreen extends React.Component {
       var valCol = parseInt(keywords[i][2]);
       var iii = parseInt(valCol);
 
+      // GENERATE THE SQUARES FOR THE DOMAIN HITS IN TOP 10
 
-        for(var x = 0;x < iii ; x++){
+      for(var x = 0;x < iii ; x++){
           boxr1.push(
             <Svg height="16" width="17"  key={x} >
               <Rect
@@ -220,12 +254,70 @@ export default class PresentationScreen extends React.Component {
         </View>
       );
 
-
-
-
-
     }
 
+
+    rr = 99;
+
+    boxes1.push(
+      <View style={{ margin:2 }}  key={rr} >
+        <Grid key={rr}>
+          <Col style={{ backgroundColor: '#00000000', height: 40 }}>
+            <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'space-around',
+                        alignItems: 'center',
+                        }} >
+
+              <Text  style={{flex: 1, flexDirection: 'row',
+              fontSize: 34, color:'#ABABAB', textAlign: 'left', paddingLeft: 15 }}>_____</Text>
+
+            </View>
+          </Col>
+
+          <Col style={{ backgroundColor: '#00000000', height: 40  }}>
+            <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        }} >
+              <Text  style={{flex: 1, flexDirection: 'row',
+              fontSize: 34, color:'#ABABAB', textAlign: 'left', paddingLeft: 15 }}>{selectedDomainTotal}</Text>
+
+            </View>
+          </Col>
+
+          <Col style={{ backgroundColor: '#00000000', height: 40  }}>
+            <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        }} >
+              <Text  style={{flex: 1, flexDirection: 'row',
+              fontSize: 34, color:'#ABABAB', textAlign: 'left', paddingLeft: 15 }}>{columnTotal2}</Text>
+
+            </View>
+          </Col>
+
+          <Col style={{ backgroundColor: '#00000000', height: 40  }}>
+            <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        }} >
+              <Text   style={{flex: 1, flexDirection: 'row',
+              fontSize: 34, color:'#ABABAB', textAlign: 'left', paddingLeft: 15 }}>{columnTotal3}</Text>
+
+            </View>
+          </Col>
+
+        </Grid>
+      </View>
+    );
 
 
     return (
@@ -241,7 +333,8 @@ export default class PresentationScreen extends React.Component {
 
             <InputGroup borderType='rounded'  style={{ flex:2,  marginRight:5, marginLeft:5 }}  >
               <Icon name='ios-home' style={{color:'#696969'}}/>
-              <Input  borderType='rounded' placeholder="DOMAIN" style={{ color:'#FFFFFF',}}   />
+              <Input  borderType='rounded' placeholder="DOMAIN" style={{ color:'#FFFFFF',}}
+                      defaultValue={this.state.selectedDomain}   />
             </InputGroup>
 
             <InputGroup borderType='rounded'  style={{ flex:2,  marginRight:5, marginLeft:5 }}  >
@@ -263,41 +356,42 @@ export default class PresentationScreen extends React.Component {
             {/*<TextInput borderType='rounded' placeholder="MARKET"   style={{ flex:2,padding: 4, height:30,backgroundColor:'#FFFFFF', color:'#000000', marginRight:5   }}  />*/}
 
           </View>
+
+
+          <View  style={{ flex:1, marginTop:20 }}  >
+            <Text style={{flex:1, flexDirection: 'row', textAlign: 'center' ,
+             color:'#ABABAB', margin:10, fontSize: 34 }}  >
+                Top 10 Searches for {this.state.selectedCategory} in {this.state.selectedDomain}
+            </Text>
+          </View>
+
+
+
           <View  style={{ flex:1, marginTop:20 }}  >
             {boxes1}
           </View>
 
 
-          <View style={styles.section} >
+          {/*<RoundedButton onPress={NavigationActions.componentExamples}>*/}
+            {/*Component Examples Screen*/}
+          {/*</RoundedButton>*/}
 
-            <Text style={{ color:'#FFFFFF'}} >
+          {/*<RoundedButton onPress={NavigationActions.usageExamples}>*/}
+            {/*Usage Examples Screen*/}
+          {/*</RoundedButton>*/}
 
-            </Text>
-          </View>
+          {/*<RoundedButton onPress={NavigationActions.apiTesting}>*/}
+            {/*API Testing Screen*/}
+          {/*</RoundedButton>*/}
 
-          <RoundedButton onPress={NavigationActions.componentExamples}>
-            Component Examples Screen
-          </RoundedButton>
+          {/*<RoundedButton onPress={NavigationActions.theme}>*/}
+            {/*Theme Screen*/}
+          {/*</RoundedButton>*/}
 
-          <RoundedButton onPress={NavigationActions.usageExamples}>
-            Usage Examples Screen
-          </RoundedButton>
+          {/*<RoundedButton onPress={NavigationActions.deviceInfo}>*/}
+            {/*Device Info Screen*/}
+          {/*</RoundedButton>*/}
 
-          <RoundedButton onPress={NavigationActions.apiTesting}>
-            API Testing Screen
-          </RoundedButton>
-
-          <RoundedButton onPress={NavigationActions.theme}>
-            Theme Screen
-          </RoundedButton>
-
-          <RoundedButton onPress={NavigationActions.deviceInfo}>
-            Device Info Screen
-          </RoundedButton>
-
-          {/*<View style={styles.centered}>*/}
-            {/*<Text style={styles.subtitle}>Made with ❤️ by Infinite Red</Text>*/}
-          {/*</View>*/}
 
         </ScrollView>
       </View>
