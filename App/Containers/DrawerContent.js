@@ -53,11 +53,11 @@ class DrawerContent extends Component {
     return (
       <ScrollView style={styles.container}>
         {/*<Image source={Images.logo} style={styles.logo} />*/}
-        <DrawerButton icon='circle' text='Component Examples' onPress={this.handlePressComponents} />
-        <DrawerButton icon='square' text='Usage Examples' onPress={this.handlePressUsage} />
-        <DrawerButton icon='check' text='API Testing' onPress={this.handlePressAPI} />
-        <DrawerButton icon='cog' text='Themes' onPress={this.handlePressTheme} />
-        <DrawerButton icon='star' text='Device Info' onPress={this.handlePressDevice} />
+        <DrawerButton icon='circle' text='Google PageOne' onPress={this.handlePressComponents} />
+        <DrawerButton icon='square' text='Print' onPress={this.handlePressUsage} />
+        <DrawerButton icon='check' text='Site Gaps' onPress={this.handlePressAPI} />
+        <DrawerButton icon='cog' text='Send' onPress={this.handlePressTheme} />
+        <DrawerButton icon='star' text='Settings' onPress={this.handlePressDevice} />
       </ScrollView>
     )
   }

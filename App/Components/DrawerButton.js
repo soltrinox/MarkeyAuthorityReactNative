@@ -27,7 +27,7 @@ class DrawerButton extends Component {
 
   render () {
     return (
-      <TouchableOpacity onPress={this.props.onPress}>
+      <TouchableOpacity onPress={this.props.onPress} style={{marginBottom: 20}}  >
         <View style={{flex: 1, flexDirection:'column', justifyContent:'center', alignItems: 'center',}} >
           <Icon name={this.props.icon}
                 size={Metrics.icons.large}
