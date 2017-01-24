@@ -11,7 +11,7 @@ import { Colors, Metrics } from '../Themes'
 ExamplesRegistry.add('Drawer Button', () =>
   <DrawerButton
     text='Example left drawer button'
-    icon='window'
+    icon='star'
     onPress={() => window.alert('Your drawers are showing')}
   />
 )
