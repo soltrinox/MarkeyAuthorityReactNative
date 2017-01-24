@@ -1,7 +1,7 @@
 // @flow
 
 import React, { Component } from 'react'
-import { Text, TouchableOpacity } from 'react-native'
+import { Text, View, TouchableOpacity, TextInput, Image } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import styles from './Styles/DrawerButtonStyles'
 import ExamplesRegistry from '../Services/ExamplesRegistry'
@@ -28,12 +28,13 @@ class DrawerButton extends Component {
   render () {
     return (
       <TouchableOpacity onPress={this.props.onPress}>
-        <Icon name={this.props.icon}
-              size={Metrics.icons.large}
-              color={Colors.snow}
-              style={styles.backButton}
-        />
-        <Text style={styles.text}>{this.props.text}</Text>
+        <View style={{flex: 1, flexDirection:'column', justifyContent:'center', alignItems: 'center',}} >
+          <Icon name={this.props.icon}
+                size={Metrics.icons.large}
+                color={Colors.snow}
+          />
+          <Text style={styles.text}>{this.props.text}</Text>
+        </View>
       </TouchableOpacity>
     )
   }
