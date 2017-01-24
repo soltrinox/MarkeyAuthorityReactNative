@@ -334,7 +334,7 @@ export default class PresentationScreen extends React.Component {
             <InputGroup borderType='rounded'  style={{ flex:2,  marginRight:5, marginLeft:5 }}  >
               <Icon name='ios-home' style={{color:'#696969'}}/>
               <Input  borderType='rounded' placeholder="DOMAIN" style={{ color:'#FFFFFF',}}
-                      defaultValue={this.state.selectedDomain}   />
+                      value={this.state.selectedDomain}   />
             </InputGroup>
 
             <InputGroup borderType='rounded'  style={{ flex:2,  marginRight:5, marginLeft:5 }}  >
