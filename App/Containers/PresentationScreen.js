@@ -2,30 +2,16 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom';
-import { ScrollView, Text, Image, View, TextInput } from 'react-native'
+import { ScrollView, Text, Image, View, TextInput, AppRegistry, TouchableOpacity, Dimensions } from 'react-native'
 import { Images } from '../Themes'
 import RoundedButton from '../Components/RoundedButton'
 import { Actions as NavigationActions } from 'react-native-router-flux'
-
+import Picker from 'react-native-picker';
+import area from './area.json';
 import { Container, Content, List, ListItem, Button, Icon,  InputGroup, Input } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid'
 import DeviceInfo from 'react-native-device-info'
-
-import Svg,{
-  Circle,
-  Ellipse,
-  G,
-  LinearGradient,
-  RadialGradient,
-  Line,
-  Path,
-  Polygon,
-  Polyline,
-  Rect,
-  Symbol,
-  Use,
-  Defs,
-  Stop
+import Svg,{ Circle, Ellipse, G, LinearGradient, RadialGradient, Line, Path, Polygon, Polyline, Rect, Symbol, Use, Defs, Stop
 } from 'react-native-svg';
 
 // Styles
@@ -34,10 +20,12 @@ import styles from './Styles/PresentationScreenStyle'
 
 export default class PresentationScreen extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-       text: 'Useless Placeholder' ,
+  constructor(props, context) {
+    super(props, context);
+  }
+
+  state = {
+
        selectedDomain : 'targetdomain.com',
        selectedCategory : 'plumbing',
        selectedState : 'CA',
@@ -49,6 +37,52 @@ export default class PresentationScreen extends React.Component {
        columnTotal5 : 0,
        columnTotal6 : 0,
     };
+
+
+   _createAreaData() {
+    let data = [];
+    let len = area.length;
+    for(let i=0;i<len;i++){
+      let city = [];
+      for(let j=0,cityLen=area[i]['city'].length;j<cityLen;j++){
+        let _city = {};
+        _city[area[i]['city'][j]['name']] = area[i]['city'][j]['area'];
+        city.push(_city);
+      }
+
+      let _data = {};
+      _data[area[i]['name']] = city;
+      data.push(_data);
+    }
+    return data;
+  }
+
+  _showAreaPicker() {
+    Picker.init({
+      pickerData: this._createAreaData(),
+      selectedValue: ['河北', '唐山', '古冶区'],
+      onPickerConfirm: pickedValue => {
+        console.log('area', pickedValue);
+      },
+      onPickerCancel: pickedValue => {
+        console.log('area', pickedValue);
+      },
+      onPickerSelect: pickedValue => {
+        //Picker.select(['山东', '青岛', '黄岛区'])
+        console.log('area', pickedValue);
+      }
+    });
+    Picker.show();
+  }
+
+  _toggle() {
+    Picker.toggle();
+  }
+
+  _isPickerShow(){
+    Picker.isPickerShow(status => {
+      alert(status);
+    });
   }
 
 
@@ -74,18 +108,7 @@ export default class PresentationScreen extends React.Component {
     var boxes1 = [];
     let rr = 0;
 
-    var selectedDomain = 'targetdomain.com';
-    var selectedCategory = 'plumbing';
-    var selectedState = 'CA';
-    var selectedCity = 'San Francisco';
 
-
-    var selectedDomainTotal = 0;
-    var columnTotal2 = 0;
-    var columnTotal3 = 0;
-    var columnTotal4 = 0;
-    var columnTotal5 = 0;
-    var columnTotal6 = 0;
 
     boxes1.push(
       <View style={{ margin:2 }}  key={rr} >
@@ -110,7 +133,7 @@ export default class PresentationScreen extends React.Component {
                         justifyContent: 'flex-start',
                         alignItems: 'center',
                         }} >
-              <Text style={styles.sectionText}>{selectedDomain}</Text>
+              <Text style={styles.sectionText}>{this.state.selectedDomain}</Text>
 
             </View>
           </Col>
@@ -284,7 +307,7 @@ export default class PresentationScreen extends React.Component {
                         alignItems: 'center',
                         }} >
               <Text  style={{flex: 1, flexDirection: 'row',
-              fontSize: 34, color:'#ABABAB', textAlign: 'left', paddingLeft: 15 }}>{selectedDomainTotal}</Text>
+              fontSize: 34, color:'#ABABAB', textAlign: 'left', paddingLeft: 15 }}>{this.state.selectedDomainTotal}</Text>
 
             </View>
           </Col>
@@ -297,7 +320,7 @@ export default class PresentationScreen extends React.Component {
                         alignItems: 'center',
                         }} >
               <Text  style={{flex: 1, flexDirection: 'row',
-              fontSize: 34, color:'#ABABAB', textAlign: 'left', paddingLeft: 15 }}>{columnTotal2}</Text>
+              fontSize: 34, color:'#ABABAB', textAlign: 'left', paddingLeft: 15 }}>{this.state.columnTotal2}</Text>
 
             </View>
           </Col>
@@ -310,7 +333,7 @@ export default class PresentationScreen extends React.Component {
                         alignItems: 'center',
                         }} >
               <Text   style={{flex: 1, flexDirection: 'row',
-              fontSize: 34, color:'#ABABAB', textAlign: 'left', paddingLeft: 15 }}>{columnTotal3}</Text>
+              fontSize: 34, color:'#ABABAB', textAlign: 'left', paddingLeft: 15 }}>{this.state.columnTotal3}</Text>
 
             </View>
           </Col>
@@ -334,7 +357,7 @@ export default class PresentationScreen extends React.Component {
             <InputGroup borderType='rounded'  style={{ flex:2,  marginRight:5, marginLeft:5 }}  >
               <Icon name='ios-home' style={{color:'#696969'}}/>
               <Input  borderType='rounded' placeholder="DOMAIN" style={{ color:'#FFFFFF',}}
-                      value={this.state.selectedDomain}   />
+                      defaultValue={this.state.selectedDomain}    />
             </InputGroup>
 
             <InputGroup borderType='rounded'  style={{ flex:2,  marginRight:5, marginLeft:5 }}  >
@@ -371,27 +394,17 @@ export default class PresentationScreen extends React.Component {
             {boxes1}
           </View>
 
-
-          {/*<RoundedButton onPress={NavigationActions.componentExamples}>*/}
-            {/*Component Examples Screen*/}
-          {/*</RoundedButton>*/}
-
-          {/*<RoundedButton onPress={NavigationActions.usageExamples}>*/}
-            {/*Usage Examples Screen*/}
-          {/*</RoundedButton>*/}
-
-          {/*<RoundedButton onPress={NavigationActions.apiTesting}>*/}
-            {/*API Testing Screen*/}
-          {/*</RoundedButton>*/}
-
-          {/*<RoundedButton onPress={NavigationActions.theme}>*/}
-            {/*Theme Screen*/}
-          {/*</RoundedButton>*/}
-
-          {/*<RoundedButton onPress={NavigationActions.deviceInfo}>*/}
-            {/*Device Info Screen*/}
-          {/*</RoundedButton>*/}
-
+          <View  style={{ flex:1, marginTop:20,  }}  >
+              <TouchableOpacity style={{marginTop: 10, marginLeft: 20}} onPress={this._showAreaPicker.bind(this)}>
+                <Text style={{color: '#ABABAB'}}>AreaPicker</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={{marginTop: 10, marginLeft: 20}} onPress={this._toggle.bind(this)}>
+                <Text style={{color: '#ABABAB'}}>toggle</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={{marginTop: 10, marginLeft: 20}} onPress={this._isPickerShow.bind(this)}>
+                <Text style={{color: '#ABABAB'}}>isPickerShow</Text>
+              </TouchableOpacity>
+          </View>
 
         </ScrollView>
       </View>
