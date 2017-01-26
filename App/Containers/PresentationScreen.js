@@ -27,7 +27,6 @@ export default class PresentationScreen extends React.Component {
   }
 
   state = {
-
        selectedDomain : 'targetdomain.com',
        selectedCategory : 'plumbing',
        selectedState : 'CA',
@@ -38,10 +37,10 @@ export default class PresentationScreen extends React.Component {
        columnTotal4 : 0,
        columnTotal5 : 0,
        columnTotal6 : 0,
-        domain1: 'test 1',
-        domain2: 'test 1',
-        domain3: 'test 1',
-    productDomains : 5
+       domain1: 'test 1',
+       domain2: 'test 1',
+       domain3: 'test 1',
+       productDomains : 5
     };
 
 
