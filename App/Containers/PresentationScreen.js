@@ -60,7 +60,11 @@ export default class PresentationScreen extends React.Component {
   _showAreaPicker() {
     Picker.init({
       pickerData: this._createAreaData(),
-      selectedValue: ['河北', '唐山', '古冶区'],
+      selectedValue: ['CA', 'SAN FRANCISCO', 'SAN FRANCISCO'],
+      pickerTitleText: 'Select A Market',
+      pickerFontSize: 20,
+      pickerConfirmBtnText:'Cancel',
+      pickerCancelBtnText:'Select',
       onPickerConfirm: pickedValue => {
         console.log('area', pickedValue);
       },
@@ -68,7 +72,6 @@ export default class PresentationScreen extends React.Component {
         console.log('area', pickedValue);
       },
       onPickerSelect: pickedValue => {
-        //Picker.select(['山东', '青岛', '黄岛区'])
         console.log('area', pickedValue);
       }
     });
@@ -86,7 +89,16 @@ export default class PresentationScreen extends React.Component {
   }
 
 
+
+
+
   render () {
+
+    onValueChange = (key: string, value: string) => {
+      const newState = {};
+      newState[key] = value;
+      this.setState(newState);
+    };
 
     var items = ['San Jose','San Francisco','Santa Cruz','Sacramento','Los Angeles'];
 
