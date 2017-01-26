@@ -11,9 +11,9 @@
           "WALNUT CREEK",
           "SAN LEANDRO",
           "BERKELEY "
-	 ]
-	},
-	{
+        ]
+      },
+      {
         "name": "Santa Clara",
         "area": [
           "SANTA CLARA",
@@ -31,7 +31,7 @@
           "SOUTH SAN FRANCISCO",
           "DALY CITY",
           "PACIFICA"
-	]
+        ]
       },
       {
         "name": "Marin",
