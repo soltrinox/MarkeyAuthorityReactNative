@@ -2,10 +2,10 @@
 
   {
     "name": "CALIFORNIA",
-    "city": [
+    "county": [
       {
         "name": "Alameda",
-        "area": [
+        "ccity": [
           "OAKLAND",
           "EMERYVILLE",
           "WALNUT CREEK",
@@ -15,7 +15,7 @@
       },
       {
         "name": "Santa Clara",
-        "area": [
+        "ccity": [
           "SANTA CLARA",
           "SAN JOSE",
           "CAMPBELL",
@@ -26,7 +26,7 @@
       },
       {
         "name": "San Francisco",
-        "area": [
+        "ccity": [
           "SAN FRANCISCO",
           "SOUTH SAN FRANCISCO",
           "DALY CITY",
@@ -35,7 +35,7 @@
       },
       {
         "name": "Marin",
-        "area": [
+        "ccity": [
           "MARIN",
           "BOLINAS",
           "STINSON BEACH"
@@ -43,7 +43,7 @@
       },
       {
         "name": "Orange",
-        "area": [
+        "ccity": [
           "LOS ANGELES",
           "LONG BEACH",
           "SANTA BARBRA"

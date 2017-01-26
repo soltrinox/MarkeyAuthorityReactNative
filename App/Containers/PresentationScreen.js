@@ -49,9 +49,9 @@ export default class PresentationScreen extends React.Component {
     let len = area.length;
     for(let i=0;i<len;i++){
       let city = [];
-      for(let j=0,cityLen=area[i]['city'].length;j<cityLen;j++){
+      for(let j=0,cityLen=area[i]['county'].length;j<cityLen;j++){
         let _city = {};
-        _city[area[i]['city'][j]['name']] = area[i]['city'][j]['area'];
+        _city[area[i]['county'][j]['name']] = area[i]['county'][j]['ccity'];
         city.push(_city);
       }
 
@@ -71,13 +71,13 @@ export default class PresentationScreen extends React.Component {
       pickerConfirmBtnText:'Cancel',
       pickerCancelBtnText:'Select',
       onPickerConfirm: pickedValue => {
-        console.log('area', pickedValue);
+        console.log('ccity', pickedValue);
       },
       onPickerCancel: pickedValue => {
-        console.log('area', pickedValue);
+        console.log('ccity', pickedValue);
       },
       onPickerSelect: pickedValue => {
-        console.log('area', pickedValue);
+        console.log('ccity', pickedValue);
       }
     });
     Picker.show();
@@ -130,63 +130,6 @@ export default class PresentationScreen extends React.Component {
 
 
 
-    boxes1.push(
-      <View style={{ margin:2 }}  key={rr} >
-        <Grid key={rr}>
-          <Col style={{ backgroundColor: '#00000000', height: 25 }}>
-            <View style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        justifyContent: 'space-around',
-                        alignItems: 'center',
-                        }} >
-
-              <Text style={styles.sectionText}>KEYWORD</Text>
-
-            </View>
-          </Col>
-
-          <Col style={{ backgroundColor: '#00000000', height: 25  }}>
-            <View style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',
-                        }} >
-              <Text style={styles.sectionText}>{this.state.selectedDomain}</Text>
-
-            </View>
-          </Col>
-
-          <Col style={{ backgroundColor: '#00000000', height: 25  }}>
-            <View style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',
-                        }} >
-              <Text style={styles.sectionText}>DEX ESS</Text>
-
-            </View>
-          </Col>
-
-          <Col style={{ backgroundColor: '#00000000', height: 25  }}>
-            <View style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',
-                        }} >
-              <Text style={styles.sectionText}>DEX PRO</Text>
-
-            </View>
-          </Col>
-
-        </Grid>
-      </View>
-    );
-
-  rr++;
 
   console.log("Device  inEmulator"  );
   console.log("Device  isTablet" );
