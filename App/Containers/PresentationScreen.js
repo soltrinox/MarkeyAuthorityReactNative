@@ -41,7 +41,7 @@ export default class PresentationScreen extends React.Component {
         domain1: 'test 1',
         domain2: 'test 1',
         domain3: 'test 1',
-    productDomains : 4
+    productDomains : 5
     };
 
 
@@ -95,7 +95,7 @@ export default class PresentationScreen extends React.Component {
   }
 
   _renderDotIndicator(){
-    return <PagerDotIndicator pageCount={this.state.productDomains} />;
+    return <PagerDotIndicator pageCount={this.state.productDomains - 1} />;
   }
 
 
@@ -111,18 +111,18 @@ export default class PresentationScreen extends React.Component {
     var items = ['San Jose','San Francisco','Santa Cruz','Sacramento','Los Angeles'];
 
     var keywords = [
-      ['plumbing', '0', '3','2', '2'],
-      ['water heater', '2', '2','2', '2'],
-      ['broken pipes', '0', '6','2', '2'],
-      ['plumbing', '1', '3','2', '2'],
-      ['water heater', '2', '4','2', '2'],
-      ['broken pipes', '1', '6','2', '2'],
-      ['plumbing', '0', '6','2', '2'],
-      ['water heater', '1', '5','2', '2'],
-      ['broken pipes', '0', '6','2', '2'],
-      ['plumbing', '0', '6','2', '2'],
-      ['water heater', '1', '5','2', '2'],
-      ['broken pipes', '0', '6','2', '2'],
+      ['plumbing', '0', '1','5', '2'],
+      ['water heater', '2', '2','6', '5'],
+      ['broken pipes', '0', '5','1', '7'],
+      ['plumbing', '1', '10','8', '12'],
+      ['water heater', '2', '8','10', '10'],
+      ['broken pipes', '1', '1','5', '4'],
+      ['plumbing', '0', '3','9', '8'],
+      ['water heater', '1', '7','3', '5'],
+      ['broken pipes', '0', '1','4', '1'],
+      ['plumbing', '0', '6','8', '9'],
+      ['water heater', '1', '10','10', '10'],
+      ['broken pipes', '0', '9','5', '7'],
     ];
 
     var boxes1 = [];
@@ -286,15 +286,18 @@ export default class PresentationScreen extends React.Component {
 
     }
 
-    for(var cll = 0;cll < this.state.productDomains ; cll++) {
+    for(var cll = 1;cll < this.state.productDomains ; cll++) {
 
       ct = Math.floor(Math.random() * 10);
       ct = ct + 2;
 
       var boxr2 = [];
       var brr =  cll + 1;
+      var totalCount = 0;
+      var topval = 0;
+
       boxr2.push(
-        <Row style={{ backgroundColor: '#00000000', height: 25 }} key={x}>
+        <Row style={{ backgroundColor: '#00000000', height: 25 }} key={topval}>
           <View style={{
                         flex: 1,
                         flexDirection: 'row',
@@ -305,14 +308,13 @@ export default class PresentationScreen extends React.Component {
         </Row>
       );
 
-      var totalCount = 0;
-      var topval = 0;
-      for(var x = 0;x < keywords.length ; x++){
+
+      for(var p = 0;p < keywords.length ; p++){
 
         var kray = [];
 
-        var valCol = parseInt(keywords[x][2]);
-        var ggg = parseInt(valCol);
+        var fcol = parseInt(keywords[p][cll]);
+        var ggg = parseInt(fcol);
 
         for(var k = 0; k < ggg; k++){
           kray.push(<Svg height="16" width="17"  key={k} >
@@ -330,7 +332,7 @@ export default class PresentationScreen extends React.Component {
         }
 
         boxr2.push(
-          <Row style={{ backgroundColor: '#00000000', height: 25 }} key={x}>
+          <Row style={{ backgroundColor: '#00000000', height: 25 }} key={p+1}>
             <View style={{
                         flex: 1,
                         flexDirection: 'row',
@@ -368,65 +370,7 @@ export default class PresentationScreen extends React.Component {
 
     rr = 99;
 
-    boxes1.push(
-      <View style={{ margin:2 }}  key={rr} >
-        <Grid key={rr}>
-          <Col style={{ backgroundColor: '#00000000', height: 40 }}>
-            <View style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        justifyContent: 'space-around',
-                        alignItems: 'center',
-                        }} >
 
-              <Text  style={{flex: 1, flexDirection: 'row',
-              fontSize: 34, color:'#ABABAB', textAlign: 'left', paddingLeft: 15 }}> </Text>
-
-            </View>
-          </Col>
-
-          <Col style={{ backgroundColor: '#00000000', height: 40  }}>
-            <View style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',
-                        }} >
-              <Text  style={{flex: 1, flexDirection: 'row',
-              fontSize: 34, color:'#ABABAB', textAlign: 'left', paddingLeft: 15 }}>{this.state.selectedDomainTotal}</Text>
-
-            </View>
-          </Col>
-
-          <Col style={{ backgroundColor: '#00000000', height: 40  }}>
-            <View style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',
-                        }} >
-              <Text  style={{flex: 1, flexDirection: 'row',
-              fontSize: 34, color:'#ABABAB', textAlign: 'left', paddingLeft: 15 }}>{this.state.columnTotal2}</Text>
-
-            </View>
-          </Col>
-
-          <Col style={{ backgroundColor: '#00000000', height: 40  }}>
-            <View style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',
-                        }} >
-              <Text   style={{flex: 1, flexDirection: 'row',
-              fontSize: 34, color:'#ABABAB', textAlign: 'left', paddingLeft: 15 }}>{this.state.columnTotal3}</Text>
-
-            </View>
-          </Col>
-
-        </Grid>
-      </View>
-    );
 
 
     return (
