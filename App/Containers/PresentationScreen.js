@@ -7,7 +7,6 @@ import { Images } from '../Themes'
 import RoundedButton from '../Components/RoundedButton'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import Picker from 'react-native-picker';
-import area from './area.json';
 import { Container, Content, List, ListItem, Button, Icon,  InputGroup, Input } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid'
 import DeviceInfo from 'react-native-device-info'
@@ -17,6 +16,8 @@ import Svg,{ Circle, Ellipse, G, LinearGradient, RadialGradient, Line, Path, Pol
 // Styles
 import styles from './Styles/PresentationScreenStyle'
 
+// State county city data
+import area from './area.json';
 
 export default class PresentationScreen extends React.Component {
 
