@@ -2,16 +2,17 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom';
-import { ScrollView, Text, Image, View, TextInput, AppRegistry, TouchableOpacity, Dimensions } from 'react-native'
+import { StyleSheet, ScrollView, Text, Image, View, TextInput, AppRegistry, TouchableOpacity, Dimensions } from 'react-native'
 import { Images } from '../Themes'
 import RoundedButton from '../Components/RoundedButton'
 import { Actions as NavigationActions } from 'react-native-router-flux'
-import Picker from 'react-native-picker';
-import { Container, Content, List, ListItem, Button, Icon,  InputGroup, Input } from 'native-base';
+import Picker from 'react-native-picker'
+import { Container, Content, List, ListItem, Button, Icon,  InputGroup, Input } from 'native-base'
 import { Col, Row, Grid } from 'react-native-easy-grid'
 import DeviceInfo from 'react-native-device-info'
+import {PagerTabIndicator, IndicatorViewPager, PagerTitleIndicator, PagerDotIndicator} from 'rn-viewpager'
 import Svg,{ Circle, Ellipse, G, LinearGradient, RadialGradient, Line, Path, Polygon, Polyline, Rect, Symbol, Use, Defs, Stop
-} from 'react-native-svg';
+} from 'react-native-svg'
 
 // Styles
 import styles from './Styles/PresentationScreenStyle'
@@ -31,9 +32,9 @@ export default class PresentationScreen extends React.Component {
        selectedCategory : 'plumbing',
        selectedState : 'CA',
        selectedCity : 'San Francisco',
-       selectedDomainTotal : 0,
-       columnTotal2 : 0,
-       columnTotal3 : 0,
+       selectedDomainTotal : 2,
+       columnTotal2 : 4,
+       columnTotal3 : 6,
        columnTotal4 : 0,
        columnTotal5 : 0,
        columnTotal6 : 0,
@@ -89,7 +90,9 @@ export default class PresentationScreen extends React.Component {
     });
   }
 
-
+  _renderDotIndicator() {
+    return <PagerDotIndicator pageCount={3} />;
+  }
 
 
 
@@ -307,7 +310,7 @@ export default class PresentationScreen extends React.Component {
                         }} >
 
               <Text  style={{flex: 1, flexDirection: 'row',
-              fontSize: 34, color:'#ABABAB', textAlign: 'left', paddingLeft: 15 }}>_____</Text>
+              fontSize: 34, color:'#ABABAB', textAlign: 'left', paddingLeft: 15 }}> </Text>
 
             </View>
           </Col>
@@ -405,6 +408,22 @@ export default class PresentationScreen extends React.Component {
 
           <View  style={{ flex:1, marginTop:20 }}  >
             {boxes1}
+          </View>
+
+          <View style={{flex:1}}>
+            <IndicatorViewPager
+              style={{height:200}}
+              indicator={this._renderDotIndicator()} >
+              <View style={{backgroundColor:'#efefef'}}>
+                <Text>page one</Text>
+              </View>
+              <View style={{backgroundColor:'#cdcdcd'}}>
+                <Text>page two</Text>
+              </View>
+              <View style={{backgroundColor:'#ababab'}}>
+                <Text>page three</Text>
+              </View>
+            </IndicatorViewPager>
           </View>
 
           <View  style={{ flex:1, marginTop:20,  }}  >
