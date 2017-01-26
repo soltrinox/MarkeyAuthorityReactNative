@@ -292,7 +292,7 @@ export default class PresentationScreen extends React.Component {
       ct = ct + 2;
 
       var boxr2 = [];
-      var brr =  cll + 1;
+
       var totalCount = 0;
       var topval = 0;
 
@@ -303,7 +303,7 @@ export default class PresentationScreen extends React.Component {
                         flexDirection: 'row',
                         alignItems: 'flex-start',
                         }} >
-            <Text style={{color:'#FFFFFF'}}> DOMAIN # {brr} </Text>
+            <Text style={{color:'#FFFFFF'}}> DOMAIN # { cll } </Text>
           </View>
         </Row>
       );
@@ -359,7 +359,7 @@ export default class PresentationScreen extends React.Component {
       );
 
       boxes2.push(
-        <View style={{ margin:2 }}  key={cll} >
+        <View style={{ margin:2 }}  key={cll } >
           <Grid >
             { boxr2 }
           </Grid>
