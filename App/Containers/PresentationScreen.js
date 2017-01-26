@@ -38,6 +38,10 @@ export default class PresentationScreen extends React.Component {
        columnTotal4 : 0,
        columnTotal5 : 0,
        columnTotal6 : 0,
+        domain1: 'test 1',
+        domain2: 'test 1',
+        domain3: 'test 1',
+    productDomains : 4
     };
 
 
@@ -90,8 +94,8 @@ export default class PresentationScreen extends React.Component {
     });
   }
 
-  _renderDotIndicator() {
-    return <PagerDotIndicator pageCount={3} />;
+  _renderDotIndicator(){
+    return <PagerDotIndicator pageCount={this.state.productDomains} />;
   }
 
 
@@ -122,6 +126,7 @@ export default class PresentationScreen extends React.Component {
     ];
 
     var boxes1 = [];
+    var boxes2 = [];
     let rr = 0;
 
 
@@ -199,7 +204,7 @@ export default class PresentationScreen extends React.Component {
       ct = Math.floor(Math.random() * 10);
       ct = ct + 2;
       var boxr1 = [];
-      var boxr2 = [];
+
       var boxr3 = [];
       var valCol = parseInt(keywords[i][2]);
       var iii = parseInt(valCol);
@@ -222,21 +227,7 @@ export default class PresentationScreen extends React.Component {
           )
         }
 
-      for(var x = 0;x < iii ; x++){
-        boxr2.push(
-          <Svg height="16" width="17"  key={x} >
-            <Rect
-              x="0"
-              y="0"
-              width="15"
-              height="15"
-              stroke="black"
-              strokeWidth="1"
-              fill="green"
-            />
-          </Svg>
-        )
-      }
+
 
       var valKeyName = keywords[i][0];
 
@@ -293,6 +284,85 @@ export default class PresentationScreen extends React.Component {
         </View>
       );
 
+    }
+
+    for(var cll = 0;cll < this.state.productDomains ; cll++) {
+
+      ct = Math.floor(Math.random() * 10);
+      ct = ct + 2;
+
+      var boxr2 = [];
+      var brr =  cll + 1;
+      boxr2.push(
+        <Row style={{ backgroundColor: '#00000000', height: 25 }} key={x}>
+          <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        alignItems: 'flex-start',
+                        }} >
+            <Text style={{color:'#FFFFFF'}}> DOMAIN # {brr} </Text>
+          </View>
+        </Row>
+      );
+
+      var totalCount = 0;
+      var topval = 0;
+      for(var x = 0;x < keywords.length ; x++){
+
+        var kray = [];
+
+        var valCol = parseInt(keywords[x][2]);
+        var ggg = parseInt(valCol);
+
+        for(var k = 0; k < ggg; k++){
+          kray.push(<Svg height="16" width="17"  key={k} >
+            <Rect
+              x="0"
+              y="0"
+              width="15"
+              height="15"
+              stroke="black"
+              strokeWidth="1"
+              fill="green"
+            />
+          </Svg>);
+          totalCount++;
+        }
+
+        boxr2.push(
+          <Row style={{ backgroundColor: '#00000000', height: 25 }} key={x}>
+            <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        alignItems: 'flex-start',
+                        }} >
+              { kray }
+            </View>
+          </Row>
+        )
+        topval++;
+      }
+      topval++;
+
+      boxr2.push(
+        <Row style={{ backgroundColor: '#00000000', height: 25 }} key={topval}>
+          <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        alignItems: 'flex-start',
+                        }} >
+            <Text style={{color:'#FFFFFF', fontSize: 20, textAlign: 'center'}}> {totalCount} </Text>
+          </View>
+        </Row>
+      );
+
+      boxes2.push(
+        <View style={{ margin:2 }}  key={cll} >
+          <Grid >
+            { boxr2 }
+          </Grid>
+        </View>
+      );
     }
 
 
@@ -410,19 +480,22 @@ export default class PresentationScreen extends React.Component {
             {boxes1}
           </View>
 
-          <View style={{flex:1}}>
+
+          <View style={{margin:15, flex:0, width:400, height:400, overflow:'hidden'}}>
             <IndicatorViewPager
-              style={{height:200}}
+              style={{flex:1}}
               indicator={this._renderDotIndicator()} >
-              <View style={{backgroundColor:'#efefef'}}>
-                <Text>page one</Text>
-              </View>
-              <View style={{backgroundColor:'#cdcdcd'}}>
-                <Text>page two</Text>
-              </View>
-              <View style={{backgroundColor:'#ababab'}}>
-                <Text>page three</Text>
-              </View>
+              {
+                boxes2.map((item, index) => {
+                  return (
+                    <View style={{ }} key={index}>
+                      <TouchableOpacity  >
+                        {item}
+                      </TouchableOpacity>
+                    </View>
+                  )
+                })
+              }
             </IndicatorViewPager>
           </View>
 
