@@ -2,21 +2,23 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom';
-import { ScrollView, Text, Image, View, TextInput, AppRegistry, TouchableOpacity, Dimensions } from 'react-native'
+import { StyleSheet, ScrollView, Text, Image, View, TextInput, AppRegistry, TouchableOpacity, Dimensions } from 'react-native'
 import { Images } from '../Themes'
 import RoundedButton from '../Components/RoundedButton'
 import { Actions as NavigationActions } from 'react-native-router-flux'
-import Picker from 'react-native-picker';
-import area from './area.json';
-import { Container, Content, List, ListItem, Button, Icon,  InputGroup, Input } from 'native-base';
+import Picker from 'react-native-picker'
+import { Container, Content, List, ListItem, Button, Icon,  InputGroup, Input } from 'native-base'
 import { Col, Row, Grid } from 'react-native-easy-grid'
 import DeviceInfo from 'react-native-device-info'
+import {PagerTabIndicator, IndicatorViewPager, PagerTitleIndicator, PagerDotIndicator} from 'rn-viewpager'
 import Svg,{ Circle, Ellipse, G, LinearGradient, RadialGradient, Line, Path, Polygon, Polyline, Rect, Symbol, Use, Defs, Stop
-} from 'react-native-svg';
+} from 'react-native-svg'
 
 // Styles
 import styles from './Styles/PresentationScreenStyle'
 
+// State county city data
+import area from './area.json';
 
 export default class PresentationScreen extends React.Component {
 
@@ -30,12 +32,16 @@ export default class PresentationScreen extends React.Component {
        selectedCategory : 'plumbing',
        selectedState : 'CA',
        selectedCity : 'San Francisco',
-       selectedDomainTotal : 0,
-       columnTotal2 : 0,
-       columnTotal3 : 0,
+       selectedDomainTotal : 2,
+       columnTotal2 : 4,
+       columnTotal3 : 6,
        columnTotal4 : 0,
        columnTotal5 : 0,
        columnTotal6 : 0,
+        domain1: 'test 1',
+        domain2: 'test 1',
+        domain3: 'test 1',
+    productDomains : 5
     };
 
 
@@ -60,7 +66,11 @@ export default class PresentationScreen extends React.Component {
   _showAreaPicker() {
     Picker.init({
       pickerData: this._createAreaData(),
-      selectedValue: ['河北', '唐山', '古冶区'],
+      selectedValue: ['CA', 'SAN FRANCISCO', 'SAN FRANCISCO'],
+      pickerTitleText: 'Select A Market',
+      pickerFontSize: 20,
+      pickerConfirmBtnText:'Cancel',
+      pickerCancelBtnText:'Select',
       onPickerConfirm: pickedValue => {
         console.log('area', pickedValue);
       },
@@ -68,7 +78,6 @@ export default class PresentationScreen extends React.Component {
         console.log('area', pickedValue);
       },
       onPickerSelect: pickedValue => {
-        //Picker.select(['山东', '青岛', '黄岛区'])
         console.log('area', pickedValue);
       }
     });
@@ -85,27 +94,39 @@ export default class PresentationScreen extends React.Component {
     });
   }
 
+  _renderDotIndicator(){
+    return <PagerDotIndicator pageCount={this.state.productDomains - 1} />;
+  }
+
+
 
   render () {
+
+    onValueChange = (key: string, value: string) => {
+      const newState = {};
+      newState[key] = value;
+      this.setState(newState);
+    };
 
     var items = ['San Jose','San Francisco','Santa Cruz','Sacramento','Los Angeles'];
 
     var keywords = [
-      ['plumbing', '0', '3','2', '2'],
-      ['water heater', '2', '2','2', '2'],
-      ['broken pipes', '0', '6','2', '2'],
-      ['plumbing', '1', '3','2', '2'],
-      ['water heater', '2', '4','2', '2'],
-      ['broken pipes', '1', '6','2', '2'],
-      ['plumbing', '0', '6','2', '2'],
-      ['water heater', '1', '5','2', '2'],
-      ['broken pipes', '0', '6','2', '2'],
-      ['plumbing', '0', '6','2', '2'],
-      ['water heater', '1', '5','2', '2'],
-      ['broken pipes', '0', '6','2', '2'],
+      ['plumbing', '0', '1','5', '2'],
+      ['water heater', '2', '2','6', '5'],
+      ['broken pipes', '0', '5','1', '7'],
+      ['plumbing', '1', '10','8', '12'],
+      ['water heater', '2', '8','10', '10'],
+      ['broken pipes', '1', '1','5', '4'],
+      ['plumbing', '0', '3','9', '8'],
+      ['water heater', '1', '7','3', '5'],
+      ['broken pipes', '0', '1','4', '1'],
+      ['plumbing', '0', '6','8', '9'],
+      ['water heater', '1', '10','10', '10'],
+      ['broken pipes', '0', '9','5', '7'],
     ];
 
     var boxes1 = [];
+    var boxes2 = [];
     let rr = 0;
 
 
@@ -183,7 +204,7 @@ export default class PresentationScreen extends React.Component {
       ct = Math.floor(Math.random() * 10);
       ct = ct + 2;
       var boxr1 = [];
-      var boxr2 = [];
+
       var boxr3 = [];
       var valCol = parseInt(keywords[i][2]);
       var iii = parseInt(valCol);
@@ -206,21 +227,7 @@ export default class PresentationScreen extends React.Component {
           )
         }
 
-      for(var x = 0;x < iii ; x++){
-        boxr2.push(
-          <Svg height="16" width="17"  key={x} >
-            <Rect
-              x="0"
-              y="0"
-              width="15"
-              height="15"
-              stroke="black"
-              strokeWidth="1"
-              fill="green"
-            />
-          </Svg>
-        )
-      }
+
 
       var valKeyName = keywords[i][0];
 
@@ -279,68 +286,91 @@ export default class PresentationScreen extends React.Component {
 
     }
 
+    for(var cll = 1;cll < this.state.productDomains ; cll++) {
+
+      ct = Math.floor(Math.random() * 10);
+      ct = ct + 2;
+
+      var boxr2 = [];
+
+      var totalCount = 0;
+      var topval = 0;
+
+      boxr2.push(
+        <Row style={{ backgroundColor: '#00000000', height: 25 }} key={topval}>
+          <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        alignItems: 'flex-start',
+                        }} >
+            <Text style={{color:'#FFFFFF'}}> DOMAIN # { cll } </Text>
+          </View>
+        </Row>
+      );
+
+
+      for(var p = 0;p < keywords.length ; p++){
+
+        var kray = [];
+
+        var fcol = parseInt(keywords[p][cll]);
+        var ggg = parseInt(fcol);
+
+        for(var k = 0; k < ggg; k++){
+          kray.push(<Svg height="16" width="17"  key={k} >
+            <Rect
+              x="0"
+              y="0"
+              width="15"
+              height="15"
+              stroke="black"
+              strokeWidth="1"
+              fill="green"
+            />
+          </Svg>);
+          totalCount++;
+        }
+
+        boxr2.push(
+          <Row style={{ backgroundColor: '#00000000', height: 25 }} key={p+1}>
+            <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        alignItems: 'flex-start',
+                        }} >
+              { kray }
+            </View>
+          </Row>
+        )
+        topval++;
+      }
+      topval++;
+
+      boxr2.push(
+        <Row style={{ backgroundColor: '#00000000', height: 25 }} key={topval}>
+          <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        alignItems: 'flex-start',
+                        }} >
+            <Text style={{color:'#FFFFFF', fontSize: 20, textAlign: 'center'}}> {totalCount} </Text>
+          </View>
+        </Row>
+      );
+
+      boxes2.push(
+        <View style={{ margin:2 }}  key={cll } >
+          <Grid >
+            { boxr2 }
+          </Grid>
+        </View>
+      );
+    }
+
 
     rr = 99;
 
-    boxes1.push(
-      <View style={{ margin:2 }}  key={rr} >
-        <Grid key={rr}>
-          <Col style={{ backgroundColor: '#00000000', height: 40 }}>
-            <View style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        justifyContent: 'space-around',
-                        alignItems: 'center',
-                        }} >
 
-              <Text  style={{flex: 1, flexDirection: 'row',
-              fontSize: 34, color:'#ABABAB', textAlign: 'left', paddingLeft: 15 }}>_____</Text>
-
-            </View>
-          </Col>
-
-          <Col style={{ backgroundColor: '#00000000', height: 40  }}>
-            <View style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',
-                        }} >
-              <Text  style={{flex: 1, flexDirection: 'row',
-              fontSize: 34, color:'#ABABAB', textAlign: 'left', paddingLeft: 15 }}>{this.state.selectedDomainTotal}</Text>
-
-            </View>
-          </Col>
-
-          <Col style={{ backgroundColor: '#00000000', height: 40  }}>
-            <View style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',
-                        }} >
-              <Text  style={{flex: 1, flexDirection: 'row',
-              fontSize: 34, color:'#ABABAB', textAlign: 'left', paddingLeft: 15 }}>{this.state.columnTotal2}</Text>
-
-            </View>
-          </Col>
-
-          <Col style={{ backgroundColor: '#00000000', height: 40  }}>
-            <View style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',
-                        }} >
-              <Text   style={{flex: 1, flexDirection: 'row',
-              fontSize: 34, color:'#ABABAB', textAlign: 'left', paddingLeft: 15 }}>{this.state.columnTotal3}</Text>
-
-            </View>
-          </Col>
-
-        </Grid>
-      </View>
-    );
 
 
     return (
@@ -392,6 +422,25 @@ export default class PresentationScreen extends React.Component {
 
           <View  style={{ flex:1, marginTop:20 }}  >
             {boxes1}
+          </View>
+
+
+          <View style={{margin:15, flex:0, width:400, height:400, overflow:'hidden'}}>
+            <IndicatorViewPager
+              style={{flex:1}}
+              indicator={this._renderDotIndicator()} >
+              {
+                boxes2.map((item, index) => {
+                  return (
+                    <View style={{ }} key={index}>
+                      <TouchableOpacity  >
+                        {item}
+                      </TouchableOpacity>
+                    </View>
+                  )
+                })
+              }
+            </IndicatorViewPager>
           </View>
 
           <View  style={{ flex:1, marginTop:20,  }}  >
