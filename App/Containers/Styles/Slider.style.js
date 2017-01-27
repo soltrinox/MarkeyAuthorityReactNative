@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { itemHorizontalMargin, itemWidth } from 'SliderEntry.style';
+import { itemHorizontalMargin, itemWidth } from './SliderEntry.style';
 
 export default StyleSheet.create({
   slider: {

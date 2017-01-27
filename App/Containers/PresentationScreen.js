@@ -18,7 +18,8 @@ import Svg,{ Circle, Ellipse, G, LinearGradient, RadialGradient, Line, Path, Pol
 // Styles
 
 import sliderStyles from './Styles/Slider.style'
-import sliderEntryStyles, { sliderWidth, itemWidth } from './Styles/SliderEntry.style'
+import { sliderWidth, itemWidth } from './Styles/SliderEntry.style'
+import sliderEntryStyles from './Styles/SliderEntry.style'
 import styles from './Styles/PresentationScreenStyle'
 
 // State county city data
@@ -43,12 +44,13 @@ export default class PresentationScreen extends React.Component {
       domain2: 'test 1',
       domain3: 'test 1',
       productDomains : 5,
-      carouselItems : []
+      carouselItems : [],
+      boxes1: [],
+      boxes2: []
     };
 
     this._updateText = this._updateText.bind(this);
-    this._renderItem = this._renderItem.bind(this);
-    this._updateCarouselItems = this._updateCarouselItems.bind(this);
+
   }
 
 
@@ -117,30 +119,37 @@ export default class PresentationScreen extends React.Component {
     this.setState({ carouselItems: items });
   }
 
+  _updateBoxes1(arrayz){
+    this.setState({boxes1 : arrayz});
+  }
+
+  _updateBoxes2(arrayz){
+
+    this.setState({boxes2 : arrayz});
+    this._updateCarouselItems(arrayz);
+  }
+
 
   _renderItem (entry) {
     return (
       <TouchableOpacity
         activeOpacity={0.9}
         style={sliderEntryStyles.slideInnerContainer}
-        onPress={() => { alert(`You've clicked '${title}'`); }}
-      >
-        {entry}
-      </TouchableOpacity>
+      >{entry}</TouchableOpacity>
     );
   }
-  // <SliderEntry {...entry} />
 
-  get example1 () {
-    return (
+  // _renderSliderView(){
+  get example1 (){
+    return(
       <Carousel
         items={this.state.carouselItems}
-        firstItem={2}
+        firstItem={0}
         inactiveSlideScale={0.94}
         inactiveSlideOpacity={0.6}
         renderItem={this._renderItem}
-        sliderWidth={sliderWidth}
-        itemWidth={itemWidth}
+        sliderWidth={450}
+        itemWidth={400}
         slideStyle={sliderStyles.slide}
         containerCustomStyle={sliderStyles.slider}
         contentContainerCustomStyle={sliderStyles.sliderContainer}
@@ -152,112 +161,114 @@ export default class PresentationScreen extends React.Component {
   }
 
 
-  render () {
-
-    var items = ['San Jose','San Francisco','Santa Cruz','Sacramento','Los Angeles'];
-
-    var keywords = [
-      ['plumbing', '0', '1','5', '2'],
-      ['water heater', '2', '2','6', '5'],
-      ['broken pipes', '0', '5','1', '7'],
-      ['plumbing', '1', '10','8', '12'],
-      ['water heater', '2', '8','10', '10'],
-      ['broken pipes', '1', '1','5', '4'],
-      ['plumbing', '0', '3','9', '8'],
-      ['water heater', '1', '7','3', '5'],
-      ['broken pipes', '0', '1','4', '1'],
-      ['plumbing', '0', '6','8', '9'],
-      ['water heater', '1', '10','10', '10'],
-      ['broken pipes', '0', '9','5', '7'],
-    ];
-
-    var boxes1 = [];
-    var boxes2 = [];
-    let rr = 0;
+    componentWillMount() {
 
 
 
-    boxes1.push(
-      <View style={{ margin:2 }}  key={rr} >
-        <Grid key={rr}>
-          <Col style={{ backgroundColor: '#00000000', height: 25 }}>
-            <View style={{
+      var items = ['San Jose','San Francisco','Santa Cruz','Sacramento','Los Angeles'];
+
+      var keywords = [
+        ['plumbing', '0', '1','5', '2'],
+        ['water heater', '2', '2','6', '5'],
+        ['broken pipes', '0', '5','1', '7'],
+        ['plumbing', '1', '10','8', '12'],
+        ['water heater', '2', '8','10', '10'],
+        ['broken pipes', '1', '1','5', '4'],
+        ['plumbing', '0', '3','9', '8'],
+        ['water heater', '1', '7','3', '5'],
+        ['broken pipes', '0', '1','4', '1'],
+        ['plumbing', '0', '6','8', '9'],
+        ['water heater', '1', '10','10', '10'],
+        ['broken pipes', '0', '9','5', '7'],
+      ];
+
+      var firstBoxes = [];
+      var secondBoxes = [];
+      let rr = 0;
+
+
+
+      firstBoxes.push(
+        <View style={{ margin:2 }}  key={rr} >
+          <Grid key={rr}>
+            <Col style={{ backgroundColor: '#00000000', height: 25 }}>
+              <View style={{
                         flex: 1,
                         flexDirection: 'row',
                         justifyContent: 'space-around',
                         alignItems: 'center',
                         }} >
 
-              <Text style={styles.sectionText}>KEYWORD</Text>
+                <Text style={styles.sectionText}>KEYWORD</Text>
 
-            </View>
-          </Col>
+              </View>
+            </Col>
 
-          <Col style={{ backgroundColor: '#00000000', height: 25  }}>
-            <View style={{
+            <Col style={{ backgroundColor: '#00000000', height: 25  }}>
+              <View style={{
                         flex: 1,
                         flexDirection: 'row',
                         justifyContent: 'flex-start',
                         alignItems: 'center',
                         }} >
-              <Text style={styles.sectionText}>{this.state.selectedDomain}</Text>
+                <Text style={styles.sectionText}>{this.state.selectedDomain}</Text>
 
-            </View>
-          </Col>
+              </View>
+            </Col>
 
-          <Col style={{ backgroundColor: '#00000000', height: 25  }}>
-            <View style={{
+            <Col style={{ backgroundColor: '#00000000', height: 25  }}>
+              <View style={{
                         flex: 1,
                         flexDirection: 'row',
                         justifyContent: 'flex-start',
                         alignItems: 'center',
                         }} >
-              <Text style={styles.sectionText}>DEX ESS</Text>
+                <Text style={styles.sectionText}>DEX ESS</Text>
 
-            </View>
-          </Col>
+              </View>
+            </Col>
 
-          <Col style={{ backgroundColor: '#00000000', height: 25  }}>
-            <View style={{
+            <Col style={{ backgroundColor: '#00000000', height: 25  }}>
+              <View style={{
                         flex: 1,
                         flexDirection: 'row',
                         justifyContent: 'flex-start',
                         alignItems: 'center',
                         }} >
-              <Text style={styles.sectionText}>DEX PRO</Text>
+                <Text style={styles.sectionText}>DEX PRO</Text>
 
-            </View>
-          </Col>
+              </View>
+            </Col>
 
-        </Grid>
-      </View>
-    );
+          </Grid>
+        </View>
+      );
 
-  rr++;
+      rr++;
 
-  console.log("Device  inEmulator"  );
-  console.log("Device  isTablet" );
+      console.log("Device  inEmulator"  );
+      console.log("Device  isTablet" );
 
-  console.log("Test Model", DeviceInfo.getModel());
-  console.log("Device ID", DeviceInfo.getDeviceId());
-  console.log("System Name", DeviceInfo.getSystemName());
+      console.log("Test Model", DeviceInfo.getModel());
+      console.log("Device ID", DeviceInfo.getDeviceId());
+      console.log("System Name", DeviceInfo.getSystemName());
 
 
-    var ct = 0;
+      var ct = 0;
 
-    for(let i = rr; i < keywords.length ; ++i ){
+      for(let i = rr; i < keywords.length ; ++i ){
 
-      ct = Math.floor(Math.random() * 10);
-      ct = ct + 2;
-      var boxr1 = [];
+        ct = Math.floor(Math.random() * 10);
+        ct = ct + 2;
+        var boxr1 = [];
 
-      var boxr3 = [];
-      var valCol = parseInt(keywords[i][2]);
-      var iii = parseInt(valCol);
+        var boxr3 = [];
+        var valCol = parseInt(keywords[i][2]);
+        var iii = parseInt(valCol);
 
-      // GENERATE THE SQUARES FOR THE DOMAIN HITS IN TOP 10
+        // GENERATE THE SQUARES FOR THE DOMAIN HITS IN TOP 10
 
-      for(var x = 0;x < iii ; x++){
+        for(var x = 0;x < iii ; x++){
           boxr1.push(
             <Svg height="16" width="17"  key={x} >
               <Rect
@@ -275,147 +286,157 @@ export default class PresentationScreen extends React.Component {
 
 
 
-      var valKeyName = keywords[i][0];
+        var valKeyName = keywords[i][0];
 
-      boxes1.push(
-        <View style={{ margin:2 }}  key={i}>
-          <Grid key={i}>
-            <Col style={{ backgroundColor: '#00000000', height: 25 }}>
-              <View style={{
+        firstBoxes.push(
+          <View style={{ margin:2 }}  key={i}>
+            <Grid key={i}>
+              <Col style={{ backgroundColor: '#00000000', height: 25 }}>
+                <View style={{
                         flex: 1,
                         flexDirection: 'row',
                         justifyContent: 'space-around',
                         alignItems: 'center',
                         }} >
 
-                <Text style={styles.sectionText}>{i}] {valKeyName} </Text>
+                  <Text style={styles.sectionText}>{i}] {valKeyName} </Text>
 
-              </View>
-            </Col>
+                </View>
+              </Col>
 
-            <Col style={{ backgroundColor: '#00000000', height: 25  }}>
-              <View style={{
+              <Col style={{ backgroundColor: '#00000000', height: 25  }}>
+                <View style={{
                         flex: 1,
                         flexDirection: 'row',
                         justifyContent: 'flex-start',
                         alignItems: 'center',
                         }} >
-                { boxr1 }
-              </View>
-            </Col>
+                  { boxr1 }
+                </View>
+              </Col>
 
-            <Col style={{ backgroundColor: '#00000000', height: 25  }}>
-              <View style={{
+              <Col style={{ backgroundColor: '#00000000', height: 25  }}>
+                <View style={{
                         flex: 1,
                         flexDirection: 'row',
                         justifyContent: 'flex-start',
                         alignItems: 'center',
                         }} >
-                { boxr1 }
-              </View>
-            </Col>
+                  { boxr1 }
+                </View>
+              </Col>
 
-            <Col style={{ backgroundColor: '#00000000', height: 25  }}>
-              <View style={{
+              <Col style={{ backgroundColor: '#00000000', height: 25  }}>
+                <View style={{
                         flex: 1,
                         flexDirection: 'row',
                         justifyContent: 'flex-start',
                         alignItems: 'center',
                         }} >
-                { boxr1 }
-              </View>
-            </Col>
+                  { boxr1 }
+                </View>
+              </Col>
 
-          </Grid>
-        </View>
-      );
-
-    }
-
-    for(var cll = 1;cll < this.state.productDomains ; cll++) {
-
-      ct = Math.floor(Math.random() * 10);
-      ct = ct + 2;
-
-      var boxr2 = [];
-
-      var totalCount = 0;
-      var topval = 0;
-
-      boxr2.push(
-        <Row style={{ backgroundColor: '#00000000', height: 25 }} key={topval}>
-          <View style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        alignItems: 'flex-start',
-                        }} >
-            <Text style={{color:'#FFFFFF'}}> DOMAIN # { cll } </Text>
+            </Grid>
           </View>
-        </Row>
-      );
+        );
+
+      }
+
+      this._updateBoxes1(firstBoxes);
 
 
-      for(var p = 0;p < keywords.length ; p++){
 
-        var kray = [];
+      for(var cll = 1;cll < this.state.productDomains ; cll++) {
 
-        var fcol = parseInt(keywords[p][cll]);
-        var ggg = parseInt(fcol);
+        ct = Math.floor(Math.random() * 10);
+        ct = ct + 2;
 
-        for(var k = 0; k < ggg; k++){
-          kray.push(<Svg height="16" width="17"  key={k} >
-            <Rect
-              x="0"
-              y="0"
-              width="15"
-              height="15"
-              stroke="black"
-              strokeWidth="1"
-              fill="green"
-            />
-          </Svg>);
-          totalCount++;
-        }
+        var boxr2 = [];
+
+        var totalCount = 0;
+        var topval = 0;
 
         boxr2.push(
-          <Row style={{ backgroundColor: '#00000000', height: 25 }} key={p+1}>
+          <Row style={{ backgroundColor: '#00000000', height: 25 }} key={topval}>
             <View style={{
                         flex: 1,
                         flexDirection: 'row',
                         alignItems: 'flex-start',
                         }} >
-              { kray }
+              <Text style={{color:'#FFFFFF'}}> DOMAIN # { cll } </Text>
             </View>
           </Row>
-        )
-        topval++;
-      }
-      topval++;
+        );
 
-      boxr2.push(
-        <Row style={{ backgroundColor: '#00000000', height: 25 }} key={topval}>
-          <View style={{
+
+        for(var p = 0;p < keywords.length ; p++){
+
+          var kray = [];
+
+          var fcol = parseInt(keywords[p][cll]);
+          var ggg = parseInt(fcol);
+
+          for(var k = 0; k < ggg; k++){
+            kray.push(<Svg height="16" width="17"  key={k} >
+              <Rect
+                x="0"
+                y="0"
+                width="15"
+                height="15"
+                stroke="black"
+                strokeWidth="1"
+                fill="green"
+              />
+            </Svg>);
+            totalCount++;
+          }
+
+          boxr2.push(
+            <Row style={{ backgroundColor: '#00000000', height: 25 }} key={p+1}>
+              <View style={{
                         flex: 1,
                         flexDirection: 'row',
                         alignItems: 'flex-start',
                         }} >
-            <Text style={{color:'#FFFFFF', fontSize: 20, textAlign: 'center'}}> {totalCount} </Text>
-          </View>
-        </Row>
-      );
+                { kray }
+              </View>
+            </Row>
+          )
+          topval++;
+        }
+        topval++;
 
-      boxes2.push(
-        <View style={{ width:225, height:400, overflow: 'hidden' }}  key={cll } >
-          <Grid style={{ flex:1 }} >
-            { boxr2 }
-          </Grid>
-        </View>
-      );
+        boxr2.push(
+          <Row style={{ backgroundColor: '#00000000', height: 25 }} key={topval}>
+            <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        alignItems: 'flex-start',
+                        }} >
+              <Text style={{color:'#FFFFFF', fontSize: 20, textAlign: 'center'}}> {totalCount} </Text>
+            </View>
+          </Row>
+        );
+
+        secondBoxes.push(
+          <View style={{ width:225, height:400, overflow: 'hidden' }}  key={cll } >
+            <Grid style={{ flex:1 }} >
+              { boxr2 }
+            </Grid>
+          </View>
+        );
+
+
+      }
+
+
+      this._updateBoxes2(secondBoxes);
+      this._updateCarouselItems(secondBoxes);
+
     }
 
-    this._updateCarouselItems(boxes2);
-
-    rr = 99;
+    render () {
 
 
 
@@ -470,7 +491,7 @@ export default class PresentationScreen extends React.Component {
           </View>
 
           <View  style={{ flex:1, marginTop:20 }}  >
-            {boxes1}
+            {this.state.boxes1}
           </View>
 
           <View style={{  width:450, height:400, overflow: 'hidden' }}>
@@ -479,7 +500,7 @@ export default class PresentationScreen extends React.Component {
                 style={{ flex:1 }}
                 indicator={this._renderDotIndicator()} >
                 {
-                  boxes2.map((item, index) => {
+                  this.state.boxes2.map((item, index) => {
                     return (
                       <View style={{ width:225, overflow:'hidden' }} key={index}>
                         <TouchableOpacity style={{ width:450  }} key={index}  >
@@ -493,14 +514,17 @@ export default class PresentationScreen extends React.Component {
             </View>
           </View>
 
-          <View  style={{ flex:1, marginTop:20,  }}  >
-            <ScrollView style={{flex:1}}>
 
-              { this.example1 }
+
+
+          <View  style={{ flex:1, marginTop:20,  }}  >
+            <ScrollView style={{width:450, height:400, overflow:'hidden', backgroundColor: '#CCCCCC' }}>
+
+              {this.example1}
 
             </ScrollView>
-
           </View>
+
 
           {/*<View  style={{ flex:1, marginTop:20,  }}  >*/}
               {/*<TouchableOpacity style={{marginTop: 10, marginLeft: 20}} onPress={this._showAreaPicker.bind(this)}>*/}
