@@ -135,6 +135,65 @@ export default class PresentationScreen extends React.Component {
     let rr = 0;
 
 
+
+    boxes1.push(
+      <View style={{ margin:2 }}  key={rr} >
+        <Grid key={rr}>
+          <Col style={{ backgroundColor: '#00000000', height: 25 }}>
+            <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'space-around',
+                        alignItems: 'center',
+                        }} >
+
+              <Text style={styles.sectionText}>KEYWORD</Text>
+
+            </View>
+          </Col>
+
+          <Col style={{ backgroundColor: '#00000000', height: 25  }}>
+            <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        }} >
+              <Text style={styles.sectionText}>{this.state.selectedDomain}</Text>
+
+            </View>
+          </Col>
+
+          <Col style={{ backgroundColor: '#00000000', height: 25  }}>
+            <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        }} >
+              <Text style={styles.sectionText}>DEX ESS</Text>
+
+            </View>
+          </Col>
+
+          <Col style={{ backgroundColor: '#00000000', height: 25  }}>
+            <View style={{
+                        flex: 1,
+                        flexDirection: 'row',
+                        justifyContent: 'flex-start',
+                        alignItems: 'center',
+                        }} >
+              <Text style={styles.sectionText}>DEX PRO</Text>
+
+            </View>
+          </Col>
+
+        </Grid>
+      </View>
+    );
+
+  rr++;
+
   console.log("Device  inEmulator"  );
   console.log("Device  isTablet" );
 
