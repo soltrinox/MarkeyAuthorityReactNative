@@ -10,11 +10,15 @@ import Picker from 'react-native-picker'
 import { Container, Content, List, ListItem, Button, Icon,  InputGroup, Input } from 'native-base'
 import { Col, Row, Grid } from 'react-native-easy-grid'
 import DeviceInfo from 'react-native-device-info'
+import Carousel from 'react-native-snap-carousel'
 import {PagerTabIndicator, IndicatorViewPager, PagerTitleIndicator, PagerDotIndicator} from 'rn-viewpager'
 import Svg,{ Circle, Ellipse, G, LinearGradient, RadialGradient, Line, Path, Polygon, Polyline, Rect, Symbol, Use, Defs, Stop
 } from 'react-native-svg'
 
 // Styles
+
+import sliderStyles from './Styles/Slider.style'
+import sliderEntryStyles from './Styles/SliderEntry.style'
 import styles from './Styles/PresentationScreenStyle'
 
 // State county city data
@@ -38,10 +42,13 @@ export default class PresentationScreen extends React.Component {
       domain1: 'test 1',
       domain2: 'test 1',
       domain3: 'test 1',
-      productDomains : 5
+      productDomains : 5,
+      carouselItems : []
     };
 
     this._updateText = this._updateText.bind(this);
+    this._renderItem = this._renderItem.bind(this);
+    this._updateCarouselItems = this._updateCarouselItems.bind(this);
   }
 
 
@@ -104,14 +111,48 @@ export default class PresentationScreen extends React.Component {
      this.setState({ selectedDomain: ddomain });
 
      // LOOK UP THE DOMAIN BY NAME HERE
+  }
+
+  _updateCarouselItems(items) {
+    this.setState({ carouselItems: items });
+  }
 
 
+  _renderItem (entry) {
+    return (
+      <TouchableOpacity
+        activeOpacity={0.9}
+        style={sliderEntryStyles.slideInnerContainer}
+        onPress={() => { alert(`You've clicked '${title}'`); }}
+      >
+        {entry}
+      </TouchableOpacity>
+    );
+  }
+  // <SliderEntry {...entry} />
+
+  get example1 () {
+    return (
+      <Carousel
+        items={this.state.carouselItems}
+        firstItem={2}
+        inactiveSlideScale={0.94}
+        inactiveSlideOpacity={0.6}
+        renderItem={this._renderItem}
+        sliderWidth={sliderWidth}
+        itemWidth={itemWidth}
+        slideStyle={sliderStyles.slide}
+        containerCustomStyle={sliderStyles.slider}
+        contentContainerCustomStyle={sliderStyles.sliderContainer}
+        showsHorizontalScrollIndicator={false}
+        snapOnAndroid={true}
+        removeClippedSubviews={false}
+      />
+    );
   }
 
 
   render () {
-
-
 
     var items = ['San Jose','San Francisco','Santa Cruz','Sacramento','Los Angeles'];
 
@@ -372,6 +413,7 @@ export default class PresentationScreen extends React.Component {
       );
     }
 
+    this._updateCarouselItems(boxes2);
 
     rr = 99;
 
@@ -382,6 +424,7 @@ export default class PresentationScreen extends React.Component {
       <View style={styles.mainContainer}>
         {/*<Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />*/}
         <ScrollView style={styles.container}>
+
           <View style={{
                         flex: 1,
                         flexDirection: 'row',
@@ -417,17 +460,14 @@ export default class PresentationScreen extends React.Component {
             {/*<TextInput  borderType='rounded' placeholder="CATEGORY"   style={{ flex:2,padding: 4, height:30,backgroundColor:'#FFFFFF', color:'#000000', marginRight:5  }}  />*/}
             {/*<TextInput borderType='rounded' placeholder="MARKET"   style={{ flex:2,padding: 4, height:30,backgroundColor:'#FFFFFF', color:'#000000', marginRight:5   }}  />*/}
 
-          </View>
-
+            </View>
 
           <View  style={{ flex:1, marginTop:20 }}  >
             <Text style={{flex:1, flexDirection: 'row', textAlign: 'center' ,
              color:'#ABABAB', margin:10, fontSize: 34 }}  >
-                Top 10 Searches for {this.state.selectedCategory} in {this.state.selectedDomain}
+                Ranking {this.state.selectedCategory} KW for {this.state.selectedDomain}
             </Text>
           </View>
-
-
 
           <View  style={{ flex:1, marginTop:20 }}  >
             {boxes1}
@@ -451,6 +491,10 @@ export default class PresentationScreen extends React.Component {
                 }
               </IndicatorViewPager>
             </View>
+          </View>
+
+          <View  style={{ flex:1, marginTop:20,  }}  >
+            { this.example1 }
           </View>
 
           {/*<View  style={{ flex:1, marginTop:20,  }}  >*/}
