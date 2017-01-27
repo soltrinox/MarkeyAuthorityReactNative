@@ -408,7 +408,7 @@ export default class PresentationScreen extends React.Component {
         topval++;
 
         boxr2.push(
-          <Row style={{ backgroundColor: '#00000000', height: 25 }} key={topval}>
+          <Row style={{ backgroundColor: '#000000', height: 25 }} key={topval}>
             <View style={{
                         flex: 1,
                         flexDirection: 'row',
@@ -420,7 +420,7 @@ export default class PresentationScreen extends React.Component {
         );
 
         secondBoxes.push(
-          <View style={{ width:225, height:400, overflow: 'hidden' }}  key={cll } >
+          <View style={{ width:225, height:400, overflow: 'hidden', borderRadius:8, backgroundColor: '#222222' }}  key={cll } >
             <Grid style={{ flex:1 }} >
               { boxr2 }
             </Grid>
@@ -518,7 +518,7 @@ export default class PresentationScreen extends React.Component {
 
 
           <View  style={{ flex:1, marginTop:20,  }}  >
-            <ScrollView style={{width:450, height:400, overflow:'hidden', backgroundColor: '#CCCCCC' }}>
+            <ScrollView style={{width:450, height:400, overflow:'hidden', backgroundColor: '#00000000' }}>
 
               {this.example1}
 
