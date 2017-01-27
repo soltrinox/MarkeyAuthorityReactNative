@@ -35,6 +35,7 @@
     "react-dom": "^15.4.2",
     "react-native": "^0.38.0",
     "react-native-animatable": "^0.6.0",
+    "react-native-autocomplete-input": "github:l-urence/react-native-autocomplete-input",
     "react-native-config": "^0.1.2",
     "react-native-device": "^1.0.1",
     "react-native-device-info": "^0.9.6",

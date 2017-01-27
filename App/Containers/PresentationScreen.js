@@ -102,10 +102,11 @@ export default class PresentationScreen extends React.Component {
 
   _updateText(ddomain) {
      this.setState({ selectedDomain: ddomain });
+
+     // LOOK UP THE DOMAIN BY NAME HERE
+
+
   }
-
-
-
 
 
   render () {
@@ -304,8 +305,8 @@ export default class PresentationScreen extends React.Component {
       );
 
       boxes2.push(
-        <View style={{ margin:2 }}  key={cll } >
-          <Grid >
+        <View style={{ width:225, height:400, overflow: 'hidden' }}  key={cll } >
+          <Grid style={{ flex:1 }} >
             { boxr2 }
           </Grid>
         </View>
@@ -373,23 +374,24 @@ export default class PresentationScreen extends React.Component {
             {boxes1}
           </View>
 
-
-          <View style={{margin:15, flex:0, width:400, height:400, overflow:'hidden'}}>
-            <IndicatorViewPager
-              style={{flex:1}}
-              indicator={this._renderDotIndicator()} >
-              {
-                boxes2.map((item, index) => {
-                  return (
-                    <View style={{ }} key={index}>
-                      <TouchableOpacity  >
-                        {item}
-                      </TouchableOpacity>
-                    </View>
-                  )
-                })
-              }
-            </IndicatorViewPager>
+          <View style={{  width:450, height:400, overflow: 'hidden' }}>
+            <View style={{  width:225, height:400, overflow: 'visible'}}>
+              <IndicatorViewPager
+                style={{ flex:1 }}
+                indicator={this._renderDotIndicator()} >
+                {
+                  boxes2.map((item, index) => {
+                    return (
+                      <View style={{ width:225, overflow:'hidden' }} key={index}>
+                        <TouchableOpacity style={{ width:450  }} key={index}  >
+                          {item}
+                        </TouchableOpacity>
+                      </View>
+                    )
+                  })
+                }
+              </IndicatorViewPager>
+            </View>
           </View>
 
           {/*<View  style={{ flex:1, marginTop:20,  }}  >*/}
