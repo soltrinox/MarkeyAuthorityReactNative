@@ -12,8 +12,7 @@ import { Col, Row, Grid } from 'react-native-easy-grid'
 import DeviceInfo from 'react-native-device-info'
 import Carousel from 'react-native-snap-carousel'
 import {IndicatorViewPager,  PagerDotIndicator} from 'rn-viewpager'
-import Svg,{ Circle, Ellipse, G, LinearGradient, RadialGradient, Line, Path, Polygon, Polyline, Rect, Symbol, Use, Defs, Stop
-} from 'react-native-svg'
+import Svg,{ G, Rect, Symbol, Use, Defs, Stop} from 'react-native-svg'
 
 // Styles
 
