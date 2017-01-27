@@ -1,5 +1,7 @@
 import { StyleSheet, Dimensions, Platform } from 'react-native';
-import { colors } from '../../../Themes/Colors';
+
+import { ApplicationStyles, Metrics, Colors } from '../../../Themes/'
+
 
 const { width: viewportWidth, height: viewportHeight } = Dimensions.get('window');
 

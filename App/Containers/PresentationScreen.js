@@ -11,14 +11,14 @@ import { Container, Content, List, ListItem, Button, Icon,  InputGroup, Input } 
 import { Col, Row, Grid } from 'react-native-easy-grid'
 import DeviceInfo from 'react-native-device-info'
 import Carousel from 'react-native-snap-carousel'
-import {PagerTabIndicator, IndicatorViewPager, PagerTitleIndicator, PagerDotIndicator} from 'rn-viewpager'
+import {IndicatorViewPager,  PagerDotIndicator} from 'rn-viewpager'
 import Svg,{ Circle, Ellipse, G, LinearGradient, RadialGradient, Line, Path, Polygon, Polyline, Rect, Symbol, Use, Defs, Stop
 } from 'react-native-svg'
 
 // Styles
 
 import sliderStyles from './Styles/Slider.style'
-import sliderEntryStyles from './Styles/SliderEntry.style'
+import sliderEntryStyles, { sliderWidth, itemWidth } from './Styles/SliderEntry.style'
 import styles from './Styles/PresentationScreenStyle'
 
 // State county city data
@@ -494,7 +494,12 @@ export default class PresentationScreen extends React.Component {
           </View>
 
           <View  style={{ flex:1, marginTop:20,  }}  >
-            { this.example1 }
+            <ScrollView style={{flex:1}}>
+
+              { this.example1 }
+
+            </ScrollView>
+
           </View>
 
           {/*<View  style={{ flex:1, marginTop:20,  }}  >*/}
