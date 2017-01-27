@@ -24,24 +24,27 @@ export default class PresentationScreen extends React.Component {
 
   constructor(props, context) {
     super(props, context);
+    this.state = {
+      selectedDomain : 'targetdomain.com',
+      selectedCategory : 'plumbing',
+      selectedState : 'CA',
+      selectedCity : 'San Francisco',
+      selectedDomainTotal : 2,
+      columnTotal2 : 4,
+      columnTotal3 : 6,
+      columnTotal4 : 0,
+      columnTotal5 : 0,
+      columnTotal6 : 0,
+      domain1: 'test 1',
+      domain2: 'test 1',
+      domain3: 'test 1',
+      productDomains : 5
+    };
+
+    this._updateText = this._updateText.bind(this);
   }
 
-  state = {
-       selectedDomain : 'targetdomain.com',
-       selectedCategory : 'plumbing',
-       selectedState : 'CA',
-       selectedCity : 'San Francisco',
-       selectedDomainTotal : 2,
-       columnTotal2 : 4,
-       columnTotal3 : 6,
-       columnTotal4 : 0,
-       columnTotal5 : 0,
-       columnTotal6 : 0,
-       domain1: 'test 1',
-       domain2: 'test 1',
-       domain3: 'test 1',
-       productDomains : 5
-    };
+
 
 
    _createAreaData() {
@@ -97,15 +100,17 @@ export default class PresentationScreen extends React.Component {
     return <PagerDotIndicator pageCount={this.state.productDomains - 1} />;
   }
 
+  _updateText(ddomain) {
+     this.setState({ selectedDomain: ddomain });
+  }
+
+
+
 
 
   render () {
 
-    onValueChange = (key: string, value: string) => {
-      const newState = {};
-      newState[key] = value;
-      this.setState(newState);
-    };
+
 
     var items = ['San Jose','San Francisco','Santa Cruz','Sacramento','Los Angeles'];
 
@@ -127,8 +132,6 @@ export default class PresentationScreen extends React.Component {
     var boxes1 = [];
     var boxes2 = [];
     let rr = 0;
-
-
 
 
   console.log("Device  inEmulator"  );
@@ -328,8 +331,12 @@ export default class PresentationScreen extends React.Component {
 
             <InputGroup borderType='rounded'  style={{ flex:2,  marginRight:5, marginLeft:5 }}  >
               <Icon name='ios-home' style={{color:'#696969'}}/>
-              <Input  borderType='rounded' placeholder="DOMAIN" style={{ color:'#FFFFFF',}}
-                      defaultValue={this.state.selectedDomain}    />
+              <Input borderType='rounded'
+                     style={{height: 40, color: '#FFFFFF'}}
+                defaultValue={this.state.selectedDomain}
+                placeholder="Type domain"
+                onChangeText={this._updateText}
+              />
             </InputGroup>
 
             <InputGroup borderType='rounded'  style={{ flex:2,  marginRight:5, marginLeft:5 }}  >
@@ -385,17 +392,17 @@ export default class PresentationScreen extends React.Component {
             </IndicatorViewPager>
           </View>
 
-          <View  style={{ flex:1, marginTop:20,  }}  >
-              <TouchableOpacity style={{marginTop: 10, marginLeft: 20}} onPress={this._showAreaPicker.bind(this)}>
-                <Text style={{color: '#ABABAB'}}>AreaPicker</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={{marginTop: 10, marginLeft: 20}} onPress={this._toggle.bind(this)}>
-                <Text style={{color: '#ABABAB'}}>toggle</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={{marginTop: 10, marginLeft: 20}} onPress={this._isPickerShow.bind(this)}>
-                <Text style={{color: '#ABABAB'}}>isPickerShow</Text>
-              </TouchableOpacity>
-          </View>
+          {/*<View  style={{ flex:1, marginTop:20,  }}  >*/}
+              {/*<TouchableOpacity style={{marginTop: 10, marginLeft: 20}} onPress={this._showAreaPicker.bind(this)}>*/}
+                {/*<Text style={{color: '#ABABAB'}}>AreaPicker</Text>*/}
+              {/*</TouchableOpacity>*/}
+              {/*<TouchableOpacity style={{marginTop: 10, marginLeft: 20}} onPress={this._toggle.bind(this)}>*/}
+                {/*<Text style={{color: '#ABABAB'}}>toggle</Text>*/}
+              {/*</TouchableOpacity>*/}
+              {/*<TouchableOpacity style={{marginTop: 10, marginLeft: 20}} onPress={this._isPickerShow.bind(this)}>*/}
+                {/*<Text style={{color: '#ABABAB'}}>isPickerShow</Text>*/}
+              {/*</TouchableOpacity>*/}
+          {/*</View>*/}
 
         </ScrollView>
       </View>
