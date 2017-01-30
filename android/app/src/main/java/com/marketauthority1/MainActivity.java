@@ -1,6 +1,12 @@
 package com.marketauthority1;
 
 import com.facebook.react.ReactActivity;
+import com.horcrux.svg.SvgPackage;
+import com.beefe.picker.PickerViewPackage;
+import com.i18n.reactnativei18n.ReactNativeI18n;
+import com.RNFetchBlob.RNFetchBlobPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
+import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 
 public class MainActivity extends ReactActivity {
 
