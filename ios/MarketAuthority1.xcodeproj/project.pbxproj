@@ -43,6 +43,9 @@
 		EDA2BE2ADFC040BE9AA69B4B /* Arial Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 901CBFEADF774408AA16EB8F /* Arial Black.ttf */; };
 		F9A1F4B236104343A9745AB7 /* Andale Mono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1472E3CFAF904F1D92DA5D1B /* Andale Mono.ttf */; };
 		FC1E68821E3ED517009D6CE0 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC1E68811E3ED517009D6CE0 /* FontAwesome.ttf */; };
+		FC9C91D91E3EEB9200BC2343 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC9C91D81E3EEB9200BC2343 /* Ionicons.ttf */; };
+		FC9C91DA1E3F103800BC2343 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC1E68811E3ED517009D6CE0 /* FontAwesome.ttf */; };
+		FC9C91DB1E3F103E00BC2343 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FC9C91D81E3EEB9200BC2343 /* Ionicons.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -327,6 +330,7 @@
 		D0F8569B9F6D409EBDF59446 /* Arial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Arial.ttf; path = "../node_modules/native-base/Fonts/Arial.ttf"; sourceTree = "<group>"; };
 		E0634CC94464487996C98980 /* libRNSVG.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNSVG.a; sourceTree = "<group>"; };
 		FC1E68811E3ED517009D6CE0 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = MarketAuthority1/FontAwesome.ttf; sourceTree = "<group>"; };
+		FC9C91D81E3EEB9200BC2343 /* Ionicons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Ionicons.ttf; path = MarketAuthority1/Ionicons.ttf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -559,6 +563,7 @@
 				8BDC75D81232428782ED7577 /* Roboto.ttf */,
 				A5D6E1AC0A1A4127A537419D /* SF-UI-Text-Regular.otf */,
 				0A288AA3A8C54169B28D9378 /* Skia.ttf */,
+				FC9C91D81E3EEB9200BC2343 /* Ionicons.ttf */,
 				60F563CDD37040B6BF161E6F /* Times New Roman.ttf */,
 			);
 			name = Resources;
@@ -658,7 +663,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 610;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = Facebook;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
@@ -992,6 +997,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC9C91DB1E3F103E00BC2343 /* Ionicons.ttf in Resources */,
+				FC9C91DA1E3F103800BC2343 /* FontAwesome.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1009,6 +1016,7 @@
 				CEC06A85009D44CFA9C97647 /* Georgia.ttf in Resources */,
 				285D57D87C2647A39E5F5BF3 /* Microsoft Sans Serif.ttf in Resources */,
 				0E922B8387D545B683E1F1B6 /* Roboto_medium.ttf in Resources */,
+				FC9C91D91E3EEB9200BC2343 /* Ionicons.ttf in Resources */,
 				DCFBE785B65D4375AB26E1F3 /* Roboto.ttf in Resources */,
 				FC1E68821E3ED517009D6CE0 /* FontAwesome.ttf in Resources */,
 				012FF127B4CE4B39B788DD9E /* SF-UI-Text-Regular.otf in Resources */,
@@ -1098,6 +1106,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MarketAuthority1.app/MarketAuthority1";
 			};
@@ -1121,6 +1130,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MarketAuthority1.app/MarketAuthority1";
 			};
@@ -1140,6 +1150,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = MarketAuthority1;
 				TARGETED_DEVICE_FAMILY = 2;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1159,6 +1170,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = MarketAuthority1;
 				TARGETED_DEVICE_FAMILY = 2;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1178,15 +1190,19 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -1219,8 +1235,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1228,6 +1246,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
