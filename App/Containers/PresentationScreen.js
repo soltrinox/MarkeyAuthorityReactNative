@@ -52,9 +52,6 @@ export default class PresentationScreen extends React.Component {
 
   }
 
-
-
-
    _createAreaData() {
     let data = [];
     let len = area.length;
@@ -162,8 +159,6 @@ export default class PresentationScreen extends React.Component {
 
     componentWillMount() {
 
-
-
       var items = ['San Jose','San Francisco','Santa Cruz','Sacramento','Los Angeles'];
 
       var keywords = [
@@ -184,8 +179,6 @@ export default class PresentationScreen extends React.Component {
       var firstBoxes = [];
       var secondBoxes = [];
       let rr = 0;
-
-
 
       firstBoxes.push(
         <View style={{ margin:2 }}  key={rr} >
@@ -426,19 +419,12 @@ export default class PresentationScreen extends React.Component {
           </View>
         );
 
-
       }
-
-
       this._updateBoxes2(secondBoxes);
       this._updateCarouselItems(secondBoxes);
-
     }
 
     render () {
-
-
-
 
     return (
       <View style={styles.mainContainer}>
@@ -513,9 +499,6 @@ export default class PresentationScreen extends React.Component {
             </View>
           </View>
 
-
-
-
           <View  style={{ flex:1, marginTop:20,  }}  >
             <ScrollView style={{width:450, height:400, overflow:'hidden', backgroundColor: '#00000000' }}>
 
@@ -523,7 +506,6 @@ export default class PresentationScreen extends React.Component {
 
             </ScrollView>
           </View>
-
 
           {/*<View  style={{ flex:1, marginTop:20,  }}  >*/}
               {/*<TouchableOpacity style={{marginTop: 10, marginLeft: 20}} onPress={this._showAreaPicker.bind(this)}>*/}
