@@ -6,13 +6,13 @@ export default StyleSheet.create({
     marginBottom: 0
   },
   sliderContainer: {
-    padding: 4
+    padding: 0
   },
   slide: {
-    borderRadius: 8,
+    borderRadius: 0,
 
     flexDirection: 'column',
     width: itemWidth,
-    paddingHorizontal: itemHorizontalMargin
+    paddingHorizontal: 0
   }
 });
