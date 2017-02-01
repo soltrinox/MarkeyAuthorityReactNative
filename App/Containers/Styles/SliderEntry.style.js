@@ -8,22 +8,22 @@ function wp (percentage) {
 }
 
 const slideHeight = 400; //viewportHeight * 0.4;
-const slideWidth = 400; //wp(75);
+const slideWidth = 250; //wp(75);
 
-export const sliderWidth = 450;
-export const itemHorizontalMargin = 15; //wp(2);
-export const itemWidth =  400  ; //slideWidth + itemHorizontalMargin * 2;
+export const sliderWidth = 250;
+export const itemHorizontalMargin = 0; //wp(2);
+export const itemWidth =  250  ; //slideWidth + itemHorizontalMargin * 2;
 
-const entryBorderRadius = 6;
+const entryBorderRadius = 0;
 
 export default StyleSheet.create({
   slideInnerContainer: {
     height: slideHeight,
-    backgroundColor:'#000000'
+    backgroundColor:'#00000000'
   },
   imageContainer: {
     flex: 1,
-    backgroundColor: '#888888',
+    backgroundColor: '#00000000',
     borderTopLeftRadius: entryBorderRadius,
     borderTopRightRadius: entryBorderRadius
   },
@@ -38,12 +38,12 @@ export default StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: 20,
     paddingHorizontal: 16,
-    backgroundColor: 'white',
+    backgroundColor: '#00000000',
     borderBottomLeftRadius: entryBorderRadius,
     borderBottomRightRadius: entryBorderRadius
   },
   title: {
-    color: '#000000',
+    color: '#00000000',
     fontSize: 13,
     fontWeight: 'bold',
     letterSpacing: 0.5

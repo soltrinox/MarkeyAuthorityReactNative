@@ -141,17 +141,59 @@ export default class PresentationScreen extends React.Component {
       <Carousel
         items={this.state.carouselItems}
         firstItem={0}
-        inactiveSlideScale={0.94}
+        inactiveSlideScale={0.75}
         inactiveSlideOpacity={0.6}
         renderItem={this._renderItem}
-        sliderWidth={450}
-        itemWidth={400}
+        sliderWidth={250}
+        itemWidth={250}
         slideStyle={sliderStyles.slide}
         containerCustomStyle={sliderStyles.slider}
         contentContainerCustomStyle={sliderStyles.sliderContainer}
         showsHorizontalScrollIndicator={false}
         snapOnAndroid={true}
         removeClippedSubviews={false}
+      />
+    );
+  }
+
+  get example2 (){
+    return(
+      <Carousel
+        items={this.state.carouselItems}
+        firstItem={1}
+        inactiveSlideScale={0.75}
+        inactiveSlideOpacity={0.6}
+        renderItem={this._renderItem}
+        sliderWidth={250}
+        itemWidth={250}
+        slideStyle={sliderStyles.slide}
+        containerCustomStyle={sliderStyles.slider}
+        contentContainerCustomStyle={sliderStyles.sliderContainer}
+        showsHorizontalScrollIndicator={false}
+        snapOnAndroid={true}
+        removeClippedSubviews={false}
+      />
+    );
+  }
+
+
+  get example3 (){
+    return(
+      <Carousel
+        items={this.state.carouselItems}
+        firstItem={2}
+        inactiveSlideScale={0.75}
+        inactiveSlideOpacity={0.6}
+        renderItem={this._renderItem}
+        sliderWidth={250}
+        itemWidth={250}
+        slideStyle={sliderStyles.slide}
+        containerCustomStyle={sliderStyles.slider}
+        contentContainerCustomStyle={sliderStyles.sliderContainer}
+        showsHorizontalScrollIndicator={false}
+        snapOnAndroid={true}
+        removeClippedSubviews={false}
+        onSnapToItem={(item) => {console.log('ITEM: '+item)}}
       />
     );
   }
@@ -354,9 +396,9 @@ export default class PresentationScreen extends React.Component {
             <View style={{
                         flex: 1,
                         flexDirection: 'row',
-                        alignItems: 'flex-start',
+                        alignItems: 'flex-start',backgroundColor: '#00000000'
                         }} >
-              <Text style={{color:'#FFFFFF'}}> DOMAIN # { cll } </Text>
+              <Text style={{color:'#FFFFFF', backgroundColor: '#00000000'}}> DOMAIN # { cll } </Text>
             </View>
           </Row>
         );
@@ -400,7 +442,7 @@ export default class PresentationScreen extends React.Component {
         topval++;
 
         boxr2.push(
-          <Row style={{ backgroundColor: '#000000', height: 25 }} key={topval}>
+          <Row style={{ backgroundColor: '#00000000', height: 25 }} key={topval}>
             <View style={{
                         flex: 1,
                         flexDirection: 'row',
@@ -412,7 +454,7 @@ export default class PresentationScreen extends React.Component {
         );
 
         secondBoxes.push(
-          <View style={{ width:225, height:400, overflow: 'hidden', borderRadius:8, backgroundColor: '#222222' }}  key={cll } >
+          <View style={{ width:250, height:400, overflow: 'hidden', borderRadius:0, backgroundColor: '#00000000', padding:0 }}  key={cll } >
             <Grid style={{ flex:1 }} >
               { boxr2 }
             </Grid>
@@ -462,11 +504,7 @@ export default class PresentationScreen extends React.Component {
               <Icon name='ios-map' style={{color:'#696969'}}/>
               <Input  borderType='rounded' placeholder="MARKET" style={{ color:'#FFFFFF',}}   />
             </InputGroup>
-
-            {/*<TextInput  borderType='rounded' placeholder="CATEGORY"   style={{ flex:2,padding: 4, height:30,backgroundColor:'#FFFFFF', color:'#000000', marginRight:5  }}  />*/}
-            {/*<TextInput borderType='rounded' placeholder="MARKET"   style={{ flex:2,padding: 4, height:30,backgroundColor:'#FFFFFF', color:'#000000', marginRight:5   }}  />*/}
-
-            </View>
+          </View>
 
           <View  style={{ flex:1, marginTop:20 }}  >
             <Text style={{flex:1, flexDirection: 'row', textAlign: 'center' ,
@@ -479,33 +517,37 @@ export default class PresentationScreen extends React.Component {
             {this.state.boxes1}
           </View>
 
-          <View style={{  width:450, height:400, overflow: 'hidden' }}>
-            <View style={{  width:225, height:400, overflow: 'visible'}}>
-              <IndicatorViewPager
-                style={{ flex:1 }}
-                indicator={this._renderDotIndicator()} >
-                {
-                  this.state.boxes2.map((item, index) => {
-                    return (
-                      <View style={{ width:225, overflow:'hidden' }} key={index}>
-                        <TouchableOpacity style={{ width:450  }} key={index}  >
-                          {item}
-                        </TouchableOpacity>
-                      </View>
-                    )
-                  })
-                }
-              </IndicatorViewPager>
-            </View>
-          </View>
-
-          <View  style={{ flex:1, marginTop:20,  }}  >
-            <ScrollView style={{width:450, height:400, overflow:'hidden', backgroundColor: '#00000000' }}>
-
+          <View  style={{ width:750, height:400, overflow:'hidden',flexDirection:'row'   }}  >
+            <ScrollView style={{width:250, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>
               {this.example1}
-
+            </ScrollView>
+            <ScrollView style={{width:250, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>
+              {this.example2}
+            </ScrollView>
+            <ScrollView style={{width:250, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>
+              {this.example3}
             </ScrollView>
           </View>
+
+
+          {/*<View style={{  width:450, height:400, overflow: 'hidden' }}>*/}
+          {/*<View style={{  width:225, height:400, overflow: 'visible'}}>*/}
+          {/*<IndicatorViewPager*/}
+          {/*style={{ flex:1 }}  >*/}
+          {/*{*/}
+          {/*this.state.boxes2.map((item, index) => {*/}
+          {/*return (*/}
+          {/*<View style={{ width:225, overflow:'hidden',padding:2 }} key={index}>*/}
+          {/*<TouchableOpacity style={{ width:225  }} key={index}  >*/}
+          {/*{item}*/}
+          {/*</TouchableOpacity>*/}
+          {/*</View>*/}
+          {/*)*/}
+          {/*})*/}
+          {/*}*/}
+          {/*</IndicatorViewPager>*/}
+          {/*</View>*/}
+          {/*</View>*/}
 
           {/*<View  style={{ flex:1, marginTop:20,  }}  >*/}
               {/*<TouchableOpacity style={{marginTop: 10, marginLeft: 20}} onPress={this._showAreaPicker.bind(this)}>*/}
