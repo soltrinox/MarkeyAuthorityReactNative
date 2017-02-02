@@ -46,7 +46,7 @@ export default class PresentationScreen extends React.Component {
       carouselItems : [],
       boxes1: [],
       boxes2: [],
-
+      carouselPosition: 0,
       car1: {},
       car2: {},
       car3: {}
@@ -132,7 +132,13 @@ export default class PresentationScreen extends React.Component {
 
   _updateCarousels(carInstance, itemPos){
 
-    ; console.log('@@@@@ '+carInstance + ' ITEM: '+itemPos)
+    console.log('@@@@@ '+carInstance + ' ITEM: '+itemPos);
+
+    if(carInstance === 'CAR2'){
+
+    }else if(carInstance === 'CAR3'){
+
+    }
 
   }
 
@@ -173,7 +179,7 @@ export default class PresentationScreen extends React.Component {
     this.state.car2 =
       <Carousel
         items={this.state.carouselItems}
-        firstItem={1}
+        firstItem={0}
         inactiveSlideScale={0.75}
         inactiveSlideOpacity={0.6}
         renderItem={this._renderItem}
@@ -195,7 +201,7 @@ export default class PresentationScreen extends React.Component {
     this.state.car3 =
       <Carousel
         items={this.state.carouselItems}
-        firstItem={2}
+        firstItem={1}
         inactiveSlideScale={0.75}
         inactiveSlideOpacity={0.6}
         renderItem={this._renderItem}
