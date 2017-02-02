@@ -54,6 +54,8 @@ export default class PresentationScreen extends React.Component {
 
     this._updateText = this._updateText.bind(this);
 
+    this._updateCarousels = this._updateCarousels.bind(this);
+
   }
 
    _createAreaData() {
@@ -128,6 +130,13 @@ export default class PresentationScreen extends React.Component {
   }
 
 
+  _updateCarousels(carInstance, itemPos){
+
+    ; console.log('@@@@@ '+carInstance + ' ITEM: '+itemPos)
+
+  }
+
+
   _renderItem (entry) {
     return (
       <TouchableOpacity
@@ -155,7 +164,7 @@ export default class PresentationScreen extends React.Component {
         showsHorizontalScrollIndicator={false}
         snapOnAndroid={true}
         removeClippedSubviews={false}
-        onSnapToItem={(item) => {console.log('CAR1 ITEM: '+item)}}
+        onSnapToItem={(item) => {this._updateCarousels('CAR1',item)}}
       /> ;
       return this.state.car1;
   }
@@ -176,7 +185,7 @@ export default class PresentationScreen extends React.Component {
         showsHorizontalScrollIndicator={false}
         snapOnAndroid={true}
         removeClippedSubviews={false}
-        onSnapToItem={(item) => {console.log('CAR2 ITEM: '+item)}}
+        onSnapToItem={(item) => {this._updateCarousels('CAR2',item)}}
       /> ;
     return this.state.car2;
   }
@@ -198,7 +207,7 @@ export default class PresentationScreen extends React.Component {
         showsHorizontalScrollIndicator={false}
         snapOnAndroid={true}
         removeClippedSubviews={false}
-        onSnapToItem={(item) => {console.log('CAR3 ITEM: '+item)}}
+        onSnapToItem={(item) => {this._updateCarousels('CAR3',item)}}
       />;
     return this.state.car3;
   }
@@ -322,8 +331,6 @@ export default class PresentationScreen extends React.Component {
             </Svg>
           )
         }
-
-
 
         var valKeyName = keywords[i][0];
 
