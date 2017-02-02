@@ -56,6 +56,9 @@ export default class PresentationScreen extends React.Component {
 
     this._updateCarousels = this._updateCarousels.bind(this);
 
+    // this.car2.snapToItem = this.car2.snapToItem.bind(this);
+    // this.car3.snapToItem = this.car3.snapToItem.bind(this);
+
   }
 
    _createAreaData() {
@@ -135,9 +138,9 @@ export default class PresentationScreen extends React.Component {
     console.log('@@@@@ '+carInstance + ' ITEM: '+itemPos);
 
     if(carInstance === 'CAR2'){
-      this.state.car2.snapToItem(3, true);
+      this.state.car2.snapToItem(3);
     }else if(carInstance === 'CAR3'){
-      this.state.car2.snapToItem(3, true);
+      this.state.car2.snapToItem(3);
     }
 
   }
