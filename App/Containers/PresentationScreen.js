@@ -135,9 +135,9 @@ export default class PresentationScreen extends React.Component {
     console.log('@@@@@ '+carInstance + ' ITEM: '+itemPos);
 
     if(carInstance === 'CAR2'){
-
+      this.state.car2.snapToItem(3, true);
     }else if(carInstance === 'CAR3'){
-
+      this.state.car2.snapToItem(3, true);
     }
 
   }
