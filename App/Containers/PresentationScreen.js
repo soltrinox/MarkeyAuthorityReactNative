@@ -45,7 +45,11 @@ export default class PresentationScreen extends React.Component {
       productDomains : 5,
       carouselItems : [],
       boxes1: [],
-      boxes2: []
+      boxes2: [],
+
+      car1: {},
+      car2: {},
+      car3: {}
     };
 
     this._updateText = this._updateText.bind(this);
@@ -107,8 +111,6 @@ export default class PresentationScreen extends React.Component {
 
   _updateText(ddomain) {
      this.setState({ selectedDomain: ddomain });
-
-     // LOOK UP THE DOMAIN BY NAME HERE
   }
 
   _updateCarouselItems(items) {
@@ -137,7 +139,8 @@ export default class PresentationScreen extends React.Component {
 
   // _renderSliderView(){
   get example1 (){
-    return(
+    // return(
+    this.state.car1 =
       <Carousel
         items={this.state.carouselItems}
         firstItem={0}
@@ -152,12 +155,13 @@ export default class PresentationScreen extends React.Component {
         showsHorizontalScrollIndicator={false}
         snapOnAndroid={true}
         removeClippedSubviews={false}
-      />
-    );
+        onSnapToItem={(item) => {console.log('CAR1 ITEM: '+item)}}
+      /> ;
+      return this.state.car1;
   }
 
   get example2 (){
-    return(
+    this.state.car2 =
       <Carousel
         items={this.state.carouselItems}
         firstItem={1}
@@ -172,13 +176,14 @@ export default class PresentationScreen extends React.Component {
         showsHorizontalScrollIndicator={false}
         snapOnAndroid={true}
         removeClippedSubviews={false}
-      />
-    );
+        onSnapToItem={(item) => {console.log('CAR2 ITEM: '+item)}}
+      /> ;
+    return this.state.car2;
   }
 
 
   get example3 (){
-    return(
+    this.state.car3 =
       <Carousel
         items={this.state.carouselItems}
         firstItem={2}
@@ -193,9 +198,9 @@ export default class PresentationScreen extends React.Component {
         showsHorizontalScrollIndicator={false}
         snapOnAndroid={true}
         removeClippedSubviews={false}
-        onSnapToItem={(item) => {console.log('ITEM: '+item)}}
-      />
-    );
+        onSnapToItem={(item) => {console.log('CAR3 ITEM: '+item)}}
+      />;
+    return this.state.car3;
   }
 
 
