@@ -45,10 +45,16 @@ export default class PresentationScreen extends React.Component {
       productDomains : 5,
       carouselItems : [],
       boxes1: [],
-      boxes2: []
+      boxes2: [],
+      carouselPosition: 0,
+      car1: {},
+      car2: {},
+      car3: {}
     };
 
     this._updateText = this._updateText.bind(this);
+
+    this._updateCarousels = this._updateCarousels.bind(this);
 
   }
 
@@ -107,8 +113,6 @@ export default class PresentationScreen extends React.Component {
 
   _updateText(ddomain) {
      this.setState({ selectedDomain: ddomain });
-
-     // LOOK UP THE DOMAIN BY NAME HERE
   }
 
   _updateCarouselItems(items) {
@@ -126,6 +130,19 @@ export default class PresentationScreen extends React.Component {
   }
 
 
+  _updateCarousels(carInstance, itemPos){
+
+    console.log('@@@@@ '+carInstance + ' ITEM: '+itemPos);
+
+    if(carInstance === 'CAR2'){
+
+    }else if(carInstance === 'CAR3'){
+
+    }
+
+  }
+
+
   _renderItem (entry) {
     return (
       <TouchableOpacity
@@ -137,7 +154,8 @@ export default class PresentationScreen extends React.Component {
 
   // _renderSliderView(){
   get example1 (){
-    return(
+    // return(
+    this.state.car1 =
       <Carousel
         items={this.state.carouselItems}
         firstItem={0}
@@ -152,12 +170,35 @@ export default class PresentationScreen extends React.Component {
         showsHorizontalScrollIndicator={false}
         snapOnAndroid={true}
         removeClippedSubviews={false}
-      />
-    );
+        onSnapToItem={(item) => {this._updateCarousels('CAR1',item)}}
+      /> ;
+      return this.state.car1;
   }
 
   get example2 (){
-    return(
+    this.state.car2 =
+      <Carousel
+        items={this.state.carouselItems}
+        firstItem={0}
+        inactiveSlideScale={0.75}
+        inactiveSlideOpacity={0.6}
+        renderItem={this._renderItem}
+        sliderWidth={250}
+        itemWidth={250}
+        slideStyle={sliderStyles.slide}
+        containerCustomStyle={sliderStyles.slider}
+        contentContainerCustomStyle={sliderStyles.sliderContainer}
+        showsHorizontalScrollIndicator={false}
+        snapOnAndroid={true}
+        removeClippedSubviews={false}
+        onSnapToItem={(item) => {this._updateCarousels('CAR2',item)}}
+      /> ;
+    return this.state.car2;
+  }
+
+
+  get example3 (){
+    this.state.car3 =
       <Carousel
         items={this.state.carouselItems}
         firstItem={1}
@@ -172,30 +213,9 @@ export default class PresentationScreen extends React.Component {
         showsHorizontalScrollIndicator={false}
         snapOnAndroid={true}
         removeClippedSubviews={false}
-      />
-    );
-  }
-
-
-  get example3 (){
-    return(
-      <Carousel
-        items={this.state.carouselItems}
-        firstItem={2}
-        inactiveSlideScale={0.75}
-        inactiveSlideOpacity={0.6}
-        renderItem={this._renderItem}
-        sliderWidth={250}
-        itemWidth={250}
-        slideStyle={sliderStyles.slide}
-        containerCustomStyle={sliderStyles.slider}
-        contentContainerCustomStyle={sliderStyles.sliderContainer}
-        showsHorizontalScrollIndicator={false}
-        snapOnAndroid={true}
-        removeClippedSubviews={false}
-        onSnapToItem={(item) => {console.log('ITEM: '+item)}}
-      />
-    );
+        onSnapToItem={(item) => {this._updateCarousels('CAR3',item)}}
+      />;
+    return this.state.car3;
   }
 
 
@@ -317,8 +337,6 @@ export default class PresentationScreen extends React.Component {
             </Svg>
           )
         }
-
-
 
         var valKeyName = keywords[i][0];
 
