@@ -24,7 +24,8 @@ export default class ThemeScreen extends React.Component {
     this.state = {
       keywords: [],
       testJSON : {},
-      domainMatches: []
+      domainMatches: [],
+      resultsDomains:[]
     }
 
     this.handlePressKeyword = this.handlePressKeyword.bind(this);
@@ -110,8 +111,24 @@ export default class ThemeScreen extends React.Component {
       console.log('NONE FOUND: ');
     }else{
       this.state.domainMatches = searchResult;
+      this.returnResults();
       console.log('FOUND: '+ JSON.stringify(this.state.domainMatches));
     }
+  }
+
+  returnResults(){
+    this.state.resultsDomains =
+      this.state.domainMatches.map((item, index) => {
+        return (
+          <TouchableOpacity style={{flex:1, height:100, width:600 }} onPress={ () => window.alert( 'DOMAIN MATCH',JSON.stringify(item)) } key={index} >
+            <View style={{ flex:1, backgroundColor:'#FFFFFF' }} key={index}>
+              <Text style={{ flex:1, color:'#000000'}} >
+                {index}] {item}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        )
+      });
   }
 
 
@@ -131,7 +148,7 @@ export default class ThemeScreen extends React.Component {
           </View>
           <View style={{ flex:1, flexDirection:'row', alignItems:'flex-start'}}>
 
-            <View style={{ flex:1, flexDirection:'column', width:400}}>
+            <View style={{ flex:1, flexDirection:'column', width:400, overflow:'hidden'}}>
 
               {
                 this.state.keywords.map((item, index) => {
@@ -148,21 +165,9 @@ export default class ThemeScreen extends React.Component {
               }
             </View>
 
-            <View style={{ flex:1, flexDirection:'column', width:600}}>
+            <View style={{ flex:1, flexDirection:'column', width:600, backgroundColor:'#ABABAB'}}>
 
-              {
-                this.state.domainMatches.map((item, index) => {
-                  return (
-                    <TouchableOpacity style={{flex:1, height:100 }} onPress={ () => window.alert( 'DOMAIN MATCH',JSON.stringify(item)) } key={index} >
-                      <View style={{ flex:1, backgroundColor:'#FFFFFF' }} key={index}>
-                        <Text style={{ flex:1, color:'#000000'}} >
-                          {index}] {item}
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
-                  )
-                })
-              }
+              {this.state.resultsDomains}
             </View>
 
           </View>
