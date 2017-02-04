@@ -1,10 +1,10 @@
 // @flow
 
-import React from 'react'
-import { View, ScrollView, Text, Image } from 'react-native'
-import { Colors, Fonts, Images } from '../Themes'
+import React, { PropTypes }  from 'react'
+import { View, ScrollView, Text, Image, TouchableOpacity } from 'react-native'
+import { Colors, Fonts, Images, Metrics } from '../Themes'
 import R from 'ramda'
-
+import RoundedButton from '../Components/RoundedButton'
 
 
 // Styles
@@ -23,7 +23,11 @@ export default class ThemeScreen extends React.Component {
     super(props, context);
     this.state = {
       keywords: [],
+      testJSON : {},
+      domainMatches: []
     }
+
+    this.handlePressKeyword = this.handlePressKeyword.bind(this);
   }
 
   renderColor (color: string) {
@@ -63,9 +67,9 @@ export default class ThemeScreen extends React.Component {
   }
 
   parseJSON(){
-    var testJSON = require('../Fixtures/basic.001.json')
+    this.state.testJSON = require('../Fixtures/basic.001.json')
 
-    var array =  testJSON;
+    var array =  this.state.testJSON;
     var unique = [...new Set(array.map(item => item.KEY))];
     unique.sort();
     this.state.keywords = unique;
@@ -81,19 +85,41 @@ export default class ThemeScreen extends React.Component {
 
   componentWillMount() {
 
-    var testJSON = require('../Fixtures/LAS.001.json')
+    this.state.testJSON = require('../Fixtures/LAS.001.json')
 
-    var array =  testJSON;
+    var array =  this.state.testJSON;
     var unique = [...new Set(array.map(item => item.KEY))];
     unique.sort();
     this.state.keywords = unique;
 
-    this.state.keywords = unique.map(this.myFunction);
+    // this.state.keywords = unique.map(this.myFunction);
 
   }
 
+  handlePressKeyword(index, item){
+    console.log('KEY: ' +item+' = '+ this.state.keywords[index] );
+    // ; this.handlePressKeyword(index, item)
+    // () => window.alert('KEY: ' +item+' = '+ this.state.keywords[index])
+
+    var searchResult = [];
+    searchResult = this.state.testJSON.filter(function( obj ) {
+      return obj.KEY == item;
+    });
+
+    if(searchResult.length < 1){
+      console.log('NONE FOUND: ');
+    }else{
+      this.state.domainMatches = searchResult;
+      console.log('FOUND: '+ JSON.stringify(this.state.domainMatches));
+    }
+  }
+
+
+
   render () {
     return (
+
+
       <View style={styles.mainContainer}>
         <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />
         <ScrollView style={styles.container}>
@@ -103,22 +129,43 @@ export default class ThemeScreen extends React.Component {
           <View style={styles.sectionHeaderContainer}>
             <Text style={styles.sectionHeader}>JSON</Text>
           </View>
-          <View style={{ flex:1, flexDirection:'column', width:225}}>
+          <View style={{ flex:1, flexDirection:'row', alignItems:'flex-start'}}>
 
-            {
-              this.state.keywords.map((item, index) => {
-              return (
-                <View style={{ width:425, height:26,margin:2 }} key={index}>
-                <Text style={styles.sectionText} >
-                 {item}
-                </Text>
-                </View>
-              )
-              })
-            }
+            <View style={{ flex:1, flexDirection:'column', width:400}}>
+
+              {
+                this.state.keywords.map((item, index) => {
+                return (
+                  <TouchableOpacity style={{width:400, height:46,margin:2 }} onPress={ () => this.handlePressKeyword(index, item) } key={index} >
+                    <View style={{ flex:1 }} key={index}>
+                      <Text style={{ flex:1, color:'#FFFFFF'}} >
+                        {index}] {item}
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                )
+                })
+              }
+            </View>
+
+            <View style={{ flex:1, flexDirection:'column', width:600}}>
+
+              {
+                this.state.domainMatches.map((item, index) => {
+                  return (
+                    <TouchableOpacity style={{flex:1, height:100 }} onPress={ () => window.alert( 'DOMAIN MATCH',JSON.stringify(item)) } key={index} >
+                      <View style={{ flex:1, backgroundColor:'#FFFFFF' }} key={index}>
+                        <Text style={{ flex:1, color:'#000000'}} >
+                          {index}] {item}
+                        </Text>
+                      </View>
+                    </TouchableOpacity>
+                  )
+                })
+              }
+            </View>
+
           </View>
-
-
 
         </ScrollView>
       </View>
