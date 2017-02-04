@@ -141,28 +141,8 @@ export default class PresentationScreen extends React.Component {
   _updateCarousels(carInstance, itemPos){
 
     console.log('@@@@@ Change ON '+carInstance + ' POS: '+itemPos);
-
-
     if(carInstance === 'CAR1') {
 
-    }
-    if(carInstance === 'CAR2') {
-      if(this._myCarousel3.currentIndex === itemPos){
-        console.log('@@@@@ NO Change ON '+carInstance + ' POS: '+itemPos + ' @'+ this._myCarousel2.currentIndex);
-      }else{
-        console.log('@@@@@ BEFORE Change ON  @'+ this._myCarousel3.currentIndex);
-        this._myCarousel3.snapToItem(itemPos);
-        console.log('@@@@@ AFTER Change ON @'+ this._myCarousel3.currentIndex);
-      }
-    }
-    if(carInstance === 'CAR3') {
-      if(this._myCarousel2.currentIndex === itemPos){
-        console.log('@@@@@ NO Change ON '+carInstance + ' POS: '+itemPos + ' @'+ this._myCarousel3.currentIndex);
-      }else{
-        console.log('@@@@@ BEFORE Change ON  @'+ this._myCarousel2.currentIndex);
-        this._myCarousel2.snapToItem(itemPos);
-        console.log('@@@@@ AFTER Change ON @'+ this._myCarousel2.currentIndex);
-      }
     }
 
   }
@@ -182,7 +162,6 @@ export default class PresentationScreen extends React.Component {
     }
 
   }
-
 
   _updateCarousels3(carInstance, itemPos){
 
@@ -261,7 +240,6 @@ export default class PresentationScreen extends React.Component {
     return this.state.car2;
   }
 
-
   get example3 (){
 
 
@@ -315,9 +293,8 @@ export default class PresentationScreen extends React.Component {
       let rr = 0;
 
       firstBoxes.push(
-        <View style={{ margin:2 }}  key={rr} >
-          <Grid key={rr}>
-            <Col style={{ backgroundColor: '#00000000', height: 25 }}>
+
+            <Row style={{ backgroundColor: '#00000000', height: 25 }} key={rr}>
               <View style={{
                         flex: 1,
                         flexDirection: 'row',
@@ -328,46 +305,8 @@ export default class PresentationScreen extends React.Component {
                 <Text style={styles.sectionText}>KEYWORD</Text>
 
               </View>
-            </Col>
+            </Row>
 
-            <Col style={{ backgroundColor: '#00000000', height: 25  }}>
-              <View style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',
-                        }} >
-                <Text style={styles.sectionText}>{this.state.selectedDomain}</Text>
-
-              </View>
-            </Col>
-
-            <Col style={{ backgroundColor: '#00000000', height: 25  }}>
-              <View style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',
-                        }} >
-                <Text style={styles.sectionText}>DEX ESS</Text>
-
-              </View>
-            </Col>
-
-            <Col style={{ backgroundColor: '#00000000', height: 25  }}>
-              <View style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',
-                        }} >
-                <Text style={styles.sectionText}>DEX PRO</Text>
-
-              </View>
-            </Col>
-
-          </Grid>
-        </View>
       );
 
       rr++;
@@ -382,88 +321,38 @@ export default class PresentationScreen extends React.Component {
 
       var ct = 0;
 
-      for(let i = rr; i < keywords.length ; ++i ){
+      for(let i = 0; i < keywords.length ; ++i ){
 
         ct = Math.floor(Math.random() * 10);
         ct = ct + 2;
         var boxr1 = [];
 
-        var boxr3 = [];
         var valCol = parseInt(keywords[i][2]);
         var iii = parseInt(valCol);
 
         // GENERATE THE SQUARES FOR THE DOMAIN HITS IN TOP 10
 
-        for(var x = 0;x < iii ; x++){
-          boxr1.push(
-            <Svg height="16" width="17"  key={x} >
-              <Rect
-                x="0"
-                y="0"
-                width="15"
-                height="15"
-                stroke="black"
-                strokeWidth="1"
-                fill="green"
-              />
-            </Svg>
-          )
-        }
+
 
         var valKeyName = keywords[i][0];
 
+        var iKey = i + 1;
+
         firstBoxes.push(
-          <View style={{ margin:2 }}  key={i}>
-            <Grid key={i}>
-              <Col style={{ backgroundColor: '#00000000', height: 25 }}>
+              <Row style={{ backgroundColor: '#00000000', height: 25 }} key={iKey}>
                 <View style={{
                         flex: 1,
                         flexDirection: 'row',
-                        justifyContent: 'space-around',
-                        alignItems: 'center',
+
+                        alignItems: 'flex-start',
                         }} >
 
                   <Text style={styles.sectionText}>{i}] {valKeyName} </Text>
-
                 </View>
-              </Col>
-
-              <Col style={{ backgroundColor: '#00000000', height: 25  }}>
-                <View style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',
-                        }} >
-                  { boxr1 }
-                </View>
-              </Col>
-
-              <Col style={{ backgroundColor: '#00000000', height: 25  }}>
-                <View style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',
-                        }} >
-                  { boxr1 }
-                </View>
-              </Col>
-
-              <Col style={{ backgroundColor: '#00000000', height: 25  }}>
-                <View style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',
-                        }} >
-                  { boxr1 }
-                </View>
-              </Col>
-
-            </Grid>
-          </View>
+              </Row>
         );
+
+
 
       }
 
@@ -488,7 +377,7 @@ export default class PresentationScreen extends React.Component {
                         flexDirection: 'row',
                         alignItems: 'flex-start',backgroundColor: '#00000000'
                         }} >
-              <Text style={{color:'#FFFFFF', backgroundColor: '#00000000'}}> DOMAIN # { cll } </Text>
+              <Text style={{color:'#FFFFFF', backgroundColor: '#00000000'}}>  PRODUCT #{ cll } </Text>
             </View>
           </Row>
         );
@@ -598,26 +487,31 @@ export default class PresentationScreen extends React.Component {
 
           <View  style={{ flex:1, marginTop:20 }}  >
             <Text style={{flex:1, flexDirection: 'row', textAlign: 'center' ,
-             color:'#ABABAB', margin:10, fontSize: 34 }}  >
-                Ranking {this.state.selectedCategory} KW for {this.state.selectedDomain}
+             color:'#ABABAB', margin:10, fontSize: 28 }}  >
+                Ranking {this.state.selectedCategory}  for {this.state.selectedDomain}
             </Text>
           </View>
 
-          <View  style={{ flex:1, marginTop:20 }}  >
-            {this.state.boxes1}
+          <View  style={{ flex:1, flexDirection:'row', alignItems:'flex-start', marginTop:20 }}  >
+            <View style={{ width:250, height:400, overflow: 'hidden', borderRadius:0, backgroundColor: '#00000000', padding:0 }}   >
+              <Grid style={{ flex:1, flexDirection:'column' }} >
+                {this.state.boxes1}
+              </Grid>
+            </View>
+            <View  style={{ width:750, height:400, overflow:'hidden',flexDirection:'row'   }}  >
+              <ScrollView style={{width:250, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>
+                {this.example1}
+              </ScrollView>
+              <ScrollView style={{width:250, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>
+                {this.example2}
+              </ScrollView>
+              <ScrollView style={{width:250, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>
+                {this.example3}
+              </ScrollView>
+            </View>
           </View>
 
-          <View  style={{ width:750, height:400, overflow:'hidden',flexDirection:'row'   }}  >
-            <ScrollView style={{width:250, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>
-              {this.example1}
-            </ScrollView>
-            <ScrollView style={{width:250, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>
-              {this.example2}
-            </ScrollView>
-            <ScrollView style={{width:250, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>
-              {this.example3}
-            </ScrollView>
-          </View>
+
 
 
           {/*<View style={{  width:450, height:400, overflow: 'hidden' }}>*/}
