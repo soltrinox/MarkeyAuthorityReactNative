@@ -81,7 +81,7 @@ export default class ThemeScreen extends React.Component {
 
   componentWillMount() {
 
-    var testJSON = require('../Fixtures/basic.001.json')
+    var testJSON = require('../Fixtures/LAS.001.json')
 
     var array =  testJSON;
     var unique = [...new Set(array.map(item => item.KEY))];
