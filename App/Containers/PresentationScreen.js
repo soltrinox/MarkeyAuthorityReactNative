@@ -138,9 +138,9 @@ export default class PresentationScreen extends React.Component {
     console.log('@@@@@ '+carInstance + ' ITEM: '+itemPos);
 
     if(carInstance === 'CAR2'){
-      this.state.car2.snapToItem(3);
+      this._myCarousel1.snapToItem(2);
     }else if(carInstance === 'CAR3'){
-      this.state.car2.snapToItem(3);
+      this._myCarousel1.snapToItem(3);
     }
 
   }
@@ -174,6 +174,7 @@ export default class PresentationScreen extends React.Component {
         snapOnAndroid={true}
         removeClippedSubviews={false}
         onSnapToItem={(item) => {this._updateCarousels('CAR1',item)}}
+        ref={(myCarousel1) => { this._myCarousel1 = myCarousel1; }}
       /> ;
       return this.state.car1;
   }
@@ -195,6 +196,7 @@ export default class PresentationScreen extends React.Component {
         snapOnAndroid={true}
         removeClippedSubviews={false}
         onSnapToItem={(item) => {this._updateCarousels('CAR2',item)}}
+        ref={(myCarousel2) => { this._myCarousel2 = myCarousel2; }}
       /> ;
     return this.state.car2;
   }
@@ -217,6 +219,7 @@ export default class PresentationScreen extends React.Component {
         snapOnAndroid={true}
         removeClippedSubviews={false}
         onSnapToItem={(item) => {this._updateCarousels('CAR3',item)}}
+        ref={(myCarousel3) => { this._myCarousel3 = myCarousel3; }}
       />;
     return this.state.car3;
   }
