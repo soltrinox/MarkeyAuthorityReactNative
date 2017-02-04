@@ -44,9 +44,12 @@ export default class PresentationScreen extends React.Component {
       domain3: 'test 1',
       productDomains : 5,
       carouselItems : [],
+      carouselItems2 : [],
+      carouselItems3 : [],
       boxes1: [],
       boxes2: [],
-      carouselPosition: 0,
+      carouselPosition2: 0,
+      carouselPosition3: 0,
       car1: {},
       car2: {},
       car3: {}
@@ -55,6 +58,8 @@ export default class PresentationScreen extends React.Component {
     this._updateText = this._updateText.bind(this);
 
     this._updateCarousels = this._updateCarousels.bind(this);
+    this._updateCarousels2 = this._updateCarousels2.bind(this);
+    this._updateCarousels3 = this._updateCarousels3.bind(this);
 
     // this.car2.snapToItem = this.car2.snapToItem.bind(this);
     // this.car3.snapToItem = this.car3.snapToItem.bind(this);
@@ -135,12 +140,62 @@ export default class PresentationScreen extends React.Component {
 
   _updateCarousels(carInstance, itemPos){
 
-    console.log('@@@@@ '+carInstance + ' ITEM: '+itemPos);
+    console.log('@@@@@ Change ON '+carInstance + ' POS: '+itemPos);
 
-    if(carInstance === 'CAR2'){
-      this._myCarousel1.snapToItem(2);
-    }else if(carInstance === 'CAR3'){
-      this._myCarousel1.snapToItem(3);
+
+    if(carInstance === 'CAR1') {
+
+    }
+    if(carInstance === 'CAR2') {
+      if(this._myCarousel3.currentIndex === itemPos){
+        console.log('@@@@@ NO Change ON '+carInstance + ' POS: '+itemPos + ' @'+ this._myCarousel2.currentIndex);
+      }else{
+        console.log('@@@@@ BEFORE Change ON  @'+ this._myCarousel3.currentIndex);
+        this._myCarousel3.snapToItem(itemPos);
+        console.log('@@@@@ AFTER Change ON @'+ this._myCarousel3.currentIndex);
+      }
+    }
+    if(carInstance === 'CAR3') {
+      if(this._myCarousel2.currentIndex === itemPos){
+        console.log('@@@@@ NO Change ON '+carInstance + ' POS: '+itemPos + ' @'+ this._myCarousel3.currentIndex);
+      }else{
+        console.log('@@@@@ BEFORE Change ON  @'+ this._myCarousel2.currentIndex);
+        this._myCarousel2.snapToItem(itemPos);
+        console.log('@@@@@ AFTER Change ON @'+ this._myCarousel2.currentIndex);
+      }
+    }
+
+  }
+
+  _updateCarousels2(carInstance, itemPos){
+
+     console.log('XXXXXXXX  '+carInstance + '  NEW POS: '+itemPos+ ' | CUR POS:' + this._myCarousel2.currentIndex);
+
+    if(this._myCarousel3.currentIndex === itemPos){
+      console.log('@@@@@ NO Change ON '+carInstance + ' POS: '+itemPos + ' @'+ this._myCarousel2.currentIndex);
+    }else{
+      if(this._myCarousel3.currentIndex === this._myCarousel2.currentIndex ){
+        console.log('INDEX MATCH ');
+      }else{
+        this._myCarousel3.snapToItem(this._myCarousel2.currentIndex);
+      }
+    }
+
+  }
+
+
+  _updateCarousels3(carInstance, itemPos){
+
+    console.log('YYYYYYYY  '+carInstance + '  NEW POS: '+itemPos+ ' | CUR POS:' + this._myCarousel3.currentIndex);
+
+    if(this._myCarousel2.currentIndex === itemPos){
+      console.log('@@@@@ NO Change ON '+carInstance + ' POS: '+itemPos + ' @'+ this._myCarousel3.currentIndex);
+    }else{
+      if(this._myCarousel2.currentIndex === this._myCarousel3.currentIndex ){
+        console.log('INDEX MATCH ');
+      }else{
+        this._myCarousel2.snapToItem(this._myCarousel3.currentIndex);
+      }
     }
 
   }
@@ -155,9 +210,9 @@ export default class PresentationScreen extends React.Component {
     );
   }
 
-  // _renderSliderView(){
+
   get example1 (){
-    // return(
+
     this.state.car1 =
       <Carousel
         items={this.state.carouselItems}
@@ -180,9 +235,14 @@ export default class PresentationScreen extends React.Component {
   }
 
   get example2 (){
+
+
+    var carItems = [];
+    carItems = this.state.carouselItems.slice(0,-1);
+    this.state.carouselItems2 = carItems;
     this.state.car2 =
       <Carousel
-        items={this.state.carouselItems}
+        items={this.state.carouselItems2}
         firstItem={0}
         inactiveSlideScale={0.75}
         inactiveSlideOpacity={0.6}
@@ -195,7 +255,7 @@ export default class PresentationScreen extends React.Component {
         showsHorizontalScrollIndicator={false}
         snapOnAndroid={true}
         removeClippedSubviews={false}
-        onSnapToItem={(item) => {this._updateCarousels('CAR2',item)}}
+        onSnapToItem={(item) => {this._updateCarousels2('CAR2',item)}}
         ref={(myCarousel2) => { this._myCarousel2 = myCarousel2; }}
       /> ;
     return this.state.car2;
@@ -203,10 +263,16 @@ export default class PresentationScreen extends React.Component {
 
 
   get example3 (){
+
+
+    var carItems2 = [];
+    carItems2 = this.state.carouselItems.slice(1);
+    this.state.carouselItems3 = carItems2;
+
     this.state.car3 =
       <Carousel
-        items={this.state.carouselItems}
-        firstItem={1}
+        items={this.state.carouselItems3}
+        firstItem={0}
         inactiveSlideScale={0.75}
         inactiveSlideOpacity={0.6}
         renderItem={this._renderItem}
@@ -218,7 +284,7 @@ export default class PresentationScreen extends React.Component {
         showsHorizontalScrollIndicator={false}
         snapOnAndroid={true}
         removeClippedSubviews={false}
-        onSnapToItem={(item) => {this._updateCarousels('CAR3',item)}}
+        onSnapToItem={(item) => {this._updateCarousels3('CAR3',item)}}
         ref={(myCarousel3) => { this._myCarousel3 = myCarousel3; }}
       />;
     return this.state.car3;
@@ -460,7 +526,7 @@ export default class PresentationScreen extends React.Component {
                 { kray }
               </View>
             </Row>
-          )
+          );
           topval++;
         }
         topval++;
