@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -34,7 +35,6 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		A55608EB672B4471BD285DD2 /* Comic Sans MS.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3AB1FB56C37149D4BB9A5BF2 /* Comic Sans MS.ttf */; };
 		ADE8FAE69C1442459B4872E5 /* Times New Roman.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 60F563CDD37040B6BF161E6F /* Times New Roman.ttf */; };
-		B24DCADF3C364FB4B6898069 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 818E77773C8E474693938190 /* libRNFetchBlob.a */; };
 		B7F77D0468F04654BC801C6B /* libRNI18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A664241C0B14FDC86395045 /* libRNI18n.a */; };
 		B970CE644058453B9E2DE744 /* Courier New.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 45BA40F256174F1AA9AB6EC3 /* Courier New.ttf */; };
 		CEC06A85009D44CFA9C97647 /* Georgia.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 02C2977E8A4041818E22983A /* Georgia.ttf */; };
@@ -326,7 +326,6 @@
 		6F5F83FB9D3A4D0C86F80881 /* RNI18n.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNI18n.xcodeproj; path = "../node_modules/react-native-i18n/RNI18n.xcodeproj"; sourceTree = "<group>"; };
 		749D6CEE17C44A288CA5ACA9 /* RCTBEEPickerManager.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTBEEPickerManager.xcodeproj; path = "../node_modules/react-native-picker/ios/RCTBEEPickerManager.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
-		818E77773C8E474693938190 /* libRNFetchBlob.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNFetchBlob.a; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		8BDC75D81232428782ED7577 /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
 		901CBFEADF774408AA16EB8F /* Arial Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Arial Black.ttf"; path = "../node_modules/native-base/Fonts/Arial Black.ttf"; sourceTree = "<group>"; };
@@ -368,7 +367,6 @@
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				5A2B92107D1E46129D9778DB /* libReactNativeConfig.a in Frameworks */,
 				EC4716ACC99F4B40AF410787 /* libRNDeviceInfo.a in Frameworks */,
-				B24DCADF3C364FB4B6898069 /* libRNFetchBlob.a in Frameworks */,
 				B7F77D0468F04654BC801C6B /* libRNI18n.a in Frameworks */,
 				0C5C1C37CE9C4463A622A640 /* libRCTBEEPickerManager.a in Frameworks */,
 				5FC4E6D077544769AEAAB7E1 /* libRNSVG.a in Frameworks */,

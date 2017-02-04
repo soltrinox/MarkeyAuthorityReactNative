@@ -5,6 +5,8 @@ import { View, ScrollView, Text, Image } from 'react-native'
 import { Colors, Fonts, Images } from '../Themes'
 import R from 'ramda'
 
+
+
 // Styles
 import styles from './Styles/ThemeScreenStyle'
 
@@ -16,6 +18,13 @@ const types = R.keys(Fonts.type)
 const fontStyles = R.keys(Fonts.style)
 
 export default class ThemeScreen extends React.Component {
+
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      keywords: [],
+    }
+  }
 
   renderColor (color: string) {
     return (
@@ -53,30 +62,55 @@ export default class ThemeScreen extends React.Component {
     return fontStyles.map((fontStyle) => this.renderStyle(fontStyle))
   }
 
+  parseJSON(){
+    var testJSON = require('../Fixtures/basic.001.json')
+
+    var array =  testJSON;
+    var unique = [...new Set(array.map(item => item.KEY))];
+    this.state.keywords = unique;
+    return unique;
+  }
+
+
+  componentWillMount() {
+
+    var testJSON = require('../Fixtures/basic.001.json')
+
+    var array =  testJSON;
+    var unique = [...new Set(array.map(item => item.KEY))];
+    this.state.keywords = unique;
+
+    console.log('UNIQUES: '+JSON.stringify(unique));
+
+  }
+
   render () {
     return (
       <View style={styles.mainContainer}>
         <Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />
         <ScrollView style={styles.container}>
           <View style={styles.section} key='colors-header'>
-            <Text style={styles.sectionText} key='colors'>List of Theme specific settings.  Auto-generated from Themes folder.</Text>
+            <Text style={styles.sectionText} key='colors'>Data Test</Text>
           </View>
           <View style={styles.sectionHeaderContainer}>
-            <Text style={styles.sectionHeader}>Colors</Text>
+            <Text style={styles.sectionHeader}>JSON</Text>
           </View>
-          <View style={styles.colorsContainer}>
-            {this.renderColors()}
+          <View style={{ flex:1, flexDirection:'column', width:225}}>
+
+            {
+              this.state.keywords.map((item, index) => {
+              return (
+                <View style={{ width:225, height:26,margin:2 }} key={index}>
+                <Text style={styles.sectionText} >
+                  {index}] {item}
+                </Text>
+                </View>
+              )
+              })
+            }
           </View>
 
-          <View style={styles.sectionHeaderContainer}>
-            <Text style={styles.sectionHeader}>Fonts</Text>
-          </View>
-          {this.renderFonts()}
 
-          <View style={styles.sectionHeaderContainer}>
-            <Text style={styles.sectionHeader}>Styles</Text>
-          </View>
-          {this.renderStyles()}
 
         </ScrollView>
       </View>
