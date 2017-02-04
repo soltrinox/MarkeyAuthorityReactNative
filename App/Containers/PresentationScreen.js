@@ -58,8 +58,8 @@ export default class PresentationScreen extends React.Component {
     this._updateText = this._updateText.bind(this);
 
     this._updateCarousels = this._updateCarousels.bind(this);
-    this._updateCarousels2 = this._updateCarousels2.bind(this);
-    this._updateCarousels3 = this._updateCarousels3.bind(this);
+    this._productCarouselChange2 = this._productCarouselChange2.bind(this);
+    this._productCarouselChange3 = this._productCarouselChange3.bind(this);
 
     // this.car2.snapToItem = this.car2.snapToItem.bind(this);
     // this.car3.snapToItem = this.car3.snapToItem.bind(this);
@@ -127,11 +127,11 @@ export default class PresentationScreen extends React.Component {
     this.setState({ carouselItems: items });
   }
 
-  _updateBoxes1(arrayz){
+  _updateKeywords(arrayz){
     this.setState({boxes1 : arrayz});
   }
 
-  _updateBoxes2(arrayz){
+  _updateDomainColumns(arrayz){
 
     this.setState({boxes2 : arrayz});
     this._updateCarouselItems(arrayz);
@@ -147,7 +147,7 @@ export default class PresentationScreen extends React.Component {
 
   }
 
-  _updateCarousels2(carInstance, itemPos){
+  _productCarouselChange2(carInstance, itemPos){
 
      console.log('XXXXXXXX  '+carInstance + '  NEW POS: '+itemPos+ ' | CUR POS:' + this._myCarousel2.currentIndex);
 
@@ -163,7 +163,7 @@ export default class PresentationScreen extends React.Component {
 
   }
 
-  _updateCarousels3(carInstance, itemPos){
+  _productCarouselChange3(carInstance, itemPos){
 
     console.log('YYYYYYYY  '+carInstance + '  NEW POS: '+itemPos+ ' | CUR POS:' + this._myCarousel3.currentIndex);
 
@@ -234,7 +234,7 @@ export default class PresentationScreen extends React.Component {
         showsHorizontalScrollIndicator={false}
         snapOnAndroid={true}
         removeClippedSubviews={false}
-        onSnapToItem={(item) => {this._updateCarousels2('CAR2',item)}}
+        onSnapToItem={(item) => {this._productCarouselChange2('CAR2',item)}}
         ref={(myCarousel2) => { this._myCarousel2 = myCarousel2; }}
       /> ;
     return this.state.car2;
@@ -262,7 +262,7 @@ export default class PresentationScreen extends React.Component {
         showsHorizontalScrollIndicator={false}
         snapOnAndroid={true}
         removeClippedSubviews={false}
-        onSnapToItem={(item) => {this._updateCarousels3('CAR3',item)}}
+        onSnapToItem={(item) => {this._productCarouselChange3('CAR3',item)}}
         ref={(myCarousel3) => { this._myCarousel3 = myCarousel3; }}
       />;
     return this.state.car3;
@@ -356,8 +356,7 @@ export default class PresentationScreen extends React.Component {
 
       }
 
-      this._updateBoxes1(firstBoxes);
-
+      this._updateKeywords(firstBoxes);
 
 
       for(var cll = 1;cll < this.state.productDomains ; cll++) {
@@ -370,6 +369,8 @@ export default class PresentationScreen extends React.Component {
         var totalCount = 0;
         var topval = 0;
 
+        var columnName = 'PRODUCT '+ cll;
+
         boxr2.push(
           <Row style={{ backgroundColor: '#00000000', height: 25 }} key={topval}>
             <View style={{
@@ -377,7 +378,7 @@ export default class PresentationScreen extends React.Component {
                         flexDirection: 'row',
                         alignItems: 'flex-start',backgroundColor: '#00000000'
                         }} >
-              <Text style={{color:'#FFFFFF', backgroundColor: '#00000000'}}>  PRODUCT #{ cll } </Text>
+              <Text style={{color:'#FFFFFF', backgroundColor: '#00000000'}}>  {columnName} </Text>
             </View>
           </Row>
         );
@@ -441,7 +442,7 @@ export default class PresentationScreen extends React.Component {
         );
 
       }
-      this._updateBoxes2(secondBoxes);
+      this._updateDomainColumns(secondBoxes);
       this._updateCarouselItems(secondBoxes);
     }
 
