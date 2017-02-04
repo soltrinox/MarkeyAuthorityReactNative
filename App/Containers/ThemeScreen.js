@@ -67,8 +67,15 @@ export default class ThemeScreen extends React.Component {
 
     var array =  testJSON;
     var unique = [...new Set(array.map(item => item.KEY))];
+    unique.sort();
     this.state.keywords = unique;
     return unique;
+  }
+
+  myFunction(item, index) {
+    var sst = index + " : " + item ;
+    console.log(index + '] ' +item );
+    return sst;
   }
 
 
@@ -78,9 +85,10 @@ export default class ThemeScreen extends React.Component {
 
     var array =  testJSON;
     var unique = [...new Set(array.map(item => item.KEY))];
+    unique.sort();
     this.state.keywords = unique;
 
-    console.log('UNIQUES: '+JSON.stringify(unique));
+    this.state.keywords = unique.map(this.myFunction);
 
   }
 
@@ -100,9 +108,9 @@ export default class ThemeScreen extends React.Component {
             {
               this.state.keywords.map((item, index) => {
               return (
-                <View style={{ width:225, height:26,margin:2 }} key={index}>
+                <View style={{ width:425, height:26,margin:2 }} key={index}>
                 <Text style={styles.sectionText} >
-                  {index}] {item}
+                 {item}
                 </Text>
                 </View>
               )
