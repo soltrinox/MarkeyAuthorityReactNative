@@ -120,13 +120,13 @@ export default class ThemeScreen extends React.Component {
     this.state.resultsDomains =
       this.state.domainMatches.map((item, index) => {
         return (
-          <TouchableOpacity style={{flex:1, height:100, width:600 }} onPress={ () => window.alert( 'DOMAIN MATCH',JSON.stringify(item)) } key={index} >
+
             <View style={{ flex:1, backgroundColor:'#FFFFFF' }} key={index}>
               <Text style={{ flex:1, color:'#000000'}} >
                 {index}] {item}
               </Text>
             </View>
-          </TouchableOpacity>
+
         )
       });
   }
@@ -165,8 +165,7 @@ export default class ThemeScreen extends React.Component {
               }
             </View>
 
-            <View style={{ flex:1, flexDirection:'column', width:600, backgroundColor:'#ABABAB'}}>
-
+            <View style={{ flex:1, flexDirection:'column', width:600, backgroundColor:'#ABABAB'}} >
               {this.state.resultsDomains}
             </View>
 
