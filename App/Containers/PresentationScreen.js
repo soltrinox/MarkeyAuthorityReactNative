@@ -29,8 +29,8 @@ export default class PresentationScreen extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      selectedDomain : 'targetdomain.com',
-      selectedCategory : 'plumbing',
+      selectedDomain : 'www.default.com',
+      selectedCategory : 'keywords',
       selectedState : 'CA',
       selectedCity : 'San Francisco',
       selectedDomainTotal : 2,
@@ -42,12 +42,12 @@ export default class PresentationScreen extends React.Component {
       domain1: 'test 1',
       domain2: 'test 1',
       domain3: 'test 1',
-      productDomains : 5,
-      carouselItems : [],
-      carouselItems2 : [],
-      carouselItems3 : [],
-      boxes1: [],
-      boxes2: [],
+      productDomains : 4,
+      clientColumnItems : [],
+      domainItems2 : [],
+      domainItems3 : [],
+      keywordGridColumns: [],
+      domainGridColumns: [],
       carouselPosition2: 0,
       carouselPosition3: 0,
       car1: {},
@@ -123,18 +123,16 @@ export default class PresentationScreen extends React.Component {
      this.setState({ selectedDomain: ddomain });
   }
 
-  _updateCarouselItems(items) {
-    this.setState({ carouselItems: items });
+  _updateClientColumn(items) {
+    this.setState({ clientColumnItems: items });
   }
 
   _updateKeywords(arrayz){
-    this.setState({boxes1 : arrayz});
+    this.setState({keywordGridColumns : arrayz});
   }
 
   _updateDomainColumns(arrayz){
-
-    this.setState({boxes2 : arrayz});
-    this._updateCarouselItems(arrayz);
+    this.setState({domainGridColumns : arrayz});
   }
 
 
@@ -144,12 +142,9 @@ export default class PresentationScreen extends React.Component {
     if(carInstance === 'CAR1') {
 
     }
-
   }
 
   _productCarouselChange2(carInstance, itemPos){
-
-     console.log('XXXXXXXX  '+carInstance + '  NEW POS: '+itemPos+ ' | CUR POS:' + this._myCarousel2.currentIndex);
 
     if(this._myCarousel3.currentIndex === itemPos){
       console.log('@@@@@ NO Change ON '+carInstance + ' POS: '+itemPos + ' @'+ this._myCarousel2.currentIndex);
@@ -160,12 +155,9 @@ export default class PresentationScreen extends React.Component {
         this._myCarousel3.snapToItem(this._myCarousel2.currentIndex);
       }
     }
-
   }
 
   _productCarouselChange3(carInstance, itemPos){
-
-    console.log('YYYYYYYY  '+carInstance + '  NEW POS: '+itemPos+ ' | CUR POS:' + this._myCarousel3.currentIndex);
 
     if(this._myCarousel2.currentIndex === itemPos){
       console.log('@@@@@ NO Change ON '+carInstance + ' POS: '+itemPos + ' @'+ this._myCarousel3.currentIndex);
@@ -176,7 +168,6 @@ export default class PresentationScreen extends React.Component {
         this._myCarousel2.snapToItem(this._myCarousel3.currentIndex);
       }
     }
-
   }
 
 
@@ -194,7 +185,7 @@ export default class PresentationScreen extends React.Component {
 
     this.state.car1 =
       <Carousel
-        items={this.state.carouselItems}
+        items={this.state.clientColumnItems}
         firstItem={0}
         inactiveSlideScale={0.75}
         inactiveSlideOpacity={0.6}
@@ -217,11 +208,11 @@ export default class PresentationScreen extends React.Component {
 
 
     var carItems = [];
-    carItems = this.state.carouselItems.slice(0,-1);
-    this.state.carouselItems2 = carItems;
+    carItems = this.state.domainGridColumns.slice(0,-1);
+    this.state.domainItems2 = carItems;
     this.state.car2 =
       <Carousel
-        items={this.state.carouselItems2}
+        items={this.state.domainItems2}
         firstItem={0}
         inactiveSlideScale={0.75}
         inactiveSlideOpacity={0.6}
@@ -244,12 +235,12 @@ export default class PresentationScreen extends React.Component {
 
 
     var carItems2 = [];
-    carItems2 = this.state.carouselItems.slice(1);
-    this.state.carouselItems3 = carItems2;
+    carItems2 = this.state.domainGridColumns.slice(1);
+    this.state.domainItems3 = carItems2;
 
     this.state.car3 =
       <Carousel
-        items={this.state.carouselItems3}
+        items={this.state.domainItems3}
         firstItem={0}
         inactiveSlideScale={0.75}
         inactiveSlideOpacity={0.6}
@@ -271,28 +262,48 @@ export default class PresentationScreen extends React.Component {
 
     componentWillMount() {
 
-      var items = ['San Jose','San Francisco','Santa Cruz','Sacramento','Los Angeles'];
+      console.log("Test Model", DeviceInfo.getModel());
+      console.log("Device ID", DeviceInfo.getDeviceId());
+      console.log("System Name", DeviceInfo.getSystemName());
 
-      var keywords = [
-        ['plumbing', '0', '1','5', '2'],
-        ['water heater', '2', '2','6', '5'],
-        ['broken pipes', '0', '5','1', '7'],
-        ['plumbing', '1', '10','8', '12'],
-        ['water heater', '2', '8','10', '10'],
-        ['broken pipes', '1', '1','5', '4'],
-        ['plumbing', '0', '3','9', '8'],
-        ['water heater', '1', '7','3', '5'],
-        ['broken pipes', '0', '1','4', '1'],
-        ['plumbing', '0', '6','8', '9'],
-        ['water heater', '1', '10','10', '10'],
-        ['broken pipes', '0', '9','5', '7'],
+
+      var clientDomains = ['www.default.com','www.generic.com'];
+      var keywordsClients = [
+        ['key1', '0', '1'],
+        ['key2', '2', '2'],
+        ['key3', '0', '1'],
+        ['key4', '1', '2'],
+        ['key5', '2', '0'],
+        ['key6', '1', '1'],
+        ['key7', '0', '3'],
+        ['key8', '1', '0'],
+        ['key9', '0', '1'],
+        ['key10', '0', '2'],
       ];
 
-      var firstBoxes = [];
-      var secondBoxes = [];
+      var products =  ['DEX BASIC','DEX PLUS','DEX PRO','DEX PREMIUM'];
+      var keywordsProducts = [
+        ['key1', '5', '2','7', '9'],
+        ['key2', '6', '5','9', '12'],
+        ['key3', '1', '7','6', '10'],
+        ['key4', '8', '7','8', '9'],
+        ['key5', '10', '10','10', '10'],
+        ['key6', '5', '4','8', '11'],
+        ['key7', '9', '8','5', '9'],
+        ['key8', '3', '5','9', '12'],
+        ['key9', '4', '1','6', '9'],
+        ['key10', '8', '9','11', '11'],
+      ];
+      this.state.productDomains = products.length;
+
+
+
+      var keywordColumnArray = [];
+      var productColumnArray = [];
+
       let rr = 0;
 
-      firstBoxes.push(
+      keywordColumnArray.push(
 
             <Row style={{ backgroundColor: '#00000000', height: 25 }} key={rr}>
               <View style={{
@@ -301,44 +312,19 @@ export default class PresentationScreen extends React.Component {
                         justifyContent: 'space-around',
                         alignItems: 'center',
                         }} >
-
                 <Text style={styles.sectionText}>KEYWORD</Text>
-
               </View>
             </Row>
 
       );
 
-      rr++;
 
-      console.log("Device  inEmulator"  );
-      console.log("Device  isTablet" );
+      for(let i = 0; i < keywordsProducts.length ; ++i ){
 
-      console.log("Test Model", DeviceInfo.getModel());
-      console.log("Device ID", DeviceInfo.getDeviceId());
-      console.log("System Name", DeviceInfo.getSystemName());
-
-
-      var ct = 0;
-
-      for(let i = 0; i < keywords.length ; ++i ){
-
-        ct = Math.floor(Math.random() * 10);
-        ct = ct + 2;
-        var boxr1 = [];
-
-        var valCol = parseInt(keywords[i][2]);
-        var iii = parseInt(valCol);
-
-        // GENERATE THE SQUARES FOR THE DOMAIN HITS IN TOP 10
-
-
-
-        var valKeyName = keywords[i][0];
-
+        var valKeyName = keywordsProducts[i][0];
         var iKey = i + 1;
 
-        firstBoxes.push(
+        keywordColumnArray.push(
               <Row style={{ backgroundColor: '#00000000', height: 25 }} key={iKey}>
                 <View style={{
                         flex: 1,
@@ -347,29 +333,25 @@ export default class PresentationScreen extends React.Component {
                         alignItems: 'flex-start',
                         }} >
 
-                  <Text style={styles.sectionText}>{i}] {valKeyName} </Text>
+                  <Text style={styles.sectionText}>{i} ] {valKeyName} </Text>
                 </View>
               </Row>
         );
-
-
-
       }
 
-      this._updateKeywords(firstBoxes);
+      this._updateKeywords(keywordColumnArray);
 
 
-      for(var cll = 1;cll < this.state.productDomains ; cll++) {
+      // CREATE THE GRIDS FOR EACH CAROUSEL COLUMN
 
-        ct = Math.floor(Math.random() * 10);
-        ct = ct + 2;
+      for(var cll = 0;cll < this.state.productDomains ; cll++) {
 
         var boxr2 = [];
 
         var totalCount = 0;
         var topval = 0;
 
-        var columnName = 'PRODUCT '+ cll;
+        var columnName = products[cll];
 
         boxr2.push(
           <Row style={{ backgroundColor: '#00000000', height: 25 }} key={topval}>
@@ -384,11 +366,11 @@ export default class PresentationScreen extends React.Component {
         );
 
 
-        for(var p = 0;p < keywords.length ; p++){
+        for(var p = 0;p < keywordsProducts.length ; p++){
 
           var kray = [];
-
-          var fcol = parseInt(keywords[p][cll]);
+          let frp = cll + 1;
+          var fcol = parseInt(keywordsProducts[p][frp]);
           var ggg = parseInt(fcol);
 
           for(var k = 0; k < ggg; k++){
@@ -433,7 +415,7 @@ export default class PresentationScreen extends React.Component {
           </Row>
         );
 
-        secondBoxes.push(
+        productColumnArray.push(
           <View style={{ width:250, height:400, overflow: 'hidden', borderRadius:0, backgroundColor: '#00000000', padding:0 }}  key={cll } >
             <Grid style={{ flex:1 }} >
               { boxr2 }
@@ -442,8 +424,12 @@ export default class PresentationScreen extends React.Component {
         );
 
       }
-      this._updateDomainColumns(secondBoxes);
-      this._updateCarouselItems(secondBoxes);
+      this._updateDomainColumns(productColumnArray);
+
+
+      // NOW REBUILD THE OTHER DOMAINS
+
+      this._updateClientColumn(productColumnArray);
     }
 
     render () {
@@ -472,17 +458,18 @@ export default class PresentationScreen extends React.Component {
 
             <InputGroup borderType='rounded'  style={{ flex:2,  marginRight:5, marginLeft:5 }}  >
               <Icon name='ios-star' style={{color:'#696969'}}/>
-              <Input  borderType='rounded' placeholder="CATEGORY" style={{ color:'#FFFFFF',}}   />
+              <Input  borderType='rounded' placeholder="CATEGORY" style={{height: 40, color: '#FFFFFF'}}
+                      defaultValue={this.state.selectedCategory}  />
             </InputGroup>
 
             <InputGroup borderType='rounded'  style={{ flex:1,  marginRight:5, marginLeft:5, width: 50 }}  >
               <Icon name='ios-map' style={{color:'#696969'}}/>
-              <Input  borderType='rounded' placeholder="STATE" style={{ color:'#FFFFFF',}}   />
+              <Input  borderType='rounded' placeholder="STATE" defaultValue="NV" style={{ color:'#FFFFFF',}}   />
             </InputGroup>
 
             <InputGroup borderType='rounded'  style={{ flex:2,  marginRight:5, marginLeft:5 }}  >
               <Icon name='ios-map' style={{color:'#696969'}}/>
-              <Input  borderType='rounded' placeholder="MARKET" style={{ color:'#FFFFFF',}}   />
+              <Input  borderType='rounded' placeholder="MARKET"  defaultValue="LAS VEGAS"  style={{ color:'#FFFFFF',}}   />
             </InputGroup>
           </View>
 
@@ -496,7 +483,7 @@ export default class PresentationScreen extends React.Component {
           <View  style={{ flex:1, flexDirection:'row', alignItems:'flex-start', marginTop:20 }}  >
             <View style={{ width:250, height:400, overflow: 'hidden', borderRadius:0, backgroundColor: '#00000000', padding:0 }}   >
               <Grid style={{ flex:1, flexDirection:'column' }} >
-                {this.state.boxes1}
+                {this.state.keywordGridColumns}
               </Grid>
             </View>
             <View  style={{ width:750, height:400, overflow:'hidden',flexDirection:'row'   }}  >
@@ -520,7 +507,7 @@ export default class PresentationScreen extends React.Component {
           {/*<IndicatorViewPager*/}
           {/*style={{ flex:1 }}  >*/}
           {/*{*/}
-          {/*this.state.boxes2.map((item, index) => {*/}
+          {/*this.state.domainGridColumns.map((item, index) => {*/}
           {/*return (*/}
           {/*<View style={{ width:225, overflow:'hidden',padding:2 }} key={index}>*/}
           {/*<TouchableOpacity style={{ width:225  }} key={index}  >*/}
