@@ -75,12 +75,10 @@ class ListviewSectionsExample extends React.Component {
 
     for(var j = 0; j < categoriesArr.length; j++){
       var trr = [];
-      trr = _.filter(rawArr, { 'CAT': categoriesArr[j]  });
-      console.log('@@@@@@@@@@@@@@ SORTED KEYWORDS ON VATEGORY: '+  JSON.stringify(trr));
-      var catName = '';
-      catName = categoriesArr[j];
+      var catName  = _.toString(categoriesArr[j])
+      trr = _.find(keywordArr, { "CAT": catName } );
+      console.log('%%%%%%%%%%% SORTED KEYWORDS ON '+ catName +': '+  JSON.stringify(trr));
 
-      console.log('@@@@@@@@@@@@@@ '+  catName +' PUSHING: '+  JSON.stringify(trr));
       _.set(dataObjects, catName, trr);
     }
 
@@ -121,8 +119,8 @@ class ListviewSectionsExample extends React.Component {
     // in different sections
     return (
       <View style={styles.row}>
-        <Text style={styles.boldLabel}>Section {sectionID} - {rowData.title}</Text>
-        <Text style={styles.label}>{rowData.description}</Text>
+        <Text style={styles.boldLabel}>Section {sectionID} - {rowData.CAT}</Text>
+        <Text style={styles.label}>{rowData.KEY}</Text>
       </View>
     )
   }
