@@ -499,40 +499,6 @@ export default class PresentationScreen extends React.Component {
             </View>
           </View>
 
-
-
-
-          {/*<View style={{  width:450, height:400, overflow: 'hidden' }}>*/}
-          {/*<View style={{  width:225, height:400, overflow: 'visible'}}>*/}
-          {/*<IndicatorViewPager*/}
-          {/*style={{ flex:1 }}  >*/}
-          {/*{*/}
-          {/*this.state.domainGridColumns.map((item, index) => {*/}
-          {/*return (*/}
-          {/*<View style={{ width:225, overflow:'hidden',padding:2 }} key={index}>*/}
-          {/*<TouchableOpacity style={{ width:225  }} key={index}  >*/}
-          {/*{item}*/}
-          {/*</TouchableOpacity>*/}
-          {/*</View>*/}
-          {/*)*/}
-          {/*})*/}
-          {/*}*/}
-          {/*</IndicatorViewPager>*/}
-          {/*</View>*/}
-          {/*</View>*/}
-
-          {/*<View  style={{ flex:1, marginTop:20,  }}  >*/}
-              {/*<TouchableOpacity style={{marginTop: 10, marginLeft: 20}} onPress={this._showAreaPicker.bind(this)}>*/}
-                {/*<Text style={{color: '#ABABAB'}}>AreaPicker</Text>*/}
-              {/*</TouchableOpacity>*/}
-              {/*<TouchableOpacity style={{marginTop: 10, marginLeft: 20}} onPress={this._toggle.bind(this)}>*/}
-                {/*<Text style={{color: '#ABABAB'}}>toggle</Text>*/}
-              {/*</TouchableOpacity>*/}
-              {/*<TouchableOpacity style={{marginTop: 10, marginLeft: 20}} onPress={this._isPickerShow.bind(this)}>*/}
-                {/*<Text style={{color: '#ABABAB'}}>isPickerShow</Text>*/}
-              {/*</TouchableOpacity>*/}
-          {/*</View>*/}
-
         </ScrollView>
       </View>
     )
