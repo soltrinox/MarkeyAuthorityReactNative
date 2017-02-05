@@ -1,0 +1,175 @@
+{
+	"liveValues": [
+		{
+			"range": {
+				"from": {
+					"line": 213,
+					"ch": 26
+				},
+				"to": {
+					"line": 213,
+					"ch": 31
+				}
+			},
+			"type": "boolean",
+			"name": "Horizontal",
+			"group": "SCROLL VIEW"
+		},
+		{
+			"range": {
+				"from": {
+					"line": 216,
+					"ch": 39
+				},
+				"to": {
+					"line": 216,
+					"ch": 54
+				}
+			},
+			"editWith": "colorPicker",
+			"type": "string",
+			"name": "BackgroundColor",
+			"group": "VIEW"
+		},
+		{
+			"range": {
+				"from": {
+					"line": 220,
+					"ch": 33
+				},
+				"to": {
+					"line": 220,
+					"ch": 54
+				}
+			},
+			"editWith": "colorPicker",
+			"type": "string",
+			"name": "Color",
+			"group": "TEXT"
+		},
+		{
+			"range": {
+				"from": {
+					"line": 221,
+					"ch": 36
+				},
+				"to": {
+					"line": 221,
+					"ch": 38
+				}
+			},
+			"type": "number",
+			"name": "FontSize",
+			"group": "TEXT"
+		},
+		{
+			"range": {
+				"from": {
+					"line": 242,
+					"ch": 26
+				},
+				"to": {
+					"line": 242,
+					"ch": 31
+				}
+			},
+			"type": "boolean",
+			"name": "Horizontal",
+			"group": "SCROLL VIEW"
+		},
+		{
+			"range": {
+				"from": {
+					"line": 245,
+					"ch": 39
+				},
+				"to": {
+					"line": 245,
+					"ch": 54
+				}
+			},
+			"editWith": "colorPicker",
+			"type": "string",
+			"name": "BackgroundColor",
+			"group": "VIEW"
+		},
+		{
+			"range": {
+				"from": {
+					"line": 249,
+					"ch": 33
+				},
+				"to": {
+					"line": 249,
+					"ch": 54
+				}
+			},
+			"editWith": "colorPicker",
+			"type": "string",
+			"name": "Color",
+			"group": "TEXT"
+		},
+		{
+			"range": {
+				"from": {
+					"line": 250,
+					"ch": 36
+				},
+				"to": {
+					"line": 250,
+					"ch": 38
+				}
+			},
+			"type": "number",
+			"name": "FontSize",
+			"group": "TEXT"
+		},
+		{
+			"range": {
+				"from": {
+					"line": 259,
+					"ch": 39
+				},
+				"to": {
+					"line": 259,
+					"ch": 54
+				}
+			},
+			"editWith": "colorPicker",
+			"type": "string",
+			"name": "BackgroundColor",
+			"group": "VIEW"
+		},
+		{
+			"range": {
+				"from": {
+					"line": 263,
+					"ch": 33
+				},
+				"to": {
+					"line": 263,
+					"ch": 54
+				}
+			},
+			"editWith": "colorPicker",
+			"type": "string",
+			"name": "Color",
+			"group": "TEXT"
+		},
+		{
+			"range": {
+				"from": {
+					"line": 264,
+					"ch": 36
+				},
+				"to": {
+					"line": 264,
+					"ch": 38
+				}
+			},
+			"type": "number",
+			"name": "FontSize",
+			"group": "TEXT"
+		}
+	]
+}

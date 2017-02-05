@@ -76,10 +76,10 @@ class ListviewSectionsExample extends React.Component {
     for(var j = 0; j < categoriesArr.length; j++){
       var trr = [];
       var catName  = _.toString(categoriesArr[j])
-      trr = _.find(keywordArr, { "CAT": catName } );
+      trr = _.find(rawArr, { "CAT": catName } );
       console.log('%%%%%%%%%%% SORTED KEYWORDS ON '+ catName +': '+  JSON.stringify(trr));
 
-      _.set(dataObjects, catName, trr);
+      _.set(dataObjects, catName[0], trr);
     }
 
     // dataObjects = idataObjects;
@@ -155,12 +155,9 @@ class ListviewSectionsExample extends React.Component {
   }
 
   renderHeader (data, sectionID) {
-    switch (sectionID) {
-      case 'first':
-        return <Text style={styles.boldLabel}>First Section</Text>
-      default:
-        return <Text style={styles.boldLabel}>Second Section</Text>
-    }
+
+        return <Text style={styles.boldLabel}>{sectionID}</Text>
+
   }
 
   render () {
