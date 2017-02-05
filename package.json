@@ -27,7 +27,7 @@
     "fixed-data-table": "^0.6.3",
     "format-json": "^1.0.3",
     "griddle-react": "^0.7.1",
-    "lodash": "^4.17.2",
+    "lodash": "^4.17.4",
     "native-base": "^0.5.20",
     "querystringify": "0.0.4",
     "ramda": "^0.22.1",

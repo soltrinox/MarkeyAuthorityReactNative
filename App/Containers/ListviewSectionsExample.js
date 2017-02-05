@@ -3,6 +3,7 @@
 import React from 'react'
 import { View, ListView, Text } from 'react-native'
 import { connect } from 'react-redux'
+import _ from 'lodash'
 
 // For empty lists
 import AlertMessage from '../Components/AlertMessage'
@@ -13,18 +14,21 @@ import styles from './Styles/ListviewExampleStyle'
 class ListviewSectionsExample extends React.Component {
 
   state: {
-    dataSource: Object
+    dataSource: Object,
+      keywords: Array,
+      categories: Array,
+      domainMatches: Object
   }
 
-  constructor (props) {
-    super(props)
+  constructor(props, context) {
+    super(props, context);
 
     /* ***********************************************************
     * STEP 1
     * This is an array of objects with the properties you desire
     * Usually this should come from Redux mapStateToProps
     *************************************************************/
-    const dataObjects = {
+    var dataObjects = {
       first: [
         {title: 'First Title', description: 'First Description'},
         {title: 'Second Title', description: 'Second Description'},
@@ -51,6 +55,37 @@ class ListviewSectionsExample extends React.Component {
         {title: 'BLACKJACK!', description: 'BLACKJACK! Description'}
       ]
     }
+
+    var testJSON = require('../Fixtures/LAS.001.json')
+
+    var rawArr =  testJSON;
+    var test = _.orderBy(rawArr, ['CAT', 'KEY'], ['asc', 'asc']);
+
+    console.log('@@@@@@@@@@@@@@ ORDERBY JSON: '+  JSON.stringify(test));
+
+    var categoriesArr = [...new Set(test.map(item => item.CAT))];
+    categoriesArr.sort();
+    console.log('@@@@@@@@@@@@@@ categoriesArr : '+  JSON.stringify(categoriesArr));
+
+    var keywordArr = [...new Set(test.map(item => item.KEY))];
+    keywordArr.sort();
+    console.log('@@@@@@@@@@@@@@ keywordArr : '+  JSON.stringify(keywordArr));
+
+    var idataObjects = [];
+
+    for(var j = 0; j < categoriesArr.length; j++){
+      var trr = [];
+      trr = _.filter(rawArr, { 'CAT': categoriesArr[j]  });
+      console.log('@@@@@@@@@@@@@@ SORTED KEYWORDS ON VATEGORY: '+  JSON.stringify(trr));
+      var catName = '';
+      catName = categoriesArr[j];
+
+      console.log('@@@@@@@@@@@@@@ '+  catName +' PUSHING: '+  JSON.stringify(trr));
+      _.set(dataObjects, catName, trr);
+    }
+
+    // dataObjects = idataObjects;
+
     /* ***********************************************************
     * STEP 2
     * Teach datasource how to detect if rows are different
@@ -66,7 +101,10 @@ class ListviewSectionsExample extends React.Component {
 
     // Datasource is always in state
     this.state = {
-      dataSource: ds.cloneWithRowsAndSections(dataObjects)
+      dataSource: ds.cloneWithRowsAndSections(dataObjects),
+      keywords: keywordArr,
+      categories: categoriesArr,
+      domainMatches: ds.cloneWithRowsAndSections(dataObjects)
     }
   }
 
@@ -107,6 +145,11 @@ class ListviewSectionsExample extends React.Component {
     }
   *************************************************************/
 
+  componentWillMount() {
+
+
+  }
+
   // Used for friendly AlertMessage
   // returns true if the dataSource is empty
   noRowData () {
@@ -140,7 +183,7 @@ class ListviewSectionsExample extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    // ...redux state to props here
+
   }
 }
 

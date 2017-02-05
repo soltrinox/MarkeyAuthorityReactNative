@@ -217,8 +217,8 @@ export default class PresentationScreen extends React.Component {
         inactiveSlideScale={0.75}
         inactiveSlideOpacity={0.6}
         renderItem={this._renderItem}
-        sliderWidth={250}
-        itemWidth={250}
+        sliderWidth={350}
+        itemWidth={350}
         slideStyle={sliderStyles.slide}
         containerCustomStyle={sliderStyles.slider}
         contentContainerCustomStyle={sliderStyles.sliderContainer}
@@ -245,8 +245,8 @@ export default class PresentationScreen extends React.Component {
         inactiveSlideScale={0.75}
         inactiveSlideOpacity={0.6}
         renderItem={this._renderItem}
-        sliderWidth={250}
-        itemWidth={250}
+        sliderWidth={350}
+        itemWidth={350}
         slideStyle={sliderStyles.slide}
         containerCustomStyle={sliderStyles.slider}
         contentContainerCustomStyle={sliderStyles.sliderContainer}
@@ -416,7 +416,7 @@ export default class PresentationScreen extends React.Component {
         );
 
         productColumnArray.push(
-          <View style={{ width:250, height:400, overflow: 'hidden', borderRadius:0, backgroundColor: '#00000000', padding:0 }}  key={cll } >
+          <View style={{ width:350, height:400, overflow: 'hidden', borderRadius:0, backgroundColor: '#00000000', padding:0 }}  key={cll } >
             <Grid style={{ flex:1 }} >
               { boxr2 }
             </Grid>
@@ -487,13 +487,11 @@ export default class PresentationScreen extends React.Component {
               </Grid>
             </View>
             <View  style={{ width:750, height:400, overflow:'hidden',flexDirection:'row'   }}  >
-              <ScrollView style={{width:250, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>
-                {this.example1}
-              </ScrollView>
-              <ScrollView style={{width:250, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>
+
+              <ScrollView style={{width:350, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>
                 {this.example2}
               </ScrollView>
-              <ScrollView style={{width:250, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>
+              <ScrollView style={{width:350, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>
                 {this.example3}
               </ScrollView>
             </View>

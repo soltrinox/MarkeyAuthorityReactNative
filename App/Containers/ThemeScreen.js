@@ -21,6 +21,7 @@ import { Col, Row, Grid } from 'react-native-easy-grid'
 import R from 'ramda'
 import RoundedButton from '../Components/RoundedButton'
 import area from './area.json';
+import _ from 'lodash'
 
 // Styles
 import styles from './Styles/ThemeScreenStyle'
@@ -38,6 +39,7 @@ export default class ThemeScreen extends React.Component {
     super(props, context);
     this.state = {
       keywords: [],
+      categories: [],
       testJSON : {},
       domainMatches: [],
       resultsDomains:[]
@@ -97,7 +99,7 @@ export default class ThemeScreen extends React.Component {
     console.log(index + '] ' +item );
     return sst;
   }
-  
+
      _createAreaData() {
     let data = [];
     let len = area.length;
@@ -142,12 +144,30 @@ export default class ThemeScreen extends React.Component {
 
     this.state.testJSON = require('../Fixtures/LAS.001.json')
 
-    var array =  this.state.testJSON;
-    var unique = [...new Set(array.map(item => item.CAT))];
-    unique.sort();
-    this.state.keywords = unique;
+    var rawArr =  this.state.testJSON;
+    var test = _.orderBy(rawArr, ['CAT', 'KEY'], ['asc', 'asc']);
 
-    // this.state.keywords = unique.map(this.myFunction);
+    console.log('ORDERBY JSON: '+  JSON.stringify(test));
+
+    var categoriesArr = [...new Set(rawArr.map(item => item.CAT))];
+    categoriesArr.sort();
+    this.setState({categories: categoriesArr }) ;
+
+    var keywordArr = [...new Set(rawArr.map(item => item.KEY))];
+    keywordArr.sort();
+    this.setState({keywords: keywordArr }) ;
+
+    var dataObjects = [];
+
+    for(var j = 0; j < this.state.categories.length; j++){
+      var trr = [];
+      trr = _.filter(rawArr, { 'CAT': this.state.categories[j]  });
+      var catName = this.state.categories[j];
+      var ggr = {  catName : trr};
+      dataObjects.push(grr);
+    }
+
+
 
   }
 
@@ -167,7 +187,7 @@ export default class ThemeScreen extends React.Component {
 
       this.setState({resultsDomains : searchResult});
 //      this.state.resultsDomains = JSON.stringify(this.state.domainMatches);
-      console.log('FOUND: '+  JSON.stringify(searchResult));
+//       console.log('FOUND: '+  JSON.stringify(searchResult));
     }
   }
 
@@ -195,19 +215,30 @@ export default class ThemeScreen extends React.Component {
         <ScrollView style={styles.container}>
           <View style={styles.section} key='colors-header'>
             <Text style={styles.sectionText} key='colors'>Data Test</Text>
-            
+
             <TouchableOpacity style={{marginTop: 10, marginLeft: 20}} onPress={this._showAreaPicker.bind(this)}>
               <Text style={{color: '#ABABAB'}}>AreaPicker</Text>
             </TouchableOpacity>
-             
+
           </View>
           <View style={styles.sectionHeaderContainer}>
             <Text style={styles.sectionHeader}>JSON</Text>
           </View>
           <View style={{ flex:1, flexDirection:'row', alignItems:'flex-start', backgroundColor:'#000000'}}>
 
-            <View style={{ flex:1, flexDirection:'column', width:400, overflow:'hidden'}}>
 
+            <ScrollView style={{ flex:1, flexDirection:'column', width:400, height:700}}
+              horizontal={false}  showsHorizontalScrollIndicator={ false } >
+              <View
+                    style={{  height:30,  width:400,
+                      backgroundColor: "rgba(0,0,0,1)",
+                    }}>
+                     <Text
+                        style={{ height:30,  width:400,
+                          color: "rgba(255,255,255,1)",
+                          fontSize: 24,
+                               }}>KEYWORDS
+                </Text></View>
               {
                 this.state.keywords.map((item, index) => {
                 return (
@@ -221,28 +252,42 @@ export default class ThemeScreen extends React.Component {
                 )
                 })
               }
-            </View>
+            </ScrollView>
 
-            <View style={{ flex:3,  flexDirection:'column', alignItems:'flex-start', width:600, backgroundColor:'#000000'}} >
+
+
+            <ScrollView style={{ flex:1, flexDirection:'column', width:400, height:700}}
+              horizontal={false}  showsHorizontalScrollIndicator={ false } >
+              <View
+                    style={{  height:30,  width:600,
+                      backgroundColor: "rgba(0,0,0,1)",
+                    }}>
+                     <Text
+                        style={{ height:30,  width:600,
+                          color: "rgba(255,255,255,1)",
+                          fontSize: 24,
+                               }}>DOMAINS FOR KEYWORDS
+                </Text></View>
               {
                 this.state.resultsDomains.map((item, index) => {
                   var itemString = JSON.stringify(item);
                 return (
                   <View key={index}
-                    style={{  height:100,  width:600,
+                    style={{  height:30,  width:600,
                       backgroundColor: "rgba(0,0,0,1)",
                     }}>
-                     <Text              
-                        style={{ height:100,  width:600,
-                          color: 'white',
-                          fontSize: 11,
-                        }}>{index}] { item.CAT  } | {item.KEY} {itemString} </Text>
+                     <Text
+                        style={{ height:30,  width:600,
+                          color: "rgba(255,255,255,1)",
+                          fontSize: 14,
+                               }}>#{index}  <Text style={{fontWeight: 'bold', color: "rgba(0,0,255,1)" }}>
+                       @{item.DOM}</Text>  { item.CAT  }:{item.KEY}  <Text style={{fontWeight: 'bold'}}>[{item.SCORE}]</Text> </Text>
                   </View>
                   )
                 }
                 )
               }
-            </View>
+            </ScrollView>
 
           </View>
 
