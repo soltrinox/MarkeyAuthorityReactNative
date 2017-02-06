@@ -29,31 +29,7 @@ class ListviewSectionsExample extends React.Component {
     * Usually this should come from Redux mapStateToProps
     *************************************************************/
     var dataObjects = {
-      first: [
-        {title: 'First Title', description: 'First Description'},
-        {title: 'Second Title', description: 'Second Description'},
-        {title: 'Third Title', description: 'Third Description'},
-        {title: 'Fourth Title', description: 'Fourth Description'},
-        {title: 'Fifth Title', description: 'Fifth Description'},
-        {title: 'Sixth Title', description: 'Sixth Description'},
-        {title: 'Seventh Title', description: 'Seventh Description'},
-        {title: 'Eighth Title', description: 'Eighth Description'},
-        {title: 'Ninth Title', description: 'Ninth Description'},
-        {title: 'Tenth Title', description: 'Tenth Description'}
-      ],
-      second: [
-        {title: 'Eleventh Title', description: 'Eleventh Description'},
-        {title: '12th Title', description: '12th Description'},
-        {title: '13th Title', description: '13th Description'},
-        {title: '14th Title', description: '14th Description'},
-        {title: '15th Title', description: '15th Description'},
-        {title: '16th Title', description: '16th Description'},
-        {title: '17th Title', description: '17th Description'},
-        {title: '18th Title', description: '18th Description'},
-        {title: '19th Title', description: '19th Description'},
-        {title: '20th Title', description: '20th Description'},
-        {title: 'BLACKJACK!', description: 'BLACKJACK! Description'}
-      ]
+
     }
 
     var testJSON = require('../Fixtures/LAS.001.json')
@@ -61,26 +37,29 @@ class ListviewSectionsExample extends React.Component {
     var rawArr =  testJSON;
     var test = _.orderBy(rawArr, ['CAT', 'KEY'], ['asc', 'asc']);
 
-    console.log('@@@@@@@@@@@@@@ ORDERBY JSON: '+  JSON.stringify(test));
+    // console.log('@@@@@@@@@@@@@@ ORDERBY JSON: '+  JSON.stringify(test));
 
     var categoriesArr = [...new Set(test.map(item => item.CAT))];
     categoriesArr.sort();
-    console.log('@@@@@@@@@@@@@@ categoriesArr : '+  JSON.stringify(categoriesArr));
+    // console.log('@@@@@@@@@@@@@@ categoriesArr : '+  JSON.stringify(categoriesArr));
 
     var keywordArr = [...new Set(test.map(item => item.KEY))];
     keywordArr.sort();
-    console.log('@@@@@@@@@@@@@@ keywordArr : '+  JSON.stringify(keywordArr));
+    // console.log('@@@@@@@@@@@@@@ keywordArr : '+  JSON.stringify(keywordArr));
 
     var idataObjects = [];
 
     for(var j = 0; j < categoriesArr.length; j++){
       var trr = [];
-      var catName  = _.toString(categoriesArr[j])
-      trr = _.find(rawArr, { "CAT": catName } );
+      var catName  = _.toString(categoriesArr[j]);
+      trr =  _.filter(test, { "CAT" : catName });
+
       console.log('%%%%%%%%%%% SORTED KEYWORDS ON '+ catName +': '+  JSON.stringify(trr));
 
-      _.set(dataObjects, catName[0], trr);
+      _.set(dataObjects, catName, trr);
     }
+
+    console.log('88888888 SORTED KEYWORDS ON : '+  JSON.stringify(dataObjects));
 
     // dataObjects = idataObjects;
 
@@ -119,8 +98,8 @@ class ListviewSectionsExample extends React.Component {
     // in different sections
     return (
       <View style={styles.row}>
-        <Text style={styles.boldLabel}>Section {sectionID} - {rowData.CAT}</Text>
-        <Text style={styles.label}>{rowData.KEY}</Text>
+        <Text style={styles.boldLabel}>{rowData.KEY}</Text>
+        <Text style={{color:'#0000FF', textAlign: 'center',}}>{rowData.DOM}</Text>
       </View>
     )
   }
