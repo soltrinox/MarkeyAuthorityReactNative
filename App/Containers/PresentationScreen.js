@@ -13,6 +13,7 @@ import DeviceInfo from 'react-native-device-info'
 import Carousel from 'react-native-snap-carousel'
 import {IndicatorViewPager,  PagerDotIndicator} from 'rn-viewpager'
 import Svg,{ G, Rect, Symbol, Use, Defs, Stop} from 'react-native-svg'
+import Menu, { MenuContext, MenuOptions, MenuOption, MenuTrigger } from 'react-native-menu';
 
 // Styles
 
@@ -52,7 +53,10 @@ export default class PresentationScreen extends React.Component {
       carouselPosition3: 0,
       car1: {},
       car2: {},
-      car3: {}
+      car3: {},
+      message: 'Try clicking the top-right menus',
+      firstMenuDisabled: false,
+      dropdownSelection: '-- Choose --'
     };
 
     this._updateText = this._updateText.bind(this);
@@ -123,6 +127,10 @@ export default class PresentationScreen extends React.Component {
      this.setState({ selectedDomain: ddomain });
   }
 
+  _updateText(ddomain) {
+    this.setState({ selectedDomain: ddomain });
+  }
+
   _updateClientColumn(items) {
     this.setState({ clientColumnItems: items });
   }
@@ -181,6 +189,25 @@ export default class PresentationScreen extends React.Component {
   }
 
 
+
+  setMessage(value) {
+    if (typeof value === 'string') {
+      this.setState({ message: `You selected "${value}"` });
+    } else {
+      this.setState({ message: `Woah!\n\nYou selected an object:\n\n${JSON.stringify(value)}` });
+    }
+    return value !== 'do not close';
+  }
+
+  setFirstMenuDisabled(disabled) {
+    this.setState({
+      message: `First menu is ${disabled ? 'disabled' : 'enabled'}`,
+      firstMenuDisabled: disabled
+    });
+    return false;
+  }
+
+
   get example1 (){
 
     this.state.car1 =
@@ -190,8 +217,8 @@ export default class PresentationScreen extends React.Component {
         inactiveSlideScale={0.75}
         inactiveSlideOpacity={0.6}
         renderItem={this._renderItem}
-        sliderWidth={250}
-        itemWidth={250}
+        sliderWidth={350}
+        itemWidth={350}
         slideStyle={sliderStyles.slide}
         containerCustomStyle={sliderStyles.slider}
         contentContainerCustomStyle={sliderStyles.sliderContainer}
@@ -208,7 +235,8 @@ export default class PresentationScreen extends React.Component {
 
 
     var carItems = [];
-    carItems = this.state.domainGridColumns.slice(0,-1);
+    carItems = this.state.domainGridColumns;
+    // .slice(0,-1);
     this.state.domainItems2 = carItems;
     this.state.car2 =
       <Carousel
@@ -225,9 +253,10 @@ export default class PresentationScreen extends React.Component {
         showsHorizontalScrollIndicator={false}
         snapOnAndroid={true}
         removeClippedSubviews={false}
-        onSnapToItem={(item) => {this._productCarouselChange2('CAR2',item)}}
+
         ref={(myCarousel2) => { this._myCarousel2 = myCarousel2; }}
       /> ;
+    // onSnapToItem={(item) => {this._productCarouselChange2('CAR2',item)}}
     return this.state.car2;
   }
 
@@ -269,30 +298,30 @@ export default class PresentationScreen extends React.Component {
 
       var clientDomains = ['www.default.com','www.generic.com'];
       var keywordsClients = [
-        ['key1', '0', '1'],
-        ['key2', '2', '2'],
-        ['key3', '0', '1'],
-        ['key4', '1', '2'],
-        ['key5', '2', '0'],
-        ['key6', '1', '1'],
-        ['key7', '0', '3'],
-        ['key8', '1', '0'],
-        ['key9', '0', '1'],
-        ['key10', '0', '2'],
+        ['keyword1', '0', '1'],
+        ['keyword2', '2', '2'],
+        ['keyword3', '0', '1'],
+        ['keyword4', '1', '2'],
+        ['keyword5', '2', '0'],
+        ['keyword6', '1', '1'],
+        ['keyword7', '0', '3'],
+        ['keyword8', '1', '0'],
+        ['keyword9', '0', '1'],
+        ['keyword10', '0', '2'],
       ];
 
       var products =  ['DEX BASIC','DEX PLUS','DEX PRO','DEX PREMIUM'];
       var keywordsProducts = [
-        ['key1', '5', '2','7', '9'],
-        ['key2', '6', '5','9', '12'],
-        ['key3', '1', '7','6', '10'],
-        ['key4', '8', '7','8', '9'],
-        ['key5', '10', '10','10', '10'],
-        ['key6', '5', '4','8', '11'],
-        ['key7', '9', '8','5', '9'],
-        ['key8', '3', '5','9', '12'],
-        ['key9', '4', '1','6', '9'],
-        ['key10', '8', '9','11', '11'],
+        ['keyword1', '5', '2','7', '9'],
+        ['keyword2', '6', '5','9', '12'],
+        ['keyword3', '1', '7','6', '10'],
+        ['keyword4', '8', '7','8', '9'],
+        ['keyword5', '10', '10','10', '10'],
+        ['keyword6', '5', '4','8', '11'],
+        ['keyword7', '9', '8','5', '9'],
+        ['keyword8', '3', '5','9', '12'],
+        ['keyword9', '4', '1','6', '9'],
+        ['keyword10', '8', '9','11', '11'],
       ];
       this.state.productDomains = products.length;
 
@@ -436,69 +465,146 @@ export default class PresentationScreen extends React.Component {
 
     return (
       <View style={styles.mainContainer}>
-        {/*<Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />*/}
-        <ScrollView style={styles.container}>
+        <MenuContext style={{ flex: 1 }}>
+          {/*<Image source={Images.background} style={styles.backgroundImage} resizeMode='stretch' />*/}
+          <ScrollView style={styles.container}>
 
-          <View style={{
-                        flex: 1,
-                        flexDirection: 'row',
-                        justifyContent: 'flex-start',
-                        alignItems: 'center',
-                        }} >
+            <View style={{
+                          flex: 1,
+                          flexDirection: 'row',
+                          justifyContent: 'flex-start',
+                          alignItems: 'center',
+                          }} >
 
-            <InputGroup borderType='rounded'  style={{ flex:2,  marginRight:5, marginLeft:5 }}  >
-              <Icon name='ios-home' style={{color:'#696969'}}/>
-              <Input borderType='rounded'
-                     style={{height: 40, color: '#FFFFFF'}}
-                defaultValue={this.state.selectedDomain}
-                placeholder="Type domain"
-                onChangeText={this._updateText}
-              />
-            </InputGroup>
+              <InputGroup borderType='rounded'  style={{ flex:2,  marginRight:5, marginLeft:5 }}  >
+                <Icon name='ios-home' style={{color:'#696969'}}/>
+                <Input borderType='rounded'
+                       style={{height: 40, color: '#FFFFFF'}}
+                  defaultValue={this.state.selectedDomain}
+                  placeholder="Type domain"
+                  onChangeText={this._updateText}
+                />
+              </InputGroup>
 
-            <InputGroup borderType='rounded'  style={{ flex:2,  marginRight:5, marginLeft:5 }}  >
-              <Icon name='ios-star' style={{color:'#696969'}}/>
-              <Input  borderType='rounded' placeholder="CATEGORY" style={{height: 40, color: '#FFFFFF'}}
-                      defaultValue={this.state.selectedCategory}  />
-            </InputGroup>
+              {/*<InputGroup borderType='rounded'  style={{ flex:2,  marginRight:5, marginLeft:5 }}  >*/}
+                {/*<Icon name='ios-star' style={{color:'#696969'}}/>*/}
+                {/*<Input  borderType='rounded' placeholder="CATEGORY" style={{height: 40, color: '#FFFFFF'}}*/}
+                        {/*defaultValue={this.state.selectedCategory}  />*/}
+              {/*</InputGroup>*/}
+              <RoundedButton text='CATEGORY' onPress={NavigationActions.listviewSectionsExample} />
 
-            <InputGroup borderType='rounded'  style={{ flex:1,  marginRight:5, marginLeft:5, width: 50 }}  >
-              <Icon name='ios-map' style={{color:'#696969'}}/>
-              <Input  borderType='rounded' placeholder="STATE" defaultValue="NV" style={{ color:'#FFFFFF',}}   />
-            </InputGroup>
+              <View borderType='rounded'  style={{ flex:2, flexDirection:'row',  marginRight:5, marginLeft:5 }}  >
 
-            <InputGroup borderType='rounded'  style={{ flex:2,  marginRight:5, marginLeft:5 }}  >
-              <Icon name='ios-map' style={{color:'#696969'}}/>
-              <Input  borderType='rounded' placeholder="MARKET"  defaultValue="LAS VEGAS"  style={{ color:'#FFFFFF',}}   />
-            </InputGroup>
-          </View>
-
-          <View  style={{ flex:1, marginTop:20 }}  >
-            <Text style={{flex:1, flexDirection: 'row', textAlign: 'center' ,
-             color:'#ABABAB', margin:10, fontSize: 28 }}  >
-                Ranking {this.state.selectedCategory}  for {this.state.selectedDomain}
-            </Text>
-          </View>
-
-          <View  style={{ flex:1, flexDirection:'row', alignItems:'flex-start', marginTop:20 }}  >
-            <View style={{ width:250, height:400, overflow: 'hidden', borderRadius:0, backgroundColor: '#00000000', padding:0 }}   >
-              <Grid style={{ flex:1, flexDirection:'column' }} >
-                {this.state.keywordGridColumns}
-              </Grid>
+                <Text  borderType='rounded'  style={{ fontSize:30 , fontWeight:'bold',color:'#FF0000',}} > PHOENIX, AZ
+                </Text>
+              </View>
             </View>
-            <View  style={{ width:750, height:400, overflow:'hidden',flexDirection:'row'   }}  >
 
-              <ScrollView style={{width:350, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>
-                {this.example2}
-              </ScrollView>
-              <ScrollView style={{width:350, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>
-                {this.example3}
-              </ScrollView>
+            <View style={styles2.content}>
+              <Menu style={styles2.dropdown} onSelect={(value) => this.setState({ dropdownSelection: value })}>
+                <MenuTrigger>
+                  <Text>{this.state.dropdownSelection}</Text>
+                </MenuTrigger>
+                <MenuOptions optionsContainerStyle={styles2.dropdownOptions}
+                             renderOptionsContainer={(options) => <ScrollView><Text>CHOOSE SOMETHING....</Text>{options}</ScrollView>}>
+                  <MenuOption value="Option One">
+                    <Text>Option One</Text>
+                  </MenuOption>
+                  <MenuOption value="Option Two">
+                    <Text>Option Two</Text>
+                  </MenuOption>
+                  <MenuOption value="Option Three">
+                    <Text>Option Three</Text>
+                  </MenuOption>
+                  <MenuOption value="Option Four">
+                    <Text>Option Four</Text>
+                  </MenuOption>
+                  <MenuOption value="Option Five">
+                    <Text>Option Five</Text>
+                  </MenuOption>
+                </MenuOptions>
+              </Menu>
             </View>
-          </View>
 
-        </ScrollView>
+            <View  style={{ flex:1, marginTop:20 }}  >
+              <Text style={{flex:1, flexDirection: 'row', textAlign: 'center' ,
+               color:'#ABABAB', margin:10, fontSize: 28 }}  >
+                  Ranking {this.state.selectedCategory}  for {this.state.selectedDomain}
+              </Text>
+            </View>
+
+            <View  style={{ flex:1, flexDirection:'row', alignItems:'flex-start', marginTop:20 }}  >
+              <View style={{ width:250, height:400, overflow: 'hidden', borderRadius:0, backgroundColor: '#00000000', padding:0 }}   >
+                <Grid style={{ flex:1, flexDirection:'column' }} >
+                  {this.state.keywordGridColumns}
+                </Grid>
+              </View>
+              <View  style={{ width:750, height:400, overflow:'hidden',flexDirection:'row'   }}  >
+                <ScrollView style={{width:350, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>
+                  {this.example1}
+                </ScrollView>
+                <ScrollView style={{width:350, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>
+                  {this.example2}
+                </ScrollView>
+                {/*<ScrollView style={{width:350, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>*/}
+                  {/*{this.example3}*/}
+                {/*</ScrollView>*/}
+              </View>
+            </View>
+
+          </ScrollView>
+        </MenuContext>
       </View>
     )
   }
 }
+
+const styles2 = StyleSheet.create({
+
+  menuTrigger: {
+    flexDirection: 'row',
+    paddingHorizontal: 10
+  },
+  menuTriggerText: {
+    color: 'lightgrey',
+    fontWeight: '600',
+    fontSize: 20
+  },
+  disabled: {
+    color: '#ccc'
+  },
+  divider: {
+    marginVertical: 5,
+    marginHorizontal: 2,
+    borderBottomWidth: 1,
+    borderColor: '#ccc'
+  },
+  content: {
+    flex:1,
+    flexDirection:'row',
+    alignItems: 'flex-end',
+    backgroundColor: '#00000000',
+    paddingHorizontal: 10,
+    paddingTop: 20,
+    paddingBottom: 30,
+    borderBottomWidth: 1,
+    borderColor: '#ccc'
+  },
+  contentText: {
+    fontSize: 18
+  },
+  dropdown: {
+    width: 300,
+    borderColor: '#999',
+    borderWidth: 1,
+    padding: 5
+  },
+  dropdownOptions: {
+    marginTop: 30,
+    borderColor: '#ccc',
+    borderWidth: 2,
+    width: 300,
+    height: 200
+  }
+});
+

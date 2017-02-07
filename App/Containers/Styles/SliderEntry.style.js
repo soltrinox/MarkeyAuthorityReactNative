@@ -8,11 +8,11 @@ function wp (percentage) {
 }
 
 const slideHeight = 400; //viewportHeight * 0.4;
-const slideWidth = 250; //wp(75);
+const slideWidth = 350; //wp(75);
 
-export const sliderWidth = 250;
+export const sliderWidth = 350;
 export const itemHorizontalMargin = 0; //wp(2);
-export const itemWidth =  250  ; //slideWidth + itemHorizontalMargin * 2;
+export const itemWidth =  350  ; //slideWidth + itemHorizontalMargin * 2;
 
 const entryBorderRadius = 0;
 

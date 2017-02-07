@@ -32,10 +32,44 @@ class ListviewSectionsExample extends React.Component {
 
     }
 
+    // OBJ->OBJ->ARR
+
+    var dataObjectsTEST = {
+      CATEGORY1: [
+        {KEY: 'First Title', DOM: 'DEX PLUS'},
+        {KEY: 'First Title', DOM: 'DEX PREM'},
+        {KEY: 'First Title', DOM: 'www.xxxxx.com'},
+        {KEY: 'First Title', DOM: 'www.yyyy.com'},
+        {KEY: 'First Title', DOM: 'First Description'},
+        {KEY: 'Second Title', DOM: 'Second Description'},
+        {KEY: 'Third Title', DOM: 'Third Description'},
+        {KEY: 'Fourth Title', DOM: 'Fourth Description'},
+        {KEY: 'Fifth Title', DOM: 'Fifth Description'},
+        {KEY: 'Sixth Title', DOM: 'Sixth Description'},
+        {KEY: 'Seventh Title', DOM: 'Seventh Description'},
+        {KEY: 'Eighth Title', DOM: 'Eighth Description'},
+        {KEY: 'Ninth Title', DOM: 'Ninth Description'},
+        {KEY: 'Tenth Title', DOM: 'Tenth Description'}
+      ],
+      CATEGORY2: [
+        {KEY: 'Eleventh Title', DOM: 'Eleventh Description'},
+        {KEY: '12th Title', DOM: '12th Description'},
+        {KEY: '13th Title', DOM: '13th Description'},
+        {KEY: '14th Title', DOM: '14th Description'},
+        {KEY: '15th Title', DOM: '15th Description'},
+        {KEY: '16th Title', DOM: '16th Description'},
+        {KEY: '17th Title', DOM: '17th Description'},
+        {KEY: '18th Title', DOM: '18th Description'},
+        {KEY: '19th Title', DOM: '19th Description'},
+        {KEY: '20th Title', DOM: '20th Description'},
+        {KEY: 'BLACKJACK!', DOM: 'BLACKJACK! Description'}
+      ]
+    }
+
     var testJSON = require('../Fixtures/LAS.001.json')
 
     var rawArr =  testJSON;
-    var test = _.orderBy(rawArr, ['CAT', 'KEY'], ['asc', 'asc']);
+    var test = _.orderBy(rawArr, ['CAT', 'KEY', 'SCORE'], ['asc', 'asc','desc']);
 
     // console.log('@@@@@@@@@@@@@@ ORDERBY JSON: '+  JSON.stringify(test));
 
@@ -47,15 +81,11 @@ class ListviewSectionsExample extends React.Component {
     keywordArr.sort();
     // console.log('@@@@@@@@@@@@@@ keywordArr : '+  JSON.stringify(keywordArr));
 
-    var idataObjects = [];
-
     for(var j = 0; j < categoriesArr.length; j++){
       var trr = [];
       var catName  = _.toString(categoriesArr[j]);
       trr =  _.filter(test, { "CAT" : catName });
-
-      console.log('%%%%%%%%%%% SORTED KEYWORDS ON '+ catName +': '+  JSON.stringify(trr));
-
+      // console.log('%%%%%%%%%%% SORTED KEYWORDS ON '+ catName +': '+  JSON.stringify(trr));
       _.set(dataObjects, catName, trr);
     }
 
@@ -98,8 +128,8 @@ class ListviewSectionsExample extends React.Component {
     // in different sections
     return (
       <View style={styles.row}>
-        <Text style={styles.boldLabel}>{rowData.KEY}</Text>
-        <Text style={{color:'#0000FF', textAlign: 'center',}}>{rowData.DOM}</Text>
+        <Text style={styles.boldLabel}>{rowData.KEY} </Text>
+        <Text style={{color:'#0000FF', fontSize: 20, textAlign: 'center',}}><Text style={styles.boldLabel}>[{rowData.SCORE}]</Text> {rowData.DOM}</Text>
       </View>
     )
   }
@@ -135,7 +165,7 @@ class ListviewSectionsExample extends React.Component {
 
   renderHeader (data, sectionID) {
 
-        return <Text style={styles.boldLabel}>{sectionID}</Text>
+        return <Text style={{ fontWeight:'bold', fontSize: 25, backgroundColor: '#00FF00' }}>{sectionID}</Text>
 
   }
 
