@@ -47,7 +47,7 @@ class AllComponentsScreen extends React.Component {
             </Text>
           </View>
 
-          {ExamplesRegistry.render()}
+
 
         </ScrollView>
       </View>
