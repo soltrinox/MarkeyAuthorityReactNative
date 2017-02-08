@@ -225,8 +225,6 @@ export default class ThemeScreen extends React.Component {
             <Text style={styles.sectionHeader}>JSON</Text>
           </View>
           <View style={{ flex:1, flexDirection:'row', alignItems:'flex-start', backgroundColor:'#000000'}}>
-
-
             <ScrollView style={{ flex:1, flexDirection:'column', width:400, height:700}}
               horizontal={false}  showsHorizontalScrollIndicator={ false } >
               <View
@@ -253,8 +251,6 @@ export default class ThemeScreen extends React.Component {
                 })
               }
             </ScrollView>
-
-
 
             <ScrollView style={{ flex:1, flexDirection:'column', width:400, height:700}}
               horizontal={false}  showsHorizontalScrollIndicator={ false } >

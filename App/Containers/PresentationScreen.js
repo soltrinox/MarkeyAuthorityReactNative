@@ -56,7 +56,11 @@ export default class PresentationScreen extends React.Component {
       car3: {},
       message: 'Try clicking the top-right menus',
       firstMenuDisabled: false,
-      dropdownSelection: '-- Choose --'
+      dropdownSelection: '-- Choose --',
+      dataObjects:{},
+      rawArr:[],
+      categoriesArr:[],
+      keywordArr:[]
     };
 
     this._updateText = this._updateText.bind(this);
@@ -143,7 +147,6 @@ export default class PresentationScreen extends React.Component {
     this.setState({domainGridColumns : arrayz});
   }
 
-
   _updateCarousels(carInstance, itemPos){
 
     console.log('@@@@@ Change ON '+carInstance + ' POS: '+itemPos);
@@ -178,7 +181,6 @@ export default class PresentationScreen extends React.Component {
     }
   }
 
-
   _renderItem (entry) {
     return (
       <TouchableOpacity
@@ -187,8 +189,6 @@ export default class PresentationScreen extends React.Component {
       >{entry}</TouchableOpacity>
     );
   }
-
-
 
   setMessage(value) {
     if (typeof value === 'string') {
@@ -206,7 +206,6 @@ export default class PresentationScreen extends React.Component {
     });
     return false;
   }
-
 
   get example1 (){
 
@@ -260,32 +259,62 @@ export default class PresentationScreen extends React.Component {
     return this.state.car2;
   }
 
-  get example3 (){
+  _domainData(){
+    var testJSON = require('../Fixtures/LAS.001.json')
+    this.state.dataObjects = {
+      CATEGORY1: [
+        {KEY: 'First Title', DOM: 'DEX PLUS'},
+        {KEY: 'First Title', DOM: 'DEX PREM'},
+        {KEY: 'First Title', DOM: 'www.xxxxx.com'},
+        {KEY: 'First Title', DOM: 'www.yyyy.com'},
+        {KEY: 'First Title', DOM: 'First Description'},
+        {KEY: 'Second Title', DOM: 'Second Description'},
+        {KEY: 'Third Title', DOM: 'Third Description'},
+        {KEY: 'Fourth Title', DOM: 'Fourth Description'},
+        {KEY: 'Fifth Title', DOM: 'Fifth Description'},
+        {KEY: 'Sixth Title', DOM: 'Sixth Description'},
+        {KEY: 'Seventh Title', DOM: 'Seventh Description'},
+        {KEY: 'Eighth Title', DOM: 'Eighth Description'},
+        {KEY: 'Ninth Title', DOM: 'Ninth Description'},
+        {KEY: 'Tenth Title', DOM: 'Tenth Description'}
+      ],
+      CATEGORY2: [
+        {KEY: 'Eleventh Title', DOM: 'Eleventh Description'},
+        {KEY: '12th Title', DOM: '12th Description'},
+        {KEY: '13th Title', DOM: '13th Description'},
+        {KEY: '14th Title', DOM: '14th Description'},
+        {KEY: '15th Title', DOM: '15th Description'},
+        {KEY: '16th Title', DOM: '16th Description'},
+        {KEY: '17th Title', DOM: '17th Description'},
+        {KEY: '18th Title', DOM: '18th Description'},
+        {KEY: '19th Title', DOM: '19th Description'},
+        {KEY: '20th Title', DOM: '20th Description'},
+        {KEY: 'BLACKJACK!', DOM: 'BLACKJACK! Description'}
+      ]
+    }
 
+    this.state.rawArr =  testJSON;
+    var test = _.orderBy(this.state.rawArr, ['CAT', 'KEY', 'SCORE'], ['asc', 'asc','desc']);
+    // console.log('@@@@@@@@@@@@@@ ORDERBY JSON: '+  JSON.stringify(test));
 
-    var carItems2 = [];
-    carItems2 = this.state.domainGridColumns.slice(1);
-    this.state.domainItems3 = carItems2;
+    this.state.categoriesArr = [...new Set(test.map(item => item.CAT))];
+    this.state.categoriesArr.sort();
+    // console.log('@@@@@@@@@@@@@@ categoriesArr : '+  JSON.stringify(categoriesArr));
 
-    this.state.car3 =
-      <Carousel
-        items={this.state.domainItems3}
-        firstItem={0}
-        inactiveSlideScale={0.75}
-        inactiveSlideOpacity={0.6}
-        renderItem={this._renderItem}
-        sliderWidth={350}
-        itemWidth={350}
-        slideStyle={sliderStyles.slide}
-        containerCustomStyle={sliderStyles.slider}
-        contentContainerCustomStyle={sliderStyles.sliderContainer}
-        showsHorizontalScrollIndicator={false}
-        snapOnAndroid={true}
-        removeClippedSubviews={false}
-        onSnapToItem={(item) => {this._productCarouselChange3('CAR3',item)}}
-        ref={(myCarousel3) => { this._myCarousel3 = myCarousel3; }}
-      />;
-    return this.state.car3;
+    this.state.keywordArr = [...new Set(test.map(item => item.KEY))];
+    this.state.keywordArr.sort();
+    // console.log('@@@@@@@@@@@@@@ keywordArr : '+  JSON.stringify(keywordArr));
+
+    for(var j = 0; j < this.state.categoriesArr.length; j++){
+      var trr = [];
+      var catName  = _.toString(this.state.categoriesArr[j]);
+      trr =  _.filter(test, { "CAT" : catName });
+      // console.log('%%%%%%%%%%% SORTED KEYWORDS ON '+ catName +': '+  JSON.stringify(trr));
+      _.set(this.state.dataObjects, catName, trr);
+    }
+
+    console.log('88888888 SORTED KEYWORDS ON : '+  JSON.stringify(this.state.dataObjects));
+    return this.state.dataObjects;
   }
 
 
@@ -347,7 +376,6 @@ export default class PresentationScreen extends React.Component {
 
       );
 
-
       for(let i = 0; i < keywordsProducts.length ; ++i ){
 
         var valKeyName = keywordsProducts[i][0];
@@ -369,7 +397,6 @@ export default class PresentationScreen extends React.Component {
       }
 
       this._updateKeywords(keywordColumnArray);
-
 
       // CREATE THE GRIDS FOR EACH CAROUSEL COLUMN
 
@@ -455,9 +482,9 @@ export default class PresentationScreen extends React.Component {
       }
       this._updateDomainColumns(productColumnArray);
 
-
       // NOW REBUILD THE OTHER DOMAINS
 
+      this._domainData();
       this._updateClientColumn(productColumnArray);
     }
 
@@ -491,11 +518,12 @@ export default class PresentationScreen extends React.Component {
                 {/*<Input  borderType='rounded' placeholder="CATEGORY" style={{height: 40, color: '#FFFFFF'}}*/}
                         {/*defaultValue={this.state.selectedCategory}  />*/}
               {/*</InputGroup>*/}
+
               <RoundedButton text='CATEGORY' onPress={NavigationActions.listviewSectionsExample} />
 
               <View borderType='rounded'  style={{ flex:2, flexDirection:'row',  marginRight:5, marginLeft:5 }}  >
-
-                <Text  borderType='rounded'  style={{ fontSize:30 , fontWeight:'bold',color:'#FF0000',}} > PHOENIX, AZ
+                <Text  borderType='rounded'  style={{ fontSize:30 , fontWeight:'bold',color:'#FF0000',}} >
+                    PHOENIX, AZ
                 </Text>
               </View>
             </View>
@@ -503,25 +531,20 @@ export default class PresentationScreen extends React.Component {
             <View style={styles2.content}>
               <Menu style={styles2.dropdown} onSelect={(value) => this.setState({ dropdownSelection: value })}>
                 <MenuTrigger>
-                  <Text>{this.state.dropdownSelection}</Text>
+                  <Text style={{ color:'#FFFFFF', backgroundColor:'#000000'}}>{this.state.dropdownSelection}</Text>
                 </MenuTrigger>
-                <MenuOptions optionsContainerStyle={styles2.dropdownOptions}
-                             renderOptionsContainer={(options) => <ScrollView><Text>CHOOSE SOMETHING....</Text>{options}</ScrollView>}>
-                  <MenuOption value="Option One">
-                    <Text>Option One</Text>
-                  </MenuOption>
-                  <MenuOption value="Option Two">
-                    <Text>Option Two</Text>
-                  </MenuOption>
-                  <MenuOption value="Option Three">
-                    <Text>Option Three</Text>
-                  </MenuOption>
-                  <MenuOption value="Option Four">
-                    <Text>Option Four</Text>
-                  </MenuOption>
-                  <MenuOption value="Option Five">
-                    <Text>Option Five</Text>
-                  </MenuOption>
+                <MenuOptions optionsContainerStyle={styles2.dropdownOptions} style={{ marginLaeft:300, color:'#FFFFFF', backgroundColor:'#000000'}}
+                             renderOptionsContainer={(options) => <ScrollView>
+                             <Text style={{ color:'#FFFFFF', backgroundColor:'#000000'}} >
+                                 SELECT CATEGORY</Text>
+                             {options}</ScrollView>} >
+                            {
+                              this.state.categoriesArr.map((item, index) => {
+                                return ( <MenuOption value={item} key={index} >
+                                    <Text style={{ backgroundColor:'#000000', color:'#FFFFFF', }} >{item}</Text>
+                                  </MenuOption> )
+                              })
+                            }
                 </MenuOptions>
               </Menu>
             </View>
@@ -594,17 +617,21 @@ const styles2 = StyleSheet.create({
     fontSize: 18
   },
   dropdown: {
+    backgroundColor: '#00000000',
     width: 300,
     borderColor: '#999',
     borderWidth: 1,
-    padding: 5
+    padding: 5,
+    marginLeft: 300
   },
   dropdownOptions: {
+    backgroundColor: '#000000',
     marginTop: 30,
     borderColor: '#ccc',
     borderWidth: 2,
     width: 300,
-    height: 200
+    height: 200,
+    marginLeft: 300
   }
 });
 
