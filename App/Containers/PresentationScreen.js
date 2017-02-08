@@ -309,6 +309,9 @@ export default class PresentationScreen extends React.Component {
     this.state.categoriesArr.sort();
     this.state.keywordArr = [...new Set(test.map(item => item.KEY))];
     this.state.keywordArr.sort();
+
+    // console.log('@@@@@@@@@@@@@@ ORDERBY JSON: '+  JSON.stringify(test));
+
     for (var j = 0; j < this.state.categoriesArr.length; j++) {
       var trr = [];
       var catName = _.toString(this.state.categoriesArr[j]);
@@ -319,54 +322,10 @@ export default class PresentationScreen extends React.Component {
     return this.state.dataObjects;
   }
 
+  _updateKeywordsArray(keywordsProducts){
 
-  componentWillMount() {
-
-    this._domainData();
-
-    // console.log('@@@@@@@@@@@@@@ ORDERBY JSON: '+  JSON.stringify(test));
-    // console.log('@@@@@@@@@@@@@@ categoriesArr : '+  JSON.stringify(categoriesArr));
-    // console.log('@@@@@@@@@@@@@@ keywordArr : '+  JSON.stringify(keywordArr));
-    // console.log('88888888 SORTED KEYWORDS ON : ' + JSON.stringify(this.state.dataObjects));
-
-
-    console.log("Test Model", DeviceInfo.getModel());
-    console.log("Device ID", DeviceInfo.getDeviceId());
-    console.log("System Name", DeviceInfo.getSystemName());
-
-
-    var clientDomains = ['www.default.com', 'www.generic.com'];
-    var keywordsClients = [
-      ['keyword1', '0', '1'],
-      ['keyword2', '2', '2'],
-      ['keyword3', '0', '1'],
-      ['keyword4', '1', '2'],
-      ['keyword5', '2', '0'],
-      ['keyword6', '1', '1'],
-      ['keyword7', '0', '3'],
-      ['keyword8', '1', '0'],
-      ['keyword9', '0', '1'],
-      ['keyword10', '0', '2'],
-    ];
-
-    var products = ['DEX BASIC', 'DEX PLUS', 'DEX PRO', 'DEX PREMIUM'];
-    var keywordsProducts = [
-      ['keyword1', '5', '2', '7', '9'],
-      ['keyword2', '6', '5', '9', '12'],
-      ['keyword3', '1', '7', '6', '10'],
-      ['keyword4', '8', '7', '8', '9'],
-      ['keyword5', '10', '10', '10', '10'],
-      ['keyword6', '5', '4', '8', '11'],
-      ['keyword7', '9', '8', '5', '9'],
-      ['keyword8', '3', '5', '9', '12'],
-      ['keyword9', '4', '1', '6', '9'],
-      ['keyword10', '8', '9', '11', '11'],
-    ];
-    this.state.productDomains = products.length;
-
+    // GENERATE THE COLUMN
     var keywordColumnArray = [];
-    var productColumnArray = [];
-
     let rr = 0;
 
     keywordColumnArray.push(
@@ -403,6 +362,56 @@ export default class PresentationScreen extends React.Component {
     }
 
     this._updateKeywords(keywordColumnArray);
+  }
+
+
+  componentWillMount() {
+
+    this._domainData();
+    // NOW THAT THE ARRAYS ARE POPULATED LEST LOOK INSIDE
+
+
+    console.log("Test Model", DeviceInfo.getModel());
+    console.log("Device ID", DeviceInfo.getDeviceId());
+    console.log("System Name", DeviceInfo.getSystemName());
+
+
+    var clientDomains = ['www.default.com', 'www.generic.com'];
+    var keywordsClients = [
+      ['keyword1', '0', '1'],
+      ['keyword2', '2', '2'],
+      ['keyword3', '0', '1'],
+      ['keyword4', '1', '2'],
+      ['keyword5', '2', '0'],
+      ['keyword6', '1', '1'],
+      ['keyword7', '0', '3'],
+      ['keyword8', '1', '0'],
+      ['keyword9', '0', '1'],
+      ['keyword10', '0', '2'],
+    ];
+
+    var products = ['DEX BASIC', 'DEX PLUS', 'DEX PRO', 'DEX PREMIUM'];
+    var keywordsProducts = [
+      ['keyword1', '5', '2', '7', '9'],
+      ['keyword2', '6', '5', '9', '12'],
+      ['keyword3', '1', '7', '6', '10'],
+      ['keyword4', '8', '7', '8', '9'],
+      ['keyword5', '10', '10', '10', '10'],
+      ['keyword6', '5', '4', '8', '11'],
+      ['keyword7', '9', '8', '5', '9'],
+      ['keyword8', '3', '5', '9', '12'],
+      ['keyword9', '4', '1', '6', '9'],
+      ['keyword10', '8', '9', '11', '11'],
+    ];
+    this.state.productDomains = products.length;
+
+    var productColumnArray = [];
+
+    this._updateKeywordsArray(keywordsProducts);
+
+    console.log('@@@@@@@@@@@@@@ categoriesArr : '+  JSON.stringify(this.state.categoriesArr));
+    console.log('@@@@@@@@@@@@@@ keywordArr : '+  JSON.stringify(this.state.keywordArr));
+    console.log('88888888 SORTED KEYWORDS ON : ' + JSON.stringify(this.state.dataObjects));
 
     // CREATE THE GRIDS FOR EACH CAROUSEL COLUMN
 
