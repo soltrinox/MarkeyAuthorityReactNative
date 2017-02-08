@@ -27,14 +27,14 @@ if (Config.useReactotron) {
     // setup the redux integration with Reactotron
     .use(reactotronRedux({
       // you can flag some of your actions as important by returning true here
-      isActionImportant: action => action.type === StartupTypes.STARTUP,
+      // isActionImportant: action => action.type === StartupTypes.STARTUP,
 
       // you can flag to exclude certain types too... especially the chatty ones
       // except: ['EFFECT_TRIGGERED', 'EFFECT_RESOLVED', 'EFFECT_REJECTED', 'persist/REHYDRATE'],
 
       // Fires when Reactotron uploads a new copy of the state tree.  Since our reducers are
       // immutable with `seamless-immutable`, we ensure we convert to that format.
-      onRestore: state => Immutable(state)
+      // onRestore: state => Immutable(state)
     }))
 
     // register the redux-saga plugin so we can use the monitor in CreateStore.js

@@ -166,9 +166,6 @@ export default class ThemeScreen extends React.Component {
       var ggr = {  catName : trr};
       dataObjects.push(grr);
     }
-
-
-
   }
 
   handlePressKeyword(index, item){

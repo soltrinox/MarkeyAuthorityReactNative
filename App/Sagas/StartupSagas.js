@@ -7,7 +7,9 @@ export const selectTemperature = (state) => state.temperature.temperature
 
 // process STARTUP actions
 export function * startup (action) {
-  if (__DEV__ && console.tron) {
+
+  var enableMe = false;
+  if (__DEV__ && console.tron && enableMe) {
     // straight-up string logging
     console.tron.log('Hello, I\'m an example of how to log via Reactotron.')
 
@@ -32,9 +34,9 @@ export function * startup (action) {
       }
     })
   }
-  const temp = yield select(selectTemperature)
+  // const temp = yield select(selectTemperature)
   // only fetch new temps when we don't have one yet
-  if (!is(Number, temp)) {
-    yield put(TemperatureActions.temperatureRequest('San Francisco'))
-  }
+  // if (!is(Number, temp)) {
+    // yield put(TemperatureActions.temperatureRequest('San Francisco'))
+  // }
 }
