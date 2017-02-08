@@ -480,7 +480,7 @@ export default class PresentationScreen extends React.Component {
 
       productColumnArray.push(
         <View
-          style={{ width:350, height:400, overflow: 'hidden', borderRadius:0, backgroundColor: '#00000000', padding:0 }}
+          style={{ width:300, height:400, overflow: 'hidden', borderRadius:0, backgroundColor: '#00000000', padding:0 }}
           key={cll }>
           <Grid style={{ flex:1 }}>
             { boxr2 }
@@ -510,8 +510,9 @@ export default class PresentationScreen extends React.Component {
                           flexDirection: 'row',
                           justifyContent: 'flex-start',
                           alignItems: 'center',
+                          paddingTop:15
                           }}>
-              <InputGroup borderType='rounded' style={{ flex:2,  marginRight:5, marginLeft:5 }}>
+              <InputGroup borderType='rounded' style={{ flex:2,  marginRight:5, marginLeft:12 }}>
                 <Icon name='ios-home' style={{color:'#696969'}}/>
                 <Input borderType='rounded'
                        style={{height: 40, color: '#FFFFFF'}}
@@ -522,11 +523,11 @@ export default class PresentationScreen extends React.Component {
               </InputGroup>
 
 
-              <View>
+              <View borderType='rounded' style={{ marginLeft:12 }}>
                 {/*<RoundedButton text='CATEGORY' onPress={NavigationActions.listviewSectionsExample}/>*/}
-                <Menu style={styles2.dropdown} onSelect={(value) => this.setState({ dropdownSelection: value })}>
+                <Menu style={styles2.dropdown}  onSelect={(value) => this.setState({ dropdownSelection: value })}     >
                   <MenuTrigger>
-                    <Text style={{ color:'#FFFFFF', backgroundColor:'#000000'}}>{this.state.dropdownSelection}</Text>
+                    <Text style={{ height:30, textAlign:'center', color:'#FFFFFF', backgroundColor:'#FFFFFF00', padding:5}}>{this.state.dropdownSelection}</Text>
                   </MenuTrigger>
                   <MenuOptions optionsContainerStyle={styles2.dropdownOptions}
                                style={{  color:'#FFFFFF', backgroundColor:'#000000'}}
@@ -544,38 +545,35 @@ export default class PresentationScreen extends React.Component {
                 </Menu>
               </View>
 
-              <View borderType='rounded' style={{ flex:2, flexDirection:'row',  marginRight:5, marginLeft:15 }}>
+              <View borderType='rounded' style={{ flex:2, flexDirection:'row',  marginLeft:25 }}>
                 <Text borderType='rounded' style={{ fontSize:30 , fontWeight:'bold',color:'#FF0000',}}>
                   PHOENIX, AZ
                 </Text>
               </View>
             </View>
 
-            <View style={styles2.content}>
-
-            </View>
-
             <View style={{ flex:1, marginTop:20 }}>
               <Text style={{flex:1, flexDirection: 'row', textAlign: 'center' ,
-               color:'#ABABAB', margin:10, fontSize: 28 }}>
-                Ranking {this.state.selectedCategory} for {this.state.selectedDomain}
+               color:'#ABABAB', margin:10, fontSize: 18 }}>
+                keywords for <Text style={{ color:'#ff00ff', fontSize: 22, fontWeight:'700'  }}>{this.state.dropdownSelection}</Text>
+                @ <Text style={{ color:'#0000FF', fontSize: 22, fontWeight:'bold'  }}>{this.state.selectedDomain}</Text>
               </Text>
             </View>
 
-            <View style={{ flex:1, flexDirection:'row', alignItems:'flex-start', marginTop:20 }}>
+            <View style={{ flex:1, flexDirection:'row', alignItems:'flex-start', marginTop:20, backgroundColor: '#ffffff22', }}>
               <View
-                style={{ width:250, height:400, overflow: 'hidden', borderRadius:0, backgroundColor: '#00000000', padding:0 }}>
-                <Grid style={{ flex:1, flexDirection:'column' }}>
+                style={{ width:400, height:400, overflow: 'hidden', borderRadius:0, backgroundColor: '#00000000', paddingLeft:10}}>
+                <Grid style={{ flex:1, flexDirection:'column', marginRight:20  }}>
                   {this.state.keywordGridColumns}
                 </Grid>
               </View>
-              <View style={{ width:750, height:400, overflow:'hidden',flexDirection:'row'   }}>
+              <View style={{ width:600, height:400, overflow:'hidden',flexDirection:'row'   }}>
                 <ScrollView
-                  style={{width:350, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>
+                  style={{width:300, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>
                   {this.example1}
                 </ScrollView>
                 <ScrollView
-                  style={{width:350, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>
+                  style={{width:300, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>
                   {this.example2}
                 </ScrollView>
                 {/*<ScrollView style={{width:350, height:400, overflow:'hidden', backgroundColor: '#00000000',overflow:'hidden'  }}>*/}
@@ -626,12 +624,14 @@ const styles2 = StyleSheet.create({
     fontSize: 18
   },
   dropdown: {
-    backgroundColor: '#00000000',
-    width: 300,
-    borderColor: '#999',
+    backgroundColor: '#FFFFFF00',
+    width: 350,
+    height:42,
+    borderColor: '#FFFFFF',
     borderWidth: 1,
+    borderRadius: 20,
     padding: 5,
-    marginLeft: 20
+    marginLeft: 20,
   },
   dropdownOptions: {
     backgroundColor: '#000000',
