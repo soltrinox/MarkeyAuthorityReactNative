@@ -330,6 +330,8 @@ export default class PresentationScreen extends React.Component {
 
   componentWillMount() {
 
+    this._domainData();
+
     console.log("Test Model", DeviceInfo.getModel());
     console.log("Device ID", DeviceInfo.getDeviceId());
     console.log("System Name", DeviceInfo.getSystemName());
@@ -363,7 +365,6 @@ export default class PresentationScreen extends React.Component {
       ['keyword10', '8', '9', '11', '11'],
     ];
     this.state.productDomains = products.length;
-
 
     var keywordColumnArray = [];
     var productColumnArray = [];
@@ -492,8 +493,6 @@ export default class PresentationScreen extends React.Component {
     this._updateDomainColumns(productColumnArray);
 
     // NOW REBUILD THE OTHER DOMAINS
-
-    this._domainData();
     this._updateClientColumn(productColumnArray);
   }
 
@@ -625,7 +624,7 @@ const styles2 = StyleSheet.create({
   },
   dropdown: {
     backgroundColor: '#FFFFFF00',
-    width: 350,
+    width: 400,
     height:42,
     borderColor: '#FFFFFF',
     borderWidth: 1,
