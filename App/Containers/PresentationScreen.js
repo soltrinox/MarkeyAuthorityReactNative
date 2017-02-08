@@ -273,48 +273,42 @@ export default class PresentationScreen extends React.Component {
     var testJSON = require('../Fixtures/LAS.001.json');
     this.state.dataObjects = {
       CATEGORY1: [
-        {KEY: 'First Title', DOM: 'DEX PLUS'},
-        {KEY: 'First Title', DOM: 'DEX PREM'},
-        {KEY: 'First Title', DOM: 'www.xxxxx.com'},
-        {KEY: 'First Title', DOM: 'www.yyyy.com'},
-        {KEY: 'First Title', DOM: 'First Description'},
-        {KEY: 'Second Title', DOM: 'Second Description'},
-        {KEY: 'Third Title', DOM: 'Third Description'},
-        {KEY: 'Fourth Title', DOM: 'Fourth Description'},
-        {KEY: 'Fifth Title', DOM: 'Fifth Description'},
-        {KEY: 'Sixth Title', DOM: 'Sixth Description'},
-        {KEY: 'Seventh Title', DOM: 'Seventh Description'},
-        {KEY: 'Eighth Title', DOM: 'Eighth Description'},
-        {KEY: 'Ninth Title', DOM: 'Ninth Description'},
-        {KEY: 'Tenth Title', DOM: 'Tenth Description'}
+        {KEY: 'First Domain', DOM: 'DEX PLUS'},
+        {KEY: 'First Domain', DOM: 'DEX PREM'},
+        {KEY: 'First Domain', DOM: 'www.xxxxx.com'},
+        {KEY: 'First Domain', DOM: 'www.yyyy.com'},
+        {KEY: 'First Domain', DOM: 'First Description'},
+        {KEY: 'Second Domain', DOM: 'Second Description'},
+        {KEY: 'Third Domain', DOM: 'Third Description'},
+        {KEY: 'Fourth Domain', DOM: 'Fourth Description'},
+        {KEY: 'Fifth Domain', DOM: 'Fifth Description'},
+        {KEY: 'Sixth Domain', DOM: 'Sixth Description'},
+        {KEY: 'Seventh Domain', DOM: 'Seventh Description'},
+        {KEY: 'Eighth Domain', DOM: 'Eighth Description'},
+        {KEY: 'Ninth Domain', DOM: 'Ninth Description'},
+        {KEY: 'Tenth Domain', DOM: 'Tenth Description'}
       ],
       CATEGORY2: [
-        {KEY: 'Eleventh Title', DOM: 'Eleventh Description'},
-        {KEY: '12th Title', DOM: '12th Description'},
-        {KEY: '13th Title', DOM: '13th Description'},
-        {KEY: '14th Title', DOM: '14th Description'},
-        {KEY: '15th Title', DOM: '15th Description'},
-        {KEY: '16th Title', DOM: '16th Description'},
-        {KEY: '17th Title', DOM: '17th Description'},
-        {KEY: '18th Title', DOM: '18th Description'},
-        {KEY: '19th Title', DOM: '19th Description'},
-        {KEY: '20th Title', DOM: '20th Description'},
+        {KEY: 'Eleventh Domain', DOM: 'Eleventh Description'},
+        {KEY: '12th Domain', DOM: '12th Description'},
+        {KEY: '13th Domain', DOM: '13th Description'},
+        {KEY: '14th Domain', DOM: '14th Description'},
+        {KEY: '15th Domain', DOM: '15th Description'},
+        {KEY: '16th Domain', DOM: '16th Description'},
+        {KEY: '17th Domain', DOM: '17th Description'},
+        {KEY: '18th Domain', DOM: '18th Description'},
+        {KEY: '19th Domain', DOM: '19th Description'},
+        {KEY: '20th Domain', DOM: '20th Description'},
         {KEY: 'BLACKJACK!', DOM: 'BLACKJACK! Description'}
       ]
     };
-
     this.state.rawArr = testJSON;
     var test = _.orderBy(this.state.rawArr, ['CAT', 'KEY', 'SCORE'], ['asc', 'asc', 'desc']);
-    // console.log('@@@@@@@@@@@@@@ ORDERBY JSON: '+  JSON.stringify(test));
 
     this.state.categoriesArr = [...new Set(test.map(item => item.CAT))];
     this.state.categoriesArr.sort();
-    // console.log('@@@@@@@@@@@@@@ categoriesArr : '+  JSON.stringify(categoriesArr));
-
     this.state.keywordArr = [...new Set(test.map(item => item.KEY))];
     this.state.keywordArr.sort();
-    // console.log('@@@@@@@@@@@@@@ keywordArr : '+  JSON.stringify(keywordArr));
-
     for (var j = 0; j < this.state.categoriesArr.length; j++) {
       var trr = [];
       var catName = _.toString(this.state.categoriesArr[j]);
@@ -322,8 +316,6 @@ export default class PresentationScreen extends React.Component {
       // console.log('%%%%%%%%%%% SORTED KEYWORDS ON '+ catName +': '+  JSON.stringify(trr));
       _.set(this.state.dataObjects, catName, trr);
     }
-
-    console.log('88888888 SORTED KEYWORDS ON : ' + JSON.stringify(this.state.dataObjects));
     return this.state.dataObjects;
   }
 
@@ -331,6 +323,12 @@ export default class PresentationScreen extends React.Component {
   componentWillMount() {
 
     this._domainData();
+
+    // console.log('@@@@@@@@@@@@@@ ORDERBY JSON: '+  JSON.stringify(test));
+    // console.log('@@@@@@@@@@@@@@ categoriesArr : '+  JSON.stringify(categoriesArr));
+    // console.log('@@@@@@@@@@@@@@ keywordArr : '+  JSON.stringify(keywordArr));
+    // console.log('88888888 SORTED KEYWORDS ON : ' + JSON.stringify(this.state.dataObjects));
+
 
     console.log("Test Model", DeviceInfo.getModel());
     console.log("Device ID", DeviceInfo.getDeviceId());
